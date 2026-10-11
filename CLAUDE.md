@@ -149,10 +149,10 @@ La accesibilidad no es opcional ni un paso final: se cumple en cada componente.
 
 ## 12. Estado del proyecto
 
-Fase actual: **[Fase 1 — Preparar el entorno]** — actualizar al avanzar.
+Fase actual: **[Fase 2 — Marca y contenido]** — actualizar al avanzar.
 
 - [ ] Fase 0 · Negocio y oferta
-- [ ] Fase 1 · Entorno
+- [x] Fase 1 · Entorno
 - [ ] Fase 2 · Marca y contenido
 - [ ] Fase 3 · Stack técnico
 - [ ] Fase 4 · Construcción
@@ -168,4 +168,7 @@ Fase actual: **[Fase 1 — Preparar el entorno]** — actualizar al avanzar.
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-11 · Plantillas de textos y marca en docs/ con URLs propuestas · fuente única de contenido; URLs por confirmar.
+- 2026-10-11 · Astro 7.3 + Tailwind 4.3 (plugin de Vite) · versiones actuales; Tailwind 4 define los tokens en CSS (src/styles/global.css).
+- 2026-10-11 · Node 22 con nvm y archivo .nvmrc · Astro 7 exige Node ≥ 22.12; nvm no requiere sudo ni cambia el Node del sistema.
 - 2026-10-11 · Stack Astro + Tailwind en Cloudflare · rápido, buen SEO, plan gratuito con uso comercial.
