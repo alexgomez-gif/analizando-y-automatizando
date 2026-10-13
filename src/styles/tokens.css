@@ -1,0 +1,70 @@
+/*
+ * Tokens de marca — Analizando y Automatizando.
+ * Fuente: docs/marca.md, sección 8. No editar valores aquí sin actualizar ese documento.
+ */
+
+:root {
+  /* Fondos */
+  --fondo: #070B1F;
+  --superficie: #0F1533;
+  --elevada: #182052;
+  --borde: #2B3577;
+  --borde-fuerte: #5A6BC8;
+  /* Texto */
+  --texto: #EEF4FF;
+  --texto-2: #A7B3DA;
+  --texto-tenue: #7F8BB8;
+  /* Neón */
+  --cian: #00E5FF;
+  --magenta: #FF3DDC;
+  --violeta: #A78BFA;
+  --lima: #B8FF3D;
+  --ambar: #FFC94D;
+  --coral: #FF6B8B;
+  /* Degradados y glow */
+  --grad-amanecer: linear-gradient(135deg, #00E5FF 0%, #A78BFA 50%, #FF3DDC 100%);
+  --grad-horizonte: linear-gradient(90deg, #00E5FF 0%, #B8FF3D 100%);
+  --glow-cian: 0 0 0 1px rgba(0,229,255,.45), 0 0 24px rgba(0,229,255,.35), 0 0 64px rgba(0,229,255,.12);
+  --glow-magenta: 0 0 0 1px rgba(255,61,220,.45), 0 0 24px rgba(255,61,220,.30), 0 0 64px rgba(255,61,220,.10);
+  /* Forma */
+  --radio-tarjeta: 12px;
+  --radio-input: 8px;
+  --curva: cubic-bezier(.2,.8,.2,1);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --fondo: #F6F8FF;
+  --superficie: #FFFFFF;
+  --elevada: #EEF1FF;
+  --borde: #D5DAF0;
+  --borde-fuerte: #7880AE;
+  --texto: #0B1030;
+  --texto-2: #465079;
+  --texto-tenue: #5A6488;
+  --cian: #00788A;
+  --magenta: #B5148F;
+  --violeta: #6233D6;
+  --lima: #3F7A00;
+  --ambar: #9A5B00;
+  --coral: #C8204A;
+  --glow-cian: 0 0 0 1px rgba(0,120,138,.35), 0 8px 24px rgba(0,120,138,.15);
+  --glow-magenta: 0 0 0 1px rgba(181,20,143,.35), 0 8px 24px rgba(181,20,143,.15);
+  color-scheme: light;
+}
+
+/* Foco visible y coherente con la marca */
+:focus-visible {
+  outline: 2px solid var(--cian);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

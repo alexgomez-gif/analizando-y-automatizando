@@ -1,1 +1,76 @@
 @import "tailwindcss";
+@import "./tokens.css";
+
+/*
+ * Tokens de marca como clases de Tailwind (bg-fondo, text-cian, font-titulo…).
+ * `--color-*: initial` quita la paleta por defecto de Tailwind (red-500, blue-600…),
+ * así solo existen los colores de la marca y no se pueden usar colores sueltos.
+ */
+@theme {
+  --color-*: initial;
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-elevada: var(--elevada);
+  --color-borde: var(--borde);
+  --color-borde-fuerte: var(--borde-fuerte);
+  --color-texto: var(--texto);
+  --color-texto-2: var(--texto-2);
+  --color-texto-tenue: var(--texto-tenue);
+  --color-cian: var(--cian);
+  --color-magenta: var(--magenta);
+  --color-violeta: var(--violeta);
+  --color-lima: var(--lima);
+  --color-ambar: var(--ambar);
+  --color-coral: var(--coral);
+  --font-titulo: "Space Grotesk", system-ui, sans-serif;
+  --font-texto: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Estilos base: escala tipográfica de docs/marca.md, sección 3 */
+@layer base {
+  html {
+    background-color: var(--fondo);
+    color: var(--texto);
+  }
+
+  body {
+    background-color: var(--fondo);
+    font-family: var(--font-texto);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-titulo);
+    font-weight: 700;
+    color: var(--texto);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+    line-height: 1.15;
+  }
+
+  h3 {
+    font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+    line-height: 1.25;
+  }
+
+  p {
+    max-width: 68ch;
+  }
+
+  a {
+    color: var(--cian);
+  }
+}
