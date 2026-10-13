@@ -3,7 +3,8 @@
 Fuente única de los textos de cada página. El código toma los textos de aquí; no se redactan dentro de los componentes.
 
 **Reglas rápidas** (ver CLAUDE.md, sección 6):
-- Español de Colombia, trato **[PENDIENTE: tú / usted]** en todo el sitio.
+- Español de Colombia, trato de **tú** en todo el sitio.
+- La marca habla en **plural**: "analizamos", "te ayudamos", nunca "yo".
 - Hablar de resultados del cliente, no de herramientas.
 - Una sola acción principal por página.
 - Nada de precios, testimonios, clientes ni cifras inventadas. Si falta un dato, se deja `[PENDIENTE: ...]`.
@@ -114,7 +115,7 @@ Cada artículo es un archivo en `src/content/blog/`.
 
 ## Sobre nosotros · `/sobre-nosotros`
 
-[PENDIENTE: decidir si se incluye esta página y si se habla en primera persona singular o plural]
+[PENDIENTE: decidir si se incluye esta página. Se escribe en primera persona del plural.]
 
 ---
 

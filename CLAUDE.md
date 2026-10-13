@@ -1,4 +1,4 @@
-# CLAUDE.md — Web de servicios de análisis de datos y automatización
+# CLAUDE.md — Analizando y Automatizando
 
 Este archivo es la memoria del proyecto. Léelo completo al inicio de cada sesión y síguelo siempre.
 Si una instrucción del usuario contradice este archivo, pregunta antes de actuar.
@@ -8,10 +8,11 @@ Si una instrucción del usuario contradice este archivo, pregunta antes de actua
 Sitio web comercial que vende servicios de análisis de datos y automatización a negocios en Colombia.
 Su trabajo es convertir visitas en diagnósticos agendados y diagnósticos en clientes.
 
-- **Marca:** [NOMBRE DE LA MARCA] — completar
-- **Dominio:** [tudominio.co] — completar
+- **Marca:** Analizando y Automatizando (forma corta: A&A)
+- **Lema:** «Analizamos lo que tienes. Automatizamos lo que repites»
+- **Dominio:** [verificar: analizandoyautomatizando.co] — completar
 - **Nicho principal:** [ej. pymes de comercio en Colombia] — completar
-- **Propuesta de valor:** [Ayudo a ___ a ___ mediante ___, sin ___] — completar
+- **Propuesta de valor:** [Ayudamos a ___ a ___ mediante ___, sin ___] — completar
 - **Acción principal del sitio:** agendar un diagnóstico gratuito de 30 minutos
 
 ### Servicios
@@ -21,7 +22,12 @@ Su trabajo es convertir visitas en diagnósticos agendados y diagnósticos en cl
 4. Automatización de reportes y procesos
 5. Análisis predictivo (solo cuando aporte valor real)
 
-Los textos de cada página viven en `docs/contenido.md`. La marca (colores, tipografía, logo) en `docs/marca.md`.
+Los textos de cada página viven en `docs/contenido.md`.
+
+### Identidad visual
+La marca completa (concepto «Neón al amanecer», colores, tipografía, logo, efectos e interactividad) está en el archivo importado abajo. Síguelo en todo componente, sin excepciones:
+
+@docs/marca.md
 **No inventes textos comerciales, precios, testimonios ni cifras de resultados.** Si faltan, deja un marcador `[PENDIENTE: ...]` y avísame.
 
 ## 2. Stack técnico
@@ -90,7 +96,8 @@ pip install -r requirements.txt
 ## 6. Idioma y tono de los textos
 
 - Español de Colombia (`lang="es-CO"`). Moneda en COP con formato `$1.500.000`.
-- Trato: **[tú / usted]** — elegir uno y mantenerlo en todo el sitio.
+- Trato: **tú** — en todo el sitio, sin excepciones (también en formularios, errores y correos).
+- Voz de la marca: **primera persona del plural** ("analizamos", "te ayudamos", "nuestro equipo"), nunca "yo".
 - Hablar de resultados del cliente, no de herramientas: "tus reportes listos cada lunes" antes que "scripts de Python".
 - Frases cortas, sin jerga técnica en páginas comerciales. La parte técnica va en bloques aparte de los casos de estudio.
 - Cada página tiene **una sola acción principal**.
@@ -168,6 +175,13 @@ Fase actual: **[Fase 2 — Marca y contenido]** — actualizar al avanzar.
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-13 · La marca habla en primera persona del plural en todo el sitio · coherente con el lema («Analizamos…»).
+- 2026-10-13 · Íconos con `@lucide/astro` (oficial, licencia ISC) · se renderizan como SVG al compilar, sin JavaScript en el navegador; compatible con Astro 7.
+- 2026-10-13 · Fuentes alojadas en el propio dominio con la configuración `fonts` de Astro · sin dependencias nuevas y sin enviar la IP del visitante a Google.
+- 2026-10-13 · Trato de tú en todo el sitio · cercano, coherente con la personalidad de la marca.
+- 2026-10-13 · Lema «Analizamos lo que tienes. Automatizamos lo que repites» · repite el ritmo del nombre (Analizando / Automatizando) y nombra los dos servicios.
+- 2026-10-13 · Logo v1 (monograma A&A de una sola línea) documentado en `docs/marca.md` · archivos en `public/logo/`.
+- 2026-10-12 · Nombre «Analizando y Automatizando» y estética cyberpunk optimista («Neón al amanecer») en `docs/marca.md` · marca futurista pero confiable.
 - 2026-10-11 · Plantillas de textos y marca en docs/ con URLs propuestas · fuente única de contenido; URLs por confirmar.
 - 2026-10-11 · Astro 7.3 + Tailwind 4.3 (plugin de Vite) · versiones actuales; Tailwind 4 define los tokens en CSS (src/styles/global.css).
 - 2026-10-11 · Node 22 con nvm y archivo .nvmrc · Astro 7 exige Node ≥ 22.12; nvm no requiere sudo ni cambia el Node del sistema.
