@@ -22,9 +22,10 @@
   --color-lima: var(--lima);
   --color-ambar: var(--ambar);
   --color-coral: var(--coral);
-  --font-titulo: "Space Grotesk", system-ui, sans-serif;
-  --font-texto: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Las variables --fuente-* las crea la configuración `fonts` de astro.config.mjs */
+  --font-titulo: var(--fuente-titulo);
+  --font-texto: var(--fuente-texto);
+  --font-mono: var(--fuente-mono);
 }
 
 /* Estilos base: escala tipográfica de docs/marca.md, sección 3 */
