@@ -10,7 +10,7 @@ Su trabajo es convertir visitas en diagnósticos agendados y diagnósticos en cl
 
 - **Marca:** Analizando y Automatizando (forma corta: A&A)
 - **Lema:** «Analizamos lo que tienes. Automatizamos lo que repites»
-- **Dominio:** [verificar: analizandoyautomatizando.co] — completar
+- **Dominio:** [PENDIENTE: comprar `analizandoyautomatizando.co`] — `.co`, `.com` y `.com.co` estaban libres el 2026-10-13
 - **Nicho principal:** emprendimientos emergentes en Colombia
 - **Propuesta de valor:** Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, mediante automatización y análisis a la medida, sin jerga técnica.
 - **Acción principal del sitio:** agendar un diagnóstico gratuito de 30 minutos
@@ -175,6 +175,7 @@ Fase actual: **[Fase 2 — Marca y contenido]** — actualizar al avanzar.
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-13 · Promesas de la oferta: el diagnóstico entrega la lista de tareas automatizables aunque no haya contrato; propuesta con alcance, tiempo y precio antes de empezar; se construye con las herramientas que el cliente ya usa; hay acompañamiento tras la entrega · confirmadas por el dueño del proyecto.
 - 2026-10-13 · Propuesta de valor centrada en recuperar horas de tareas repetitivas · es el dolor más concreto del cliente; conecta con el lema y con la calculadora de ahorro.
 - 2026-10-13 · Nicho: emprendimientos emergentes en Colombia · definido por el dueño del proyecto.
 - 2026-10-13 · Favicons de Astro reemplazados por los del logo (`public/logo/`) · identidad propia desde la primera página.
