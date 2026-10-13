@@ -156,7 +156,14 @@ La accesibilidad no es opcional ni un paso final: se cumple en cada componente.
 
 ## 12. Estado del proyecto
 
-Fase actual: **[Fase 2 — Marca y contenido]** — actualizar al avanzar.
+Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos pendientes) — actualizar al avanzar.
+
+**Próxima sesión:** continuar en la rama `feature/base-visual` con el paso 3 del plan de base visual (aprobado el 2026-10-13):
+1. ✅ Tokens y estilos base (`src/styles/tokens.css`, `global.css`)
+2. ✅ Fuentes alojadas en el propio dominio (`fonts` en `astro.config.mjs`)
+3. ⏭️ `BaseLayout` en `src/layouts/` (lang, saltar al contenido, title/description/canónica, favicons, `<Font>` que hoy está en `index.astro`)
+4. `Button`, `Header` y `Footer`
+5. Hero del inicio + verificación completa (375/768/1280 px y teclado)
 
 - [ ] Fase 0 · Negocio y oferta
 - [x] Fase 1 · Entorno
@@ -175,6 +182,8 @@ Fase actual: **[Fase 2 — Marca y contenido]** — actualizar al avanzar.
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-13 · Las fuentes son variables (un archivo por familia): se precarga la familia entera, no por peso · el filtro por peso de `<Font preload>` descartaba Space Grotesk.
+- 2026-10-13 · Paleta por defecto de Tailwind eliminada (`--color-*: initial`) · solo existen los colores de marca; imposible usar colores sueltos.
 - 2026-10-13 · Conversación inicial y diagnóstico completo (informe + reunión) son gratis · el diagnóstico es la puerta de entrada; tiempos de entrega aún por confirmar.
 - 2026-10-13 · Promesas de la oferta: el diagnóstico entrega la lista de tareas automatizables aunque no haya contrato; propuesta con alcance, tiempo y precio antes de empezar; se construye con las herramientas que el cliente ya usa; hay acompañamiento tras la entrega · confirmadas por el dueño del proyecto.
 - 2026-10-13 · Propuesta de valor centrada en recuperar horas de tareas repetitivas · es el dolor más concreto del cliente; conecta con el lema y con la calculadora de ahorro.
