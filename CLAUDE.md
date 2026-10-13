@@ -11,8 +11,8 @@ Su trabajo es convertir visitas en diagnósticos agendados y diagnósticos en cl
 - **Marca:** Analizando y Automatizando (forma corta: A&A)
 - **Lema:** «Analizamos lo que tienes. Automatizamos lo que repites»
 - **Dominio:** [verificar: analizandoyautomatizando.co] — completar
-- **Nicho principal:** [ej. pymes de comercio en Colombia] — completar
-- **Propuesta de valor:** [Ayudamos a ___ a ___ mediante ___, sin ___] — completar
+- **Nicho principal:** emprendimientos emergentes en Colombia
+- **Propuesta de valor:** Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, mediante automatización y análisis a la medida, sin jerga técnica.
 - **Acción principal del sitio:** agendar un diagnóstico gratuito de 30 minutos
 
 ### Servicios
@@ -175,6 +175,9 @@ Fase actual: **[Fase 2 — Marca y contenido]** — actualizar al avanzar.
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-13 · Propuesta de valor centrada en recuperar horas de tareas repetitivas · es el dolor más concreto del cliente; conecta con el lema y con la calculadora de ahorro.
+- 2026-10-13 · Nicho: emprendimientos emergentes en Colombia · definido por el dueño del proyecto.
+- 2026-10-13 · Favicons de Astro reemplazados por los del logo (`public/logo/`) · identidad propia desde la primera página.
 - 2026-10-13 · La marca habla en primera persona del plural en todo el sitio · coherente con el lema («Analizamos…»).
 - 2026-10-13 · Íconos con `@lucide/astro` (oficial, licencia ISC) · se renderizan como SVG al compilar, sin JavaScript en el navegador; compatible con Astro 7.
 - 2026-10-13 · Fuentes alojadas en el propio dominio con la configuración `fonts` de Astro · sin dependencias nuevas y sin enviar la IP del visitante a Google.
