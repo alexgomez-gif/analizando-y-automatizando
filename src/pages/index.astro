@@ -1,24 +1,11 @@
 ---
-import { Font } from "astro:assets";
-import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+// Textos de docs/contenido.md (Inicio). El hero completo se arma en el paso 5.
 ---
 
-<html lang="es-CO">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/logo/favicon.svg" type="image/svg+xml" />
-		<link rel="icon" href="/logo/favicon-32.png" sizes="32x32" type="image/png" />
-		<link rel="apple-touch-icon" href="/logo/apple-touch-icon.png" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<!-- Precarga solo las fuentes de la primera pantalla. Son fuentes variables:
-		     un archivo por familia con todos los pesos, así que se precarga la familia entera. -->
-		<Font cssVariable="--fuente-titulo" preload />
-		<Font cssVariable="--fuente-texto" preload />
-		<Font cssVariable="--fuente-mono" />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+	title="Automatiza tu emprendimiento | Analizando y Automatizando"
+	description="Deja de perder horas en tareas repetitivas. Ponemos tus reportes y procesos en automático. Empieza con un diagnóstico gratis y sin compromiso."
+>
+	<h1>Analizamos lo que tienes. Automatizamos lo que repites.</h1>
+</BaseLayout>

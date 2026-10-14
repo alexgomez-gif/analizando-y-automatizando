@@ -1,0 +1,71 @@
+---
+/**
+ * Layout base de todas las páginas.
+ * Pone el <head> (SEO, favicons, fuentes), el enlace "Saltar al contenido" y el <main>.
+ * Cada página le pasa su propio title y description (textos en docs/contenido.md).
+ */
+import { Font } from "astro:assets";
+import "../styles/global.css";
+
+interface Props {
+	/** Título único de la página, máximo 60 caracteres. */
+	title: string;
+	/** Descripción única, entre 120 y 155 caracteres. */
+	description: string;
+	/** Imagen para compartir en redes (1200 × 630). Ruta desde /public. */
+	ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+
+const nombreSitio = "Analizando y Automatizando";
+// URL canónica: la dirección oficial de esta página, armada con `site` de astro.config.mjs
+const canonica = new URL(Astro.url.pathname, Astro.site);
+const imagenSocial = ogImage ? new URL(ogImage, Astro.site) : undefined;
+---
+
+<!doctype html>
+<html lang="es-CO">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonica} />
+
+		{/* Open Graph: cómo se ve la página al compartirla en redes y WhatsApp */}
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="es_CO" />
+		<meta property="og:site_name" content={nombreSitio} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonica} />
+		{imagenSocial && <meta property="og:image" content={imagenSocial} />}
+		{imagenSocial && <meta name="twitter:card" content="summary_large_image" />}
+
+		{/* Favicons (docs/marca.md, sección 4) */}
+		<link rel="icon" href="/logo/favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href="/logo/favicon-32.png" sizes="32x32" type="image/png" />
+		<link rel="apple-touch-icon" href="/logo/apple-touch-icon.png" />
+
+		{/* Fuentes alojadas en el propio dominio. Son fuentes variables (un archivo por
+		     familia), así que se precarga la familia entera de lo que se ve primero. */}
+		<Font cssVariable="--fuente-titulo" preload />
+		<Font cssVariable="--fuente-texto" preload />
+		<Font cssVariable="--fuente-mono" />
+	</head>
+	<body>
+		{/* Oculto hasta que recibe el foco con Tab: permite saltar el menú con el teclado */}
+		<a
+			href="#contenido"
+			class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:inline-flex focus:min-h-11 focus:items-center focus:rounded-full focus:bg-cian focus:px-6 focus:font-semibold focus:text-fondo"
+		>
+			Saltar al contenido
+		</a>
+
+		<main id="contenido">
+			<slot />
+		</main>
+	</body>
+</html>

@@ -5,6 +5,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  // URL base del sitio: Astro la usa para las URL canónicas, el sitemap y Open Graph.
+  site: 'https://analizandoyautomatizando.com',
+
   vite: {
     plugins: [tailwindcss()]
   },
