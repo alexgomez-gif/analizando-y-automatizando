@@ -95,6 +95,11 @@ En el tema claro, el texto de los botones de color va en blanco (`#FFFFFF`): 5,2
 
 Regla: los degradados van en **titulares cortos (≤ 4 palabras), bordes y fondos**, nunca en párrafos.
 
+**Versiones para el tema claro** (con los neones oscurecidos de §2.2):
+- Amanecer neón: `#00788A → #6233D6 → #B5148F` (contraste 4,9 / 6,7 / 5,7 sobre `#F6F8FF`).
+- Horizonte: `#00788A → #3F7A00` (4,9 / 5,0).
+- Aurora: violeta `rgba(98,51,214,.10)` y magenta `rgba(181,20,143,.06)`. Más intensa, el cian del titular bajaría de 3:1.
+
 ### 2.4 Resplandor (glow)
 
 ```css
@@ -274,6 +279,7 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
   /* Degradados y glow */
   --grad-amanecer: linear-gradient(135deg, #00E5FF 0%, #A78BFA 50%, #FF3DDC 100%);
   --grad-horizonte: linear-gradient(90deg, #00E5FF 0%, #B8FF3D 100%);
+  --grad-aurora: radial-gradient(ellipse at top, rgba(167,139,250,.25), transparent 60%), radial-gradient(ellipse at bottom right, rgba(255,61,220,.15), transparent 50%);
   --glow-cian: 0 0 0 1px rgba(0,229,255,.45), 0 0 24px rgba(0,229,255,.35), 0 0 64px rgba(0,229,255,.12);
   --glow-magenta: 0 0 0 1px rgba(255,61,220,.45), 0 0 24px rgba(255,61,220,.30), 0 0 64px rgba(255,61,220,.10);
   /* Forma */
@@ -299,6 +305,10 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
   --ambar: #9A5B00;
   --coral: #C8204A;
   --texto-sobre-neon: #FFFFFF;
+  /* Degradados con los neones oscurecidos del tema claro (todos ≥ 4,5:1 sobre --fondo) */
+  --grad-amanecer: linear-gradient(135deg, #00788A 0%, #6233D6 50%, #B5148F 100%);
+  --grad-horizonte: linear-gradient(90deg, #00788A 0%, #3F7A00 100%);
+  --grad-aurora: radial-gradient(ellipse at top, rgba(98,51,214,.10), transparent 60%), radial-gradient(ellipse at bottom right, rgba(181,20,143,.06), transparent 50%);
   --glow-cian: 0 0 0 1px rgba(0,120,138,.35), 0 8px 24px rgba(0,120,138,.15);
   --glow-magenta: 0 0 0 1px rgba(181,20,143,.35), 0 8px 24px rgba(181,20,143,.15);
   color-scheme: light;
