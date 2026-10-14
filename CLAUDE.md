@@ -161,8 +161,9 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 **Plan de base visual (aprobado el 2026-10-13): completo** en la rama `feature/base-visual`.
 1. ✅ Tokens y estilos base · 2. ✅ Fuentes en el propio dominio · 3. ✅ `BaseLayout` · 4. ✅ `Button`, `Header`, `Footer` · 5. ✅ Hero del inicio
 
+**Cambio de tema oscuro/claro: completo** en la rama `feature/cambio-de-tema` (auditoría de contraste: 0 fallas en 2 temas × 3 anchos).
+
 **Pendientes técnicos conocidos:**
-- Tema claro: `--grad-amanecer` no tiene versión clara (el titular perdería contraste) y falta el logo claro en el encabezado. Resolver junto con el botón de cambio de tema.
 - Borde giratorio del botón principal (marca.md §6.1): `marca.md` pide el degradado Amanecer (3 neones), pero §9 limita a 2 neones por componente. Decidir antes de implementarlo.
 - Imagen Open Graph (1200 × 630) por crear.
 - Páginas enlazadas en menú y pie aún no existen.
