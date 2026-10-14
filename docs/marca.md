@@ -21,7 +21,7 @@ La sensación final debe ser: *el futuro ya llegó y trabaja a tu favor*.
 ### Nombre
 - **Empresa y sitio:** Analizando y Automatizando
 - **Forma corta (logo, favicon, redes):** A&A
-- **Dominio:** [verificar disponibilidad: `analizandoyautomatizando.co` / `.com`]
+- **Dominio:** `analizandoyautomatizando.com`
 - **Lema:** «Analizamos lo que tienes. Automatizamos lo que repites»
   - Descartados: «Del dato a la decisión, sin trabajo repetitivo» · «Tus datos claros. Tus procesos en automático»
 

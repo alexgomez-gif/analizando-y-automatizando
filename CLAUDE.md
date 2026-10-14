@@ -10,7 +10,7 @@ Su trabajo es convertir visitas en diagnósticos agendados y diagnósticos en cl
 
 - **Marca:** Analizando y Automatizando (forma corta: A&A)
 - **Lema:** «Analizamos lo que tienes. Automatizamos lo que repites»
-- **Dominio:** [PENDIENTE: comprar `analizandoyautomatizando.co`] — `.co`, `.com` y `.com.co` estaban libres el 2026-10-13
+- **Dominio:** `analizandoyautomatizando.com` (comprado el 2026-10-14) · URL del sitio: `https://analizandoyautomatizando.com`
 - **Nicho principal:** emprendimientos emergentes en Colombia
 - **Propuesta de valor:** Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, mediante automatización y análisis a la medida, sin jerga técnica.
 - **Acción principal del sitio:** agendar el diagnóstico gratuito (conversación de 30 minutos + informe en 3 días hábiles + reunión de resultados)
@@ -182,6 +182,7 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-14 · Dominio `analizandoyautomatizando.com` · comprado por el dueño del proyecto; es la URL base para canónicas, sitemap y Open Graph.
 - 2026-10-13 · Las fuentes son variables (un archivo por familia): se precarga la familia entera, no por peso · el filtro por peso de `<Font preload>` descartaba Space Grotesk.
 - 2026-10-13 · Paleta por defecto de Tailwind eliminada (`--color-*: initial`) · solo existen los colores de marca; imposible usar colores sueltos.
 - 2026-10-13 · Conversación inicial y diagnóstico completo (informe + reunión) son gratis · el diagnóstico es la puerta de entrada; tiempos de entrega aún por confirmar.
