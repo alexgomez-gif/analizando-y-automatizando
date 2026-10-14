@@ -1,13 +1,78 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-// Textos de docs/contenido.md (Inicio). El hero completo se arma en el paso 5.
+import Button from "../components/Button.astro";
+// Textos de docs/contenido.md (Inicio). Las demás secciones del inicio se agregan después.
 ---
 
 <BaseLayout
 	title="Automatiza tu emprendimiento | Analizando y Automatizando"
 	description="Deja de perder horas en tareas repetitivas. Ponemos tus reportes y procesos en automático. Empieza con un diagnóstico gratis y sin compromiso."
 >
-	<div class="contenedor py-16">
-		<h1>Analizamos lo que tienes. Automatizamos lo que repites.</h1>
-	</div>
+	<section aria-labelledby="hero-titulo" class="hero relative isolate overflow-hidden">
+		<div class="contenedor py-20 sm:py-28 lg:py-32">
+			<h1 id="hero-titulo">
+				Analizamos lo que tienes. <span class="degradado-amanecer block">Automatizamos lo que repites.</span>
+			</h1>
+
+			<p class="mt-6 max-w-2xl text-lg text-texto-2 sm:text-xl">
+				Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, con soluciones a la
+				medida y sin jerga técnica.
+			</p>
+
+			<div class="mt-10 flex flex-col items-start gap-3">
+				<Button href="/agendar">Agenda tu diagnóstico gratis</Button>
+				<p class="text-sm text-texto-2">Gratis · informe en 3 días hábiles</p>
+			</div>
+		</div>
+	</section>
 </BaseLayout>
+
+<style>
+	/* Fondo Aurora (marca.md §2.3) */
+	.hero {
+		background-image:
+			radial-gradient(ellipse at top, rgba(167, 139, 250, 0.25), transparent 60%),
+			radial-gradient(ellipse at bottom right, rgba(255, 61, 220, 0.15), transparent 50%);
+	}
+
+	/* Retícula de horizonte (marca.md §5): cuadrícula en perspectiva que se pierde hacia el fondo.
+	   Es decorativa y estática: sin animación, sin JavaScript. */
+	.hero::before {
+		content: "";
+		position: absolute;
+		inset-inline: -50%;
+		bottom: 0;
+		height: 45%;
+		z-index: -1;
+		background-image:
+			linear-gradient(to right, var(--borde) 1px, transparent 1px),
+			linear-gradient(to bottom, var(--borde) 1px, transparent 1px);
+		background-size: 56px 56px;
+		transform: perspective(360px) rotateX(62deg);
+		transform-origin: bottom;
+		mask-image: linear-gradient(to top, black 10%, transparent 90%);
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	/* Desvanecido inferior: el hero se funde con el fondo en vez de cortarse en línea recta.
+	   Va en ::after para pintarse encima de la retícula. */
+	.hero::after {
+		content: "";
+		position: absolute;
+		inset-inline: 0;
+		bottom: 0;
+		height: 12%;
+		z-index: -1;
+		background-image: linear-gradient(to bottom, transparent, var(--fondo));
+		pointer-events: none;
+	}
+
+	/* Degradado Amanecer neón solo en el titular corto (≤ 4 palabras, marca.md §2.3) */
+	.degradado-amanecer {
+		background-image: var(--grad-amanecer);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+</style>
