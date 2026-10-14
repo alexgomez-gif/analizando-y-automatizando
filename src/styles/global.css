@@ -22,10 +22,23 @@
   --color-lima: var(--lima);
   --color-ambar: var(--ambar);
   --color-coral: var(--coral);
+  --color-sobre-neon: var(--texto-sobre-neon);
   /* Las variables --fuente-* las crea la configuración `fonts` de astro.config.mjs */
   --font-titulo: var(--fuente-titulo);
   --font-texto: var(--fuente-texto);
   --font-mono: var(--fuente-mono);
+}
+
+/* Contenedor del sitio: ancho máximo y márgenes laterales iguales en todas las secciones */
+@utility contenedor {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
+  padding-inline: 1rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
 }
 
 /* Estilos base: escala tipográfica de docs/marca.md, sección 3 */

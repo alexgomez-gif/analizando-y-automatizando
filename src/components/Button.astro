@@ -1,0 +1,40 @@
+---
+/**
+ * Botón del sitio. Todos los botones y llamados a la acción usan este componente.
+ * - Con `href` se dibuja como enlace (<a>); sin `href`, como <button>.
+ * - `primario`: neón cian con glow al pasar el mouse. Solo uno por pantalla (marca.md §7).
+ * - `secundario`: contorno, sin glow. Para acciones de apoyo.
+ */
+interface Props {
+	href?: string;
+	variante?: "primario" | "secundario";
+	type?: "button" | "submit";
+	class?: string;
+	"aria-label"?: string;
+	[atributo: `data-${string}`]: string | undefined;
+}
+
+const { href, variante = "primario", type = "button", class: claseExtra, ...resto } = Astro.props;
+
+const base =
+	"inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 font-semibold no-underline transition-[box-shadow,border-color,color] duration-150 ease-(--curva)";
+
+const variantes = {
+	primario: "bg-cian text-sobre-neon hover:shadow-(--glow-cian) focus-visible:shadow-(--glow-cian)",
+	secundario: "border border-borde-fuerte text-texto hover:border-cian hover:text-cian",
+};
+
+const clases = [base, variantes[variante], claseExtra];
+---
+
+{
+	href ? (
+		<a href={href} class:list={clases} {...resto}>
+			<slot />
+		</a>
+	) : (
+		<button type={type} class:list={clases} {...resto}>
+			<slot />
+		</button>
+	)
+}

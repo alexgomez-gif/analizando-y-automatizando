@@ -1,0 +1,51 @@
+---
+/**
+ * Pie de página: logo, lema, datos legales de contacto y enlaces legales.
+ * CLAUDE.md §10 exige nombre o razón social, NIT y correo de contacto.
+ * Estilo calmado, sin glow ni degradados (marca.md §7: sobriedad en lo legal).
+ */
+const enlacesLegales = [
+	{ href: "/politica-de-tratamiento-de-datos", texto: "Política de tratamiento de datos" },
+	{ href: "/aviso-de-privacidad", texto: "Aviso de privacidad" },
+	{ href: "/terminos-y-condiciones", texto: "Términos y condiciones" },
+];
+
+const año = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-borde bg-superficie text-texto-2">
+	<div class="contenedor grid gap-10 py-12 md:grid-cols-2">
+		<div>
+			<img src="/logo/logo-horizontal.svg" alt="Analizando y Automatizando" width="176" height="44" loading="lazy" />
+			<p class="mt-4">Analizamos lo que tienes. Automatizamos lo que repites.</p>
+		</div>
+
+		<div class="grid gap-6 sm:grid-cols-2">
+			<address class="not-italic">
+				<p class="font-semibold text-texto">Contacto</p>
+				<p class="mt-2">[PENDIENTE: nombre o razón social]</p>
+				<p>NIT [PENDIENTE]</p>
+				<p>[PENDIENTE: correo de contacto]</p>
+			</address>
+
+			<nav aria-label="Legal">
+				<p class="font-semibold text-texto">Legal</p>
+				<ul class="mt-1">
+					{
+						enlacesLegales.map(({ href, texto }) => (
+							<li>
+								<a href={href} class="inline-flex min-h-11 items-center text-texto-2 hover:text-cian">
+									{texto}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="border-t border-borde">
+		<p class="contenedor py-6 text-sm text-texto-tenue">© {año} Analizando y Automatizando.</p>
+	</div>
+</footer>

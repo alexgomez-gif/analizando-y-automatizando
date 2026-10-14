@@ -5,6 +5,8 @@
  * Cada página le pasa su propio title y description (textos en docs/contenido.md).
  */
 import { Font } from "astro:assets";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -55,7 +57,7 @@ const imagenSocial = ogImage ? new URL(ogImage, Astro.site) : undefined;
 		<Font cssVariable="--fuente-texto" preload />
 		<Font cssVariable="--fuente-mono" />
 	</head>
-	<body>
+	<body class="flex min-h-dvh flex-col">
 		{/* Oculto hasta que recibe el foco con Tab: permite saltar el menú con el teclado */}
 		<a
 			href="#contenido"
@@ -64,8 +66,12 @@ const imagenSocial = ogImage ? new URL(ogImage, Astro.site) : undefined;
 			Saltar al contenido
 		</a>
 
-		<main id="contenido">
+		<Header />
+
+		<main id="contenido" class="flex-1">
 			<slot />
 		</main>
+
+		<Footer />
 	</body>
 </html>

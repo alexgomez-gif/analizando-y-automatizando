@@ -1,0 +1,103 @@
+---
+/**
+ * Encabezado del sitio: logo, menú principal y acceso a agendar.
+ * - Escritorio (≥ 1024 px): menú en línea.
+ * - Celular y tablet: menú desplegable con botón (aria-expanded / aria-controls).
+ * - Sin JavaScript, el menú se muestra abierto y el botón se oculta: nunca queda inaccesible.
+ * El botón de agendar es `secundario` porque el llamado principal de cada página va en su contenido
+ * (un solo botón principal por pantalla, marca.md §7).
+ */
+import { Menu, X } from "@lucide/astro";
+import Button from "./Button.astro";
+
+const enlaces = [
+	{ href: "/servicios", texto: "Servicios" },
+	{ href: "/como-trabajamos", texto: "Cómo trabajamos" },
+	{ href: "/demos", texto: "Demos" },
+	{ href: "/sobre-nosotros", texto: "Sobre nosotros" },
+];
+
+const rutaActual = Astro.url.pathname;
+const esActual = (href: string) => rutaActual === href || rutaActual.startsWith(`${href}/`);
+---
+
+<header id="encabezado" class="group border-b border-borde">
+	<div class="contenedor flex flex-wrap items-center justify-between gap-x-8 py-3">
+		<a href="/" aria-label="Analizando y Automatizando, inicio" class="inline-flex min-h-11 items-center">
+			<img src="/logo/logo-horizontal.svg" alt="" width="176" height="44" />
+		</a>
+
+		<button
+			id="menu-boton"
+			type="button"
+			aria-expanded="false"
+			aria-controls="menu-principal"
+			class="inline-flex size-11 items-center justify-center rounded-full border border-borde-fuerte text-texto hover:border-cian hover:text-cian lg:hidden"
+		>
+			<Menu stroke-width={1.5} class="group-data-[menu=abierto]:hidden" />
+			<X stroke-width={1.5} class="hidden group-data-[menu=abierto]:block" />
+			<span class="sr-only">Menú</span>
+		</button>
+
+		<nav id="menu-principal" aria-label="Principal" class="w-full lg:w-auto">
+			<ul class="flex flex-col gap-1 py-4 lg:flex-row lg:items-center lg:gap-6 lg:py-0">
+				{
+					enlaces.map(({ href, texto }) => (
+						<li>
+							<a
+								href={href}
+								aria-current={esActual(href) ? "page" : undefined}
+								class="flex min-h-11 items-center text-texto-2 no-underline hover:text-cian aria-[current=page]:text-cian"
+							>
+								{texto}
+							</a>
+						</li>
+					))
+				}
+				<li class="pt-3 lg:pt-0">
+					<Button href="/agendar" variante="secundario">Agenda tu diagnóstico</Button>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<style>
+	/* Con JavaScript y pantalla menor a 1024 px, el menú empieza cerrado (sin parpadeo al cargar). */
+	@media (scripting: enabled) and (width < 64rem) {
+		#encabezado:not([data-menu="abierto"]) #menu-principal {
+			display: none;
+		}
+	}
+
+	/* Sin JavaScript el botón no serviría: se oculta y el menú queda visible. */
+	@media (scripting: none) {
+		#menu-boton {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	// Abre y cierra el menú en celular. Escape lo cierra y devuelve el foco al botón.
+	const encabezado = document.getElementById("encabezado");
+	const boton = document.getElementById("menu-boton");
+
+	if (encabezado && boton) {
+		const fijarEstado = (abierto: boolean) => {
+			encabezado.dataset.menu = abierto ? "abierto" : "cerrado";
+			boton.setAttribute("aria-expanded", String(abierto));
+		};
+
+		boton.addEventListener("click", () => {
+			fijarEstado(boton.getAttribute("aria-expanded") !== "true");
+		});
+
+		document.addEventListener("keydown", (evento) => {
+			if (evento.key === "Escape" && boton.getAttribute("aria-expanded") === "true") {
+				fijarEstado(false);
+				boton.focus();
+			}
+		});
+	}
+</script>

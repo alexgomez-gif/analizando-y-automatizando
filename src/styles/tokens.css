@@ -21,6 +21,8 @@
   --lima: #B8FF3D;
   --ambar: #FFC94D;
   --coral: #FF6B8B;
+  /* Texto sobre botones de neón (marca.md §2.1) */
+  --texto-sobre-neon: #070B1F;
   /* Degradados y glow */
   --grad-amanecer: linear-gradient(135deg, #00E5FF 0%, #A78BFA 50%, #FF3DDC 100%);
   --grad-horizonte: linear-gradient(90deg, #00E5FF 0%, #B8FF3D 100%);
@@ -48,6 +50,7 @@
   --lima: #3F7A00;
   --ambar: #9A5B00;
   --coral: #C8204A;
+  --texto-sobre-neon: #FFFFFF;
   --glow-cian: 0 0 0 1px rgba(0,120,138,.35), 0 8px 24px rgba(0,120,138,.15);
   --glow-magenta: 0 0 0 1px rgba(181,20,143,.35), 0 8px 24px rgba(181,20,143,.15);
   color-scheme: light;
