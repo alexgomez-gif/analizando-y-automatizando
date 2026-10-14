@@ -32,6 +32,15 @@ const imagenSocial = ogImage ? new URL(ogImage, Astro.site) : undefined;
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
+		{/* Aplica el tema guardado ANTES de pintar la página, para que no haya destello oscuro.
+		    Es `is:inline` (sin empaquetar ni diferir) a propósito: tiene que ejecutarse ya.
+		    Sin preferencia guardada, el sitio queda en oscuro (predeterminado de marca.md). */}
+		<script is:inline>
+			try {
+				if (localStorage.getItem("tema") === "claro") document.documentElement.dataset.theme = "light";
+			} catch {}
+		</script>
+
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonica} />
