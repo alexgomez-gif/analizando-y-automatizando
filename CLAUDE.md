@@ -182,6 +182,7 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-14 · Foco sin `border-radius` propio · el contorno sigue la forma del elemento; con 4px los botones redondos se veían cuadrados al enfocarlos.
 - 2026-10-14 · Dominio `analizandoyautomatizando.com` · comprado por el dueño del proyecto; es la URL base para canónicas, sitemap y Open Graph.
 - 2026-10-13 · Las fuentes son variables (un archivo por familia): se precarga la familia entera, no por peso · el filtro por peso de `<Font preload>` descartaba Space Grotesk.
 - 2026-10-13 · Paleta por defecto de Tailwind eliminada (`--color-*: initial`) · solo existen los colores de marca; imposible usar colores sueltos.

@@ -308,7 +308,6 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
 :focus-visible {
   outline: 2px solid var(--cian);
   outline-offset: 3px;
-  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
