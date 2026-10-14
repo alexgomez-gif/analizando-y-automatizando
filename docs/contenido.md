@@ -17,7 +17,7 @@ Fuente única de los textos de cada página. El código toma los textos de aquí
 
 ## Inicio · `/`
 
-> **Estado: BORRADOR.** Redactado por Claude a pedido del dueño del proyecto.
+> **Estado: APROBADO (2026-10-14)** por el dueño del proyecto. Redactado por Claude.
 > **Confirmado (2026-10-13):** lista de tareas automatizables aunque no contrate · propuesta con alcance, tiempo y precio antes de empezar · construcción con las herramientas que el cliente ya usa · acompañamiento después de la entrega.
 > Lo marcado `[PENDIENTE]` son datos que no se pueden inventar.
 
@@ -29,7 +29,7 @@ Fuente única de los textos de cada página. El código toma los textos de aquí
 - **Acción principal:** Agendar el diagnóstico gratuito (empieza con una conversación de 30 minutos)
 - **Texto del botón:** Agenda tu diagnóstico gratis
 - **Texto bajo el botón:** Gratis · informe en 3 días hábiles
-  - [PENDIENTE: modalidad del diagnóstico (videollamada, llamada o presencial)]
+  - Modalidad: la conversación inicial es por **llamada** (decisión del 2026-10-14).
 
 ### Secciones
 
@@ -55,9 +55,13 @@ Fuente única de los textos de cada página. El código toma los textos de aquí
 2. **Propuesta clara.** Te enviamos un plan con lo que vamos a hacer, cuánto tarda y cuánto cuesta. Sin letra pequeña.
 3. **Construcción.** Armamos la solución con las herramientas que ya usas, siempre que se pueda.
 4. **Entrega y acompañamiento.** Te capacitamos, te dejamos un manual y un video, y tienes 30 días de soporte incluidos.
+- **Tubería de proceso** (visual, marca.md §6.1): Datos → Limpieza → Análisis → Automatización → Decisión.
+  Se muestran ambas: la tubería explica el método; los 4 pasos, el camino del cliente.
 - **Enlace:** Ver tiempos y acompañamiento → `/como-trabajamos`
 
 #### 4. Demos
+> **OCULTA hasta que existan las demos (Fase 6).** No se publica antes.
+
 - **Título:** Mira cómo se ve en la práctica
 - **Texto:** Explora ejemplos de tableros y automatizaciones. Usan datos de ejemplo, no de clientes reales.
 - **Botón secundario:** Ver demos
@@ -67,18 +71,21 @@ Fuente única de los textos de cada página. El código toma los textos de aquí
 - **Título:** ¿Cuánto tiempo se te va en tareas repetitivas?
 - **Campos:** Horas a la semana en tareas manuales · Valor de tu hora (COP)
 - **Resultado:** Horas al año que podrías liberar · Lo que esas horas valen al año
-- **Nota visible:** El cálculo usa solo los números que ingresas.
+- **Cálculo:** horas por semana × 48 semanas = horas al año · horas al año × valor de la hora = valor al año.
+  48 semanas = año laboral, descontando vacaciones y festivos (decisión del 2026-10-14).
+- **Nota visible:** El cálculo usa solo los números que ingresas, sobre un año de 48 semanas de trabajo.
 
 #### 6. Quiénes somos (breve)
 - **Título:** Desde 2022, convirtiendo tecnología en claridad
-- **Texto:** Escuchamos primero, analizamos con rigor y automatizamos solo lo que de verdad libera tiempo. Nos formamos en análisis de datos avanzado con Google y seguimos estudiando cada día.
+- **Texto:** Escuchamos primero, analizamos con rigor y automatizamos solo lo que de verdad libera tiempo.
 - **Frase destacada:** «Cada dato cuenta una historia. Nosotros te ayudamos a escucharla y a escribir el siguiente capítulo.»
 - **Enlace:** Conócenos → `/sobre-nosotros`
 
 #### 7. Preguntas frecuentes (resumen)
 - **¿Necesito saber de tecnología?** No. Te explicamos todo en lenguaje sencillo y la solución queda lista para usar.
 - **¿Qué pasa en el diagnóstico?** Conversamos 30 minutos, revisamos tus datos y en 3 días hábiles recibes un informe con lo que se puede automatizar. Es gratis y el informe es tuyo, aunque no trabajes con nosotros.
-- **¿Cuánto cuesta?** Depende de lo que necesites. Después del diagnóstico te damos un precio claro, antes de empezar. [PENDIENTE: decidir si se publican precios o rangos]
+- **¿Cuánto cuesta?** Depende de lo que necesites. Después del diagnóstico te damos un precio claro, antes de empezar.
+  - Decisión (2026-10-14): no se publican precios ni rangos en el sitio.
 - **¿Qué pasa con mis datos?** Firmamos un acuerdo de confidencialidad antes de verlos y los eliminamos al terminar, si así lo prefieres. Enlace a la Política de tratamiento de datos. [REVISIÓN LEGAL PENDIENTE]
 
 #### 8. Llamado final
@@ -131,7 +138,7 @@ Antes de construir cualquier tablero o automatización, necesitas saber dónde e
 No es un informe genérico. Revisamos tus propios archivos y procesos con herramientas de análisis profesionales y te entregamos recomendaciones ordenadas por impacto, para que sepas exactamente por dónde empezar.
 
 **Cómo funciona:**
-1. **Conversación inicial (30 minutos, gratis).** Nos cuentas cómo trabaja tu negocio, qué herramientas usas y qué te quita más tiempo. Sin compromiso. [PENDIENTE: modalidad (videollamada, llamada o presencial)]
+1. **Conversación inicial (llamada de 30 minutos, gratis).** Nos cuentas cómo trabaja tu negocio, qué herramientas usas y qué te quita más tiempo. Sin compromiso.
 2. **Revisión de tus datos.** Nos compartes, por un canal seguro, una muestra de tus archivos o acceso de solo lectura a tus sistemas. Analizamos calidad, orden, duplicados, errores y tareas que se repiten a mano. [PENDIENTE: definir el canal seguro]
 3. **Informe de diagnóstico.** Recibes un documento claro con:
    - El estado de tus datos, explicado sin tecnicismos.
@@ -168,7 +175,7 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 ## Cómo trabajamos · `/como-trabajamos`
 
 > Fuente: `textos-diagnostico-y-trayectoria.txt` (v1, octubre 2026), entregado por el dueño del proyecto, con ajustes de estilo de Claude.
-> **Tiempos POR CONFIRMAR:** el documento fuente los presenta como propuesta inicial, a revisar con la capacidad real antes de publicarlos.
+> **Tiempos CONFIRMADOS (2026-10-14)** por el dueño del proyecto.
 
 - **title:** Cómo trabajamos | Analizando y Automatizando
 - **meta description:** [PENDIENTE]
@@ -267,8 +274,7 @@ Nuestra historia con la tecnología empezó en 2022, con una pregunta sencilla: 
 
 Desde entonces hemos aprendido, construido y probado. Hemos pasado horas frente a hojas de cálculo desordenadas, programas que fallan a la primera y reportes que nadie lee, y de cada uno aprendimos algo. Así formamos una manera de trabajar: escuchar primero, analizar con rigor y automatizar solo lo que de verdad libera tiempo.
 
-Nos formamos en análisis de datos avanzado con Google y seguimos estudiando cada día programación, automatización, inteligencia artificial y aprendizaje automático, porque la tecnología avanza rápido y nuestros clientes merecen lo mejor de ella.
-[PENDIENTE: nombre exacto del certificado de Google, tal como aparece en la credencial]
+Seguimos estudiando cada día programación, automatización, inteligencia artificial y aprendizaje automático, porque la tecnología avanza rápido y nuestros clientes merecen lo mejor de ella.
 
 Detrás de cada tablero hay una persona que quiere decidir mejor. Detrás de cada automatización, alguien que recupera horas para su familia, su equipo o sus sueños. Para eso existimos: para que la tecnología deje de ser un obstáculo y se convierta en el viento a favor de tu negocio.
 
@@ -276,7 +282,6 @@ Detrás de cada tablero hay una persona que quiere decidir mejor. Detrás de cad
 
 **Línea de tiempo** (opcional, como gráfico):
 - **2022** · Empieza el camino en la tecnología y los datos.
-- **[PENDIENTE: año]** · Certificación de Google en análisis de datos avanzado.
 - **2026** · Nace Analizando y Automatizando.
 - **Hoy** · Ayudamos a emprendimientos a decidir con datos y a trabajar en automático.
 

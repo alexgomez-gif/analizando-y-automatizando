@@ -184,6 +184,13 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-14 · La conversación inicial del diagnóstico es por llamada · decisión del dueño del proyecto. Al agendar habrá que pedir el teléfono: dato personal (Ley 1581), con autorización sin marcar.
+- 2026-10-14 · Textos del inicio aprobados; tiempos de entrega confirmados · decisión del dueño del proyecto.
+- 2026-10-14 · Calculadora de ahorro con año laboral de 48 semanas · descuenta vacaciones y festivos; se indica en la nota visible.
+- 2026-10-14 · Sección de demos del inicio oculta hasta que existan las demos (Fase 6) · un enlace a una página vacía resta confianza.
+- 2026-10-14 · «Cómo trabajamos» muestra la tubería de 5 etapas (método) y los 4 pasos (camino del cliente).
+- 2026-10-14 · Sin mención de certificaciones en el sitio · decisión del dueño del proyecto.
+- 2026-10-14 · No se publican precios ni rangos · el precio se da en la propuesta, después del diagnóstico.
 - 2026-10-14 · Borde del botón principal con los 3 neones de Amanecer, quieto en reposo y girando solo con hover/foco · excepción a la regla de 2 neones, como el logo; girar siempre violaría WCAG 2.2.2 (movimiento que no se puede pausar).
 - 2026-10-14 · Botón de tema al final del menú, con texto de acción («Cambiar a tema claro/oscuro») en vez de `aria-pressed` · el orden de foco coincide con el visual; con `aria-pressed` el ícono contradecía el texto.
 - 2026-10-14 · Script en línea (`is:inline`) en el `<head>` para aplicar el tema guardado antes del primer cuadro · única excepción a «JS solo en islas»: evita el destello oscuro. **Al configurar la CSP (Fase 9), autorizarlo con su hash.**
