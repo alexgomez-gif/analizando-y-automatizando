@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "./tokens.css";
 
+/* Variante `claro:` → estilos que solo aplican con el tema claro activo (ej. claro:hidden) */
+@custom-variant claro (&:where([data-theme="light"], [data-theme="light"] *));
+
 /*
  * Tokens de marca como clases de Tailwind (bg-fondo, text-cian, font-titulo…).
  * `--color-*: initial` quita la paleta por defecto de Tailwind (red-500, blue-600…),
@@ -38,6 +41,18 @@
 
   @media (width >= 40rem) {
     padding-inline: 1.5rem;
+  }
+}
+
+/* Transición suave al cambiar de tema (marca.md §6.1). Solo dura mientras ThemeToggle pone la clase,
+   y no existe para quien pidió reducir el movimiento. */
+@media (prefers-reduced-motion: no-preference) {
+  .cambiando-tema,
+  .cambiando-tema * {
+    transition:
+      background-color 300ms var(--curva),
+      color 300ms var(--curva),
+      border-color 300ms var(--curva) !important;
   }
 }
 

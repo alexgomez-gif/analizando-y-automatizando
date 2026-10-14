@@ -1,0 +1,52 @@
+---
+/**
+ * Botón para alternar entre tema oscuro (predeterminado) y claro.
+ * - El texto dice la ACCIÓN: «Cambiar a tema claro» (con ☀) o «Cambiar a tema oscuro» (con ☾).
+ *   Ícono, texto visible y nombre para lectores de pantalla siempre coinciden.
+ * - El texto se ve en el menú del celular; en escritorio queda solo para lectores (botón de ícono).
+ * - Ícono y texto cambian con CSS (variante `claro:`), así que son correctos desde el primer cuadro.
+ *   El que no aplica tiene display:none, así que tampoco lo lee el lector de pantalla.
+ * - La elección se guarda en localStorage con la clave `tema` (la lee el script de BaseLayout).
+ * - Sin JavaScript no podría funcionar, así que se oculta.
+ */
+import { Moon, Sun } from "@lucide/astro";
+---
+
+<button
+	id="tema-boton"
+	type="button"
+	class="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-borde-fuerte px-3 text-texto hover:border-cian hover:text-cian lg:px-0"
+>
+	<Sun stroke-width={1.5} class="claro:hidden" />
+	<Moon stroke-width={1.5} class="hidden claro:block" />
+	<span class="claro:hidden lg:sr-only">Cambiar a tema claro</span>
+	<span class="hidden claro:inline lg:sr-only">Cambiar a tema oscuro</span>
+</button>
+
+<style>
+	@media (scripting: none) {
+		#tema-boton {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	const boton = document.getElementById("tema-boton");
+	const raiz = document.documentElement;
+
+	boton?.addEventListener("click", () => {
+		const claro = raiz.dataset.theme !== "light";
+
+		// Transición suave solo durante el cambio (la clase se quita al terminar).
+		raiz.classList.add("cambiando-tema");
+		if (claro) raiz.dataset.theme = "light";
+		else delete raiz.dataset.theme;
+		window.setTimeout(() => raiz.classList.remove("cambiando-tema"), 350);
+
+		// Si el navegador bloquea el almacenamiento, el cambio funciona igual; solo no se recuerda.
+		try {
+			localStorage.setItem("tema", claro ? "claro" : "oscuro");
+		} catch {}
+	});
+</script>
