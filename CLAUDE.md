@@ -164,7 +164,6 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 **Cambio de tema oscuro/claro: completo** en la rama `feature/cambio-de-tema` (auditoría de contraste: 0 fallas en 2 temas × 3 anchos).
 
 **Pendientes técnicos conocidos:**
-- Borde giratorio del botón principal (marca.md §6.1): `marca.md` pide el degradado Amanecer (3 neones), pero §9 limita a 2 neones por componente. Decidir antes de implementarlo.
 - Imagen Open Graph (1200 × 630) por crear.
 - Páginas enlazadas en menú y pie aún no existen.
 
@@ -185,6 +184,7 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-14 · Borde del botón principal con los 3 neones de Amanecer, quieto en reposo y girando solo con hover/foco · excepción a la regla de 2 neones, como el logo; girar siempre violaría WCAG 2.2.2 (movimiento que no se puede pausar).
 - 2026-10-14 · Botón de tema al final del menú, con texto de acción («Cambiar a tema claro/oscuro») en vez de `aria-pressed` · el orden de foco coincide con el visual; con `aria-pressed` el ícono contradecía el texto.
 - 2026-10-14 · Script en línea (`is:inline`) en el `<head>` para aplicar el tema guardado antes del primer cuadro · única excepción a «JS solo en islas»: evita el destello oscuro. **Al configurar la CSP (Fase 9), autorizarlo con su hash.**
 - 2026-10-14 · Visitante nuevo ve el tema oscuro, sin seguir la preferencia del sistema · es el predeterminado de marca.md; la elección del visitante se guarda en `localStorage` (clave `tema`).

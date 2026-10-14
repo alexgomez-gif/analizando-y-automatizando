@@ -151,7 +151,7 @@ Monograma **A&A** dibujado con una sola línea continua, como una gráfica de da
 3. **Segunda A y nodo · Resultado.** La línea sube a un pico más alto que el primero y termina en un nodo lima con brillo.
 4. **Barra compartida · Horizonte.** Un solo trazo horizontal cruza las dos A.
 
-- **Color:** degradado Amanecer neón (cian → violeta → magenta) de abajo a la izquierda hacia arriba a la derecha; nodo en `--lima`. Es la única pieza de la marca con más de dos neones.
+- **Color:** degradado Amanecer neón (cian → violeta → magenta) de abajo a la izquierda hacia arriba a la derecha; nodo en `--lima`. Junto con el borde del botón principal, es la única pieza de la marca con más de dos neones.
 - **Nodo flotante:** un corte fino separa el nodo del pico, para que se lea también en las versiones a una tinta.
 - **Wordmark:** Space Grotesk 700 convertida a trazos (no depende de fuentes instaladas), en dos líneas: «Analizando y» / «Automatizando». La «y» va en peso 500 y color `--texto-2`.
 
@@ -219,7 +219,7 @@ Cada efecto debe **comunicar algo** (datos, proceso, resultado), no solo adornar
 | **Tubería de proceso** | «Cómo trabajamos» | Diagrama: Datos → Limpieza → Análisis → Automatización → Decisión; un pulso de luz recorre la línea al hacer scroll | Método claro y confiable |
 | **Calculadora de ahorro** | Antes del llamado final | El visitante ingresa horas semanales en tareas manuales y valor de su hora; ve horas y dinero al año que podría liberar | Valor concreto, en sus propios números |
 | **Tarjetas con luz** | Servicios y casos | Un foco de luz sigue el cursor dentro de la tarjeta; inclinación 3D leve (máx. 4°) | Calidad, atención al detalle |
-| **Botón principal** | Todo el sitio | Borde con degradado que gira lentamente (`conic-gradient`) + glow en hover | Dónde hacer clic |
+| **Botón principal** | Todo el sitio | Borde con el degradado Amanecer neón (`conic-gradient`), quieto en reposo; gira lentamente solo al pasar el mouse o enfocarlo con teclado (WCAG 2.2.2); nunca gira con `prefers-reduced-motion`. Glow en hover | Dónde hacer clic |
 | **Cambio de tema** | Encabezado | Alterna oscuro/claro con transición suave, recordado en `localStorage` | Control para el visitante |
 
 La calculadora **solo multiplica los valores que ingresa el visitante**: no muestra porcentajes de ahorro inventados.
@@ -363,7 +363,7 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
 - Efectos *glitch*, texto que tiembla o parpadea: restan confianza.
 - Texto neón sobre fondo neón, o degradado sobre degradado.
 - Imágenes con mucho detalle detrás de texto.
-- Más de dos colores de neón en un mismo componente (la única excepción es el logo).
+- Más de dos colores de neón en un mismo componente (las únicas excepciones son el logo y el borde del botón principal).
 - Glow en todos los elementos de una sección.
 - Animaciones infinitas rápidas o que no se puedan detener.
 - Colores fuera de esta paleta. Si hace falta uno nuevo, se propone, se verifica el contraste y se agrega aquí.
