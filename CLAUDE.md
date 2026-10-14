@@ -163,6 +163,14 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 **Cambio de tema oscuro/claro: completo** en la rama `feature/cambio-de-tema` (auditoría de contraste: 0 fallas en 2 temas × 3 anchos).
 
+**Próxima sesión:** crear la rama `feature/secciones-inicio` desde `feature/decisiones-inicio` (aún sin fusionar a `main`) y seguir el plan de secciones estáticas del inicio (aprobado el 2026-10-14):
+1. Componentes base `Seccion` y `Card` (tarjeta «cristal»; token nuevo `--cristal` oscuro/claro, anotarlo en marca.md)
+2. Secciones Problema (3 tarjetas) y Servicios (5 tarjetas con enlace; cian = análisis, magenta = automatización, violeta = predictivo)
+3. Cómo trabajamos: tubería de 5 etapas (estática) + 4 pasos + enlace a `/como-trabajamos`
+4. Quiénes somos, Preguntas frecuentes (`<details>`/`<summary>`) y Llamado final
+5. Verificación: contraste 2 temas × 3 anchos, teclado, jerarquía de títulos, build y check
+Fuera de este plan: calculadora (plan propio, 48 semanas), efectos de marca.md, sección de demos (oculta hasta la Fase 6).
+
 **Pendientes técnicos conocidos:**
 - Imagen Open Graph (1200 × 630) por crear.
 - Páginas enlazadas en menú y pie aún no existen.
