@@ -158,12 +158,14 @@ La accesibilidad no es opcional ni un paso final: se cumple en cada componente.
 
 Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos pendientes) — actualizar al avanzar.
 
-**Próxima sesión:** continuar en la rama `feature/base-visual` con el paso 3 del plan de base visual (aprobado el 2026-10-13):
-1. ✅ Tokens y estilos base (`src/styles/tokens.css`, `global.css`)
-2. ✅ Fuentes alojadas en el propio dominio (`fonts` en `astro.config.mjs`)
-3. ⏭️ `BaseLayout` en `src/layouts/` (lang, saltar al contenido, title/description/canónica, favicons, `<Font>` que hoy está en `index.astro`)
-4. `Button`, `Header` y `Footer`
-5. Hero del inicio + verificación completa (375/768/1280 px y teclado)
+**Plan de base visual (aprobado el 2026-10-13): completo** en la rama `feature/base-visual`.
+1. ✅ Tokens y estilos base · 2. ✅ Fuentes en el propio dominio · 3. ✅ `BaseLayout` · 4. ✅ `Button`, `Header`, `Footer` · 5. ✅ Hero del inicio
+
+**Pendientes técnicos conocidos:**
+- Tema claro: `--grad-amanecer` no tiene versión clara (el titular perdería contraste) y falta el logo claro en el encabezado. Resolver junto con el botón de cambio de tema.
+- Borde giratorio del botón principal (marca.md §6.1): `marca.md` pide el degradado Amanecer (3 neones), pero §9 limita a 2 neones por componente. Decidir antes de implementarlo.
+- Imagen Open Graph (1200 × 630) por crear.
+- Páginas enlazadas en menú y pie aún no existen.
 
 - [ ] Fase 0 · Negocio y oferta
 - [x] Fase 1 · Entorno
