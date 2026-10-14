@@ -56,6 +56,51 @@
   }
 }
 
+/*
+ * Borde del botón principal (marca.md §6.1): degradado Amanecer con los 3 neones.
+ * - En reposo, quieto. Gira solo con el mouse encima o con foco de teclado (WCAG 2.2.2).
+ * - Usa los tokens, así que en el tema claro toma los neones oscurecidos sin código extra.
+ * - El fondo cian va en `padding-box` y el degradado en `border-box`: el borde transparente
+ *   deja ver el degradado. En modo de alto contraste de Windows ese borde se vuelve visible.
+ */
+@property --angulo-borde {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 135deg;
+}
+
+@keyframes girar-borde {
+  to {
+    --angulo-borde: 495deg;
+  }
+}
+
+@layer components {
+  .boton-principal {
+    border: 2px solid transparent;
+    background:
+      linear-gradient(var(--cian), var(--cian)) padding-box,
+      conic-gradient(from var(--angulo-borde), var(--cian), var(--violeta), var(--magenta), var(--cian)) border-box;
+    /* Color de fondo real debajo de los degradados: respaldo si no se dibujan y referencia
+       para las herramientas de contraste (axe, Lighthouse), que no leen imágenes de fondo. */
+    background-color: var(--cian);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .boton-principal:focus-visible {
+      animation: girar-borde 4s linear infinite;
+    }
+
+    /* Solo con mouse real: en pantallas táctiles el :hover queda «pegado» tras tocar
+       y el borde giraría sin poder detenerse. */
+    @media (hover: hover) {
+      .boton-principal:hover {
+        animation: girar-borde 4s linear infinite;
+      }
+    }
+  }
+}
+
 /* Estilos base: escala tipográfica de docs/marca.md, sección 3 */
 @layer base {
   html {

@@ -2,7 +2,8 @@
 /**
  * Botón del sitio. Todos los botones y llamados a la acción usan este componente.
  * - Con `href` se dibuja como enlace (<a>); sin `href`, como <button>.
- * - `primario`: neón cian con glow al pasar el mouse. Solo uno por pantalla (marca.md §7).
+ * - `primario`: neón cian con borde en degradado Amanecer (gira con mouse o foco) y glow.
+ *   Solo uno por pantalla (marca.md §7).
  * - `secundario`: contorno, sin glow. Para acciones de apoyo.
  */
 interface Props {
@@ -20,7 +21,8 @@ const base =
 	"inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 font-semibold no-underline transition-[box-shadow,border-color,color] duration-150 ease-(--curva)";
 
 const variantes = {
-	primario: "bg-cian text-sobre-neon hover:shadow-(--glow-cian) focus-visible:shadow-(--glow-cian)",
+	// `boton-principal` (global.css) pone el fondo cian y el borde con degradado Amanecer
+	primario: "boton-principal text-sobre-neon hover:shadow-(--glow-cian) focus-visible:shadow-(--glow-cian)",
 	secundario: "border border-borde-fuerte text-texto hover:border-cian hover:text-cian",
 };
 
