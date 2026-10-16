@@ -4,7 +4,7 @@
 //   npm run verificar                         → revisa http://localhost:4321/
 //   npm run verificar -- http://localhost:4321/servicios/
 //
-// Revisa: contraste WCAG (2 temas × 3 anchos, menú abierto en móvil), desborde horizontal,
+// Revisa: contraste WCAG (texto, bordes de controles y campos), etiquetas de formularios, desborde,
 // orden de Tab con tamaño de cada objetivo, «Saltar al contenido» y foco en tarjetas-enlace.
 // Guarda capturas en .verificacion/ (carpeta ignorada por Git). Necesita Google Chrome instalado.
 //
@@ -61,7 +61,7 @@ const auditar = `(() => {
 		const s = getComputedStyle(el), color = rgba(s.color); if (color[3] === 0) continue;
 		const px = parseFloat(s.fontSize), grande = px >= 24 || (px >= 18.66 && Number(s.fontWeight) >= 700);
 		filas.push({ texto: t.slice(0, 40), ratio: +cr(sobre(color, fondoDe(el)), fondoDe(el)).toFixed(2), minimo: grande ? 3 : 4.5 }); }
-	for (const b of document.querySelectorAll('button, a.border')) { if (!visible(b)) continue; const s = getComputedStyle(b); if (parseFloat(s.borderTopWidth) === 0 || rgba(s.borderTopColor)[3] === 0) continue;
+	for (const b of document.querySelectorAll('button, a.border, input, select, textarea')) { if (!visible(b)) continue; const s = getComputedStyle(b); if (parseFloat(s.borderTopWidth) === 0 || rgba(s.borderTopColor)[3] === 0) continue;
 		const f = fondoDe(b.parentElement); filas.push({ texto: '[borde] ' + (b.id || b.textContent.trim()).slice(0, 30), ratio: +cr(sobre(rgba(s.borderTopColor), f), f).toFixed(2), minimo: 3 }); }
 	return filas; })()`;
 
@@ -100,6 +100,9 @@ const estructura = await ev(`(() => {
 	document.querySelectorAll('[aria-labelledby], [aria-controls]').forEach(e => {
 		for (const atr of ['aria-labelledby', 'aria-controls']) for (const ref of (e.getAttribute(atr) || '').split(/\\s+/).filter(Boolean))
 			if (!document.getElementById(ref)) problemas.push(atr + ' apunta a un id inexistente: ' + ref);
+	});
+	document.querySelectorAll('input:not([type=hidden]), select, textarea').forEach(c => {
+		if (!(c.labels && c.labels.length) && !c.getAttribute('aria-label') && !c.getAttribute('aria-labelledby')) problemas.push('Campo sin etiqueta: ' + (c.id || c.name));
 	});
 	if (!document.documentElement.lang) problemas.push('Falta lang en <html>');
 	return { titulos: titulos.length, problemas };

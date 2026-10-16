@@ -190,6 +190,10 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-16 · Planes aprobados: calculadora (antes del llamado final), páginas enlazadas y efectos de marca.md · decisión del dueño del proyecto.
+- 2026-10-16 · Textos de las páginas de Tableros, Limpieza, Automatización y Predictivo: los redacta Claude como borrador para aprobación · no existían; no se publican sin aprobar.
+- 2026-10-16 · «Demos» sale del menú hasta la Fase 6 · coherente con la sección de demos oculta.
+- 2026-10-16 · Sitemap con la integración oficial `@astrojs/sitemap` · dependencia nueva aprobada; CLAUDE.md §8 lo exige.
 - 2026-10-16 · `npm run verificar` (scripts/verificar.mjs) como verificación estándar de cada página · contraste, desborde, estructura, teclado completo y acordeones, sin dependencias; los scripts temporales se perdían entre sesiones.
 - 2026-10-16 · Tarjetas con enlace: el enlace es solo el título y se estira a toda la tarjeta · nombre accesible corto; el foco se dibuja en la tarjeta completa con `:has`.
 - 2026-10-16 · Preguntas frecuentes con `<details>`/`<summary>` nativos · accesibles sin JavaScript; Chrome expone «expandido» igual que `aria-expanded`.

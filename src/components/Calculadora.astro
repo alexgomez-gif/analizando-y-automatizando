@@ -1,0 +1,171 @@
+---
+/**
+ * Calculadora de ahorro (marca.md §6.1). Solo multiplica lo que escribe el visitante:
+ *   horas al año = horas por semana × 48 semanas (año laboral, decisión del 2026-10-14)
+ *   valor al año = horas al año × valor de la hora
+ * - Todo ocurre en el navegador: ningún dato sale del dispositivo.
+ * - Etiquetas visibles; errores al salir del campo, unidos con aria-describedby y aria-invalid.
+ * - Las cifras se actualizan al instante; el anuncio para lectores de pantalla (aria-live)
+ *   espera a que la persona deje de escribir, para no leer cada tecla.
+ * - Cifras en lima: el color de marca para «ahorro» y resultados positivos.
+ * - Formato colombiano: $1.500.000 y decimales con coma.
+ */
+import Seccion from "./Seccion.astro";
+
+const SEMANAS_POR_AÑO = 48;
+---
+
+<Seccion id="calculadora" titulo="¿Cuánto tiempo se te va en tareas repetitivas?">
+	<div class="calculadora grid gap-8 lg:grid-cols-2 lg:gap-12" data-semanas={SEMANAS_POR_AÑO}>
+		<form class="grid content-start gap-6" novalidate>
+			<div>
+				<label for="calc-horas" class="block font-semibold text-texto">Horas a la semana en tareas manuales</label>
+				<input
+					id="calc-horas"
+					name="horas"
+					type="text"
+					inputmode="decimal"
+					autocomplete="off"
+					aria-describedby="calc-horas-error"
+					class="campo mt-2"
+				/>
+				<p id="calc-horas-error" class="mt-2 text-coral" hidden></p>
+			</div>
+
+			<div>
+				<label for="calc-valor" class="block font-semibold text-texto">Valor de tu hora (COP)</label>
+				<div class="relative mt-2">
+					<span aria-hidden="true" class="pointer-events-none absolute inset-y-0 left-4 flex items-center text-texto-2">$</span>
+					<input
+						id="calc-valor"
+						name="valor"
+						type="text"
+						inputmode="numeric"
+						autocomplete="off"
+						aria-describedby="calc-valor-error"
+						class="campo pl-8"
+					/>
+				</div>
+				<p id="calc-valor-error" class="mt-2 text-coral" hidden></p>
+			</div>
+
+			<noscript>
+				<p class="text-texto-2">La calculadora necesita JavaScript activado en tu navegador.</p>
+			</noscript>
+		</form>
+
+		<div class="rounded-(--radio-tarjeta) border border-borde bg-cristal p-6 sm:p-8">
+			<dl class="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+				<div>
+					<dt class="text-texto-2">Horas al año que podrías liberar</dt>
+					<dd class="mt-1 font-mono text-4xl text-lima" data-resultado="horas">—</dd>
+				</div>
+				<div>
+					<dt class="text-texto-2">Lo que esas horas valen al año</dt>
+					<dd class="mt-1 font-mono text-4xl text-lima" data-resultado="valor">—</dd>
+				</div>
+			</dl>
+			<p class="mt-6 text-sm text-texto-2">
+				El cálculo usa solo los números que ingresas, sobre un año de {SEMANAS_POR_AÑO} semanas de trabajo.
+			</p>
+			<p class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-anuncio></p>
+		</div>
+	</div>
+</Seccion>
+
+<style>
+	.campo {
+		display: block;
+		width: 100%;
+		min-height: 3rem;
+		padding-inline: 1rem;
+		border: 1px solid var(--borde-fuerte);
+		border-radius: var(--radio-input);
+		background-color: var(--superficie);
+		color: var(--texto);
+		font-family: var(--font-mono);
+		font-size: 1.125rem;
+	}
+
+	.campo[aria-invalid="true"] {
+		border-color: var(--coral);
+	}
+</style>
+
+<script>
+	const raiz = document.querySelector<HTMLElement>(".calculadora");
+
+	if (raiz) {
+		const semanas = Number(raiz.dataset.semanas);
+		const horas = raiz.querySelector<HTMLInputElement>("#calc-horas")!;
+		const valor = raiz.querySelector<HTMLInputElement>("#calc-valor")!;
+		const salidaHoras = raiz.querySelector<HTMLElement>('[data-resultado="horas"]')!;
+		const salidaValor = raiz.querySelector<HTMLElement>('[data-resultado="valor"]')!;
+		const anuncio = raiz.querySelector<HTMLElement>("[data-anuncio]")!;
+
+		// Formato colombiano: miles con punto, decimales con coma. Manual para no depender del navegador.
+		const miles = (entero: number) => String(entero).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+		const formatoHoras = (n: number) => {
+			const redondeado = Math.round(n * 10) / 10;
+			const [entero, decimal] = String(redondeado).split(".");
+			return miles(Number(entero)) + (decimal ? `,${decimal}` : "");
+		};
+		const formatoPesos = (n: number) => `$${miles(Math.round(n))}`;
+
+		// Cada campo devuelve un número válido o un mensaje de error (null = vacío, sin error todavía).
+		const leerHoras = (): number | string | null => {
+			const texto = horas.value.trim().replace(",", ".");
+			if (texto === "") return null;
+			const n = Number(texto);
+			if (!Number.isFinite(n) || n <= 0 || n > 168) return "Escribe un número de horas mayor que 0 y hasta 168 (las horas de una semana).";
+			return n;
+		};
+		const leerValor = (): number | string | null => {
+			const texto = valor.value.trim().replace(/[$\s.]/g, "");
+			if (texto === "") return null;
+			if (!/^\d+$/.test(texto) || Number(texto) <= 0) return "Escribe el valor de tu hora en pesos, solo con números (por ejemplo, 25.000).";
+			return Number(texto);
+		};
+
+		const mostrarError = (campo: HTMLInputElement, resultado: number | string | null) => {
+			const error = document.getElementById(`${campo.id}-error`)!;
+			const hayError = typeof resultado === "string";
+			campo.setAttribute("aria-invalid", String(hayError));
+			error.hidden = !hayError;
+			error.textContent = hayError ? resultado : "";
+		};
+
+		let espera: number | undefined;
+		const calcular = () => {
+			const h = leerHoras();
+			const v = leerValor();
+			const listo = typeof h === "number" && typeof v === "number";
+			const horasAño = typeof h === "number" ? h * semanas : null;
+
+			salidaHoras.textContent = horasAño === null ? "—" : formatoHoras(horasAño);
+			salidaValor.textContent = listo ? formatoPesos(h * semanas * v) : "—";
+
+			window.clearTimeout(espera);
+			espera = window.setTimeout(() => {
+				anuncio.textContent = listo
+					? `Podrías liberar ${salidaHoras.textContent} horas al año, que valen ${salidaValor.textContent}.`
+					: "";
+			}, 800);
+		};
+
+		for (const [campo, leer] of [
+			[horas, leerHoras],
+			[valor, leerValor],
+		] as const) {
+			campo.addEventListener("input", () => {
+				// Mientras escribe, solo se quita un error que ya se corrigió; los nuevos esperan al blur.
+				if (campo.getAttribute("aria-invalid") === "true") mostrarError(campo, leer());
+				calcular();
+			});
+			campo.addEventListener("blur", () => mostrarError(campo, leer()));
+		}
+
+		// Enter no envía nada: no hay servidor, todo se calcula aquí.
+		raiz.querySelector("form")!.addEventListener("submit", (evento) => evento.preventDefault());
+	}
+</script>

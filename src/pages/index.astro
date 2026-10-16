@@ -14,11 +14,12 @@ import {
 } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
+import Calculadora from "../components/Calculadora.astro";
 import Card from "../components/Card.astro";
 import EnlaceFlecha from "../components/EnlaceFlecha.astro";
 import Seccion from "../components/Seccion.astro";
 // Textos de docs/contenido.md (Inicio, aprobados).
-// Pendientes fuera de este plan: calculadora de ahorro (plan propio) y demos (ocultas hasta la Fase 6).
+// Demos: ocultas hasta la Fase 6.
 
 // «Cómo trabajamos»: la tubería muestra el método; los pasos, el camino del cliente.
 const etapas = ["Datos", "Limpieza", "Análisis", "Automatización", "Decisión"];
@@ -190,7 +191,7 @@ const preguntas: {
 		<EnlaceFlecha href="/como-trabajamos" class="mt-10">Ver tiempos y acompañamiento</EnlaceFlecha>
 	</Seccion>
 
-	{/* 4. Demos: oculta hasta la Fase 6 · 5. Calculadora de ahorro: plan propio (va aquí, antes de Quiénes somos) */}
+	{/* 4. Demos: oculta hasta la Fase 6 */}
 
 	{/* 6. Quiénes somos: texto + cita destacada con barra Horizonte (cian → lima: 2 neones) */}
 	<Seccion id="quienes-somos" titulo="Desde 2022, convirtiendo tecnología en claridad">
@@ -241,6 +242,9 @@ const preguntas: {
 			}
 		</div>
 	</Seccion>
+
+	{/* 5. Calculadora de ahorro: justo antes del llamado final (marca.md §6.1), su resultado lleva al cierre */}
+	<Calculadora />
 
 	{/* 8. Llamado final: panel que repite la Aurora y la retícula del hero, como cierre de la página */}
 	<section aria-labelledby="cierre-titulo" class="py-10 sm:py-12 lg:py-16">
