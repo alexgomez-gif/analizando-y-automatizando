@@ -81,6 +81,32 @@ for (const tema of ["oscuro", "claro"]) for (const ancho of [375, 768, 1280]) {
 }
 console.log(`  TOTAL DE FALLAS: ${fallas}`);
 
+// --- Estructura: títulos, ids, alt, nombres accesibles y referencias ARIA ---
+console.log("== ESTRUCTURA");
+await ir(1280, "oscuro");
+const estructura = await ev(`(() => {
+	const problemas = [];
+	const titulos = [...document.querySelectorAll('h1, h2, h3, h4, h5, h6')].map(h => +h.tagName[1]);
+	const h1 = titulos.filter(n => n === 1).length;
+	if (h1 !== 1) problemas.push('Hay ' + h1 + ' h1 (debe haber 1)');
+	titulos.forEach((n, i) => { if (i && n > titulos[i - 1] + 1) problemas.push('Salto de h' + titulos[i - 1] + ' a h' + n); });
+	const ids = [...document.querySelectorAll('[id]')].map(e => e.id);
+	[...new Set(ids.filter((id, i) => ids.indexOf(id) !== i))].forEach(id => problemas.push('id repetido: ' + id));
+	document.querySelectorAll('img:not([alt])').forEach(i => problemas.push('Imagen sin alt: ' + i.getAttribute('src')));
+	document.querySelectorAll('a[href], button, summary').forEach(e => {
+		const nombre = (e.getAttribute('aria-label') || e.textContent || [...e.querySelectorAll('img[alt]')].map(i => i.alt).join('')).trim();
+		if (!nombre && !e.getAttribute('aria-labelledby')) problemas.push('Sin nombre accesible: ' + e.outerHTML.slice(0, 60));
+	});
+	document.querySelectorAll('[aria-labelledby], [aria-controls]').forEach(e => {
+		for (const atr of ['aria-labelledby', 'aria-controls']) for (const ref of (e.getAttribute(atr) || '').split(/\\s+/).filter(Boolean))
+			if (!document.getElementById(ref)) problemas.push(atr + ' apunta a un id inexistente: ' + ref);
+	});
+	if (!document.documentElement.lang) problemas.push('Falta lang en <html>');
+	return { titulos: titulos.length, problemas };
+})()`);
+console.log(`  ${estructura.titulos} títulos revisados · problemas: ${estructura.problemas.length ? "" : "ninguno"}`);
+for (const p of estructura.problemas) console.log(`     PROBLEMA ${p}`);
+
 // --- Teclado: orden de Tab, tamaño de cada objetivo y foco en tarjetas-enlace ---
 console.log("== TECLADO (oscuro, 1280px)");
 await ir(1280, "oscuro");
@@ -88,7 +114,15 @@ const estadoFoco = `(() => { const a = document.activeElement, r = a.getBounding
 	const base = (a.getAttribute('aria-label') || a.innerText || '').trim().replace(/\\s+/g, ' ').slice(0, 38) + ' [' + Math.round(r.width) + '×' + Math.round(r.height) + ']';
 	if (!t) return base; const s = getComputedStyle(t), anillo = getComputedStyle(t, '::before').opacity;
 	return base + ' → tarjeta: contorno ' + s.outlineStyle + ', glow ' + (s.boxShadow !== 'none') + ', anillo ' + anillo; })()`;
-for (let i = 1; i <= 16; i++) { await tecla("Tab", "Tab", 9); console.log(`  Tab ${String(i).padStart(2)}: ${await ev(estadoFoco)}`); }
+// Recorre toda la página: se detiene cuando el foco vuelve al primer elemento (máximo 120 pasos).
+let primero = null;
+for (let i = 1; i <= 120; i++) {
+	await tecla("Tab", "Tab", 9);
+	const actual = await ev("(() => { const a = document.activeElement; return a === document.body ? 'body' : a.outerHTML.slice(0, 120); })()");
+	if (i === 1) primero = actual;
+	else if (actual === primero || actual === "body") { console.log(`  (recorrido completo: ${i - 1} elementos enfocables)`); break; }
+	console.log(`  Tab ${String(i).padStart(2)}: ${await ev(estadoFoco)}`);
+}
 await ir(1280, "oscuro");
 await tecla("Tab", "Tab", 9); await tecla("Enter", "Enter", 13); await tecla("Tab", "Tab", 9);
 console.log(`  Saltar al contenido → siguiente Tab: ${await ev(estadoFoco)}`);

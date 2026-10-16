@@ -164,13 +164,10 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 **Cambio de tema oscuro/claro: completo** en la rama `feature/cambio-de-tema` (auditoría de contraste: 0 fallas en 2 temas × 3 anchos).
 
-**Próxima sesión:** crear la rama `feature/secciones-inicio` desde `feature/decisiones-inicio` (aún sin fusionar a `main`) y seguir el plan de secciones estáticas del inicio (aprobado el 2026-10-14):
-1. Componentes base `Seccion` y `Card` (tarjeta «cristal»; token nuevo `--cristal` oscuro/claro, anotarlo en marca.md)
-2. Secciones Problema (3 tarjetas) y Servicios (5 tarjetas con enlace; cian = análisis, magenta = automatización, violeta = predictivo)
-3. Cómo trabajamos: tubería de 5 etapas (estática) + 4 pasos + enlace a `/como-trabajamos`
-4. Quiénes somos, Preguntas frecuentes (`<details>`/`<summary>`) y Llamado final
-5. Verificación: contraste 2 temas × 3 anchos, teclado, jerarquía de títulos, build y check
-Fuera de este plan: calculadora (plan propio, 48 semanas), efectos de marca.md, sección de demos (oculta hasta la Fase 6).
+**Secciones estáticas del inicio (aprobado el 2026-10-14): completo** en la rama `feature/secciones-inicio`.
+1. ✅ `Seccion` y `Card` · 2. ✅ Problema y Servicios · 3. ✅ Cómo trabajamos · 4. ✅ Quiénes somos, Preguntas frecuentes y Llamado final · 5. ✅ Verificación
+
+**Siguientes candidatos:** calculadora de ahorro (plan propio, 48 semanas) · efectos de marca.md (tarjetas con luz, tubería con pulso, terminal, antes/después, red de datos, mini tablero) · páginas enlazadas (servicios, cómo trabajamos, sobre nosotros, agendar, legales) · demos (Fase 6).
 
 **Pendientes técnicos conocidos:**
 - Imagen Open Graph (1200 × 630) por crear.
@@ -193,6 +190,10 @@ Fuera de este plan: calculadora (plan propio, 48 semanas), efectos de marca.md, 
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-16 · `npm run verificar` (scripts/verificar.mjs) como verificación estándar de cada página · contraste, desborde, estructura, teclado completo y acordeones, sin dependencias; los scripts temporales se perdían entre sesiones.
+- 2026-10-16 · Tarjetas con enlace: el enlace es solo el título y se estira a toda la tarjeta · nombre accesible corto; el foco se dibuja en la tarjeta completa con `:has`.
+- 2026-10-16 · Preguntas frecuentes con `<details>`/`<summary>` nativos · accesibles sin JavaScript; Chrome expone «expandido» igual que `aria-expanded`.
+- 2026-10-16 · Aire entre secciones: cada sección pone la mitad arriba y abajo (80/96/128 px entre secciones) · antes se sumaban 256 px.
 - 2026-10-14 · La conversación inicial del diagnóstico es por llamada · decisión del dueño del proyecto. Al agendar habrá que pedir el teléfono: dato personal (Ley 1581), con autorización sin marcar.
 - 2026-10-14 · Textos del inicio aprobados; tiempos de entrega confirmados · decisión del dueño del proyecto.
 - 2026-10-14 · Calculadora de ahorro con año laboral de 48 semanas · descuenta vacaciones y festivos; se indica en la nota visible.

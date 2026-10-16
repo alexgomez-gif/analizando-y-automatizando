@@ -13,7 +13,9 @@ const enlacesLegales = [
 const año = new Date().getFullYear();
 ---
 
-<footer class="mt-24 border-t border-borde bg-superficie text-texto-2">
+{/* Margen = la mitad del aire entre secciones; sumado al padding inferior de la última sección
+    da el mismo espacio que hay entre secciones (80 / 96 / 128 px, ver Seccion.astro). */}
+<footer class="mt-10 border-t border-borde bg-superficie text-texto-2 sm:mt-12 lg:mt-16">
 	<div class="contenedor grid gap-10 py-12 md:grid-cols-2">
 		<div>
 			<img src="/logo/logo-horizontal.svg" alt="Analizando y Automatizando" width="176" height="44" loading="lazy" class="claro:hidden" />
