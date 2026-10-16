@@ -167,11 +167,21 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 **Secciones estáticas del inicio (aprobado el 2026-10-14): completo** en la rama `feature/secciones-inicio`.
 1. ✅ `Seccion` y `Card` · 2. ✅ Problema y Servicios · 3. ✅ Cómo trabajamos · 4. ✅ Quiénes somos, Preguntas frecuentes y Llamado final · 5. ✅ Verificación
 
-**Siguientes candidatos:** calculadora de ahorro (plan propio, 48 semanas) · efectos de marca.md (tarjetas con luz, tubería con pulso, terminal, antes/después, red de datos, mini tablero) · páginas enlazadas (servicios, cómo trabajamos, sobre nosotros, agendar, legales) · demos (Fase 6).
+**Calculadora de ahorro: completa** en la rama `feature/calculadora` (aún sin fusionar a `main`; contiene también las decisiones del 2026-10-16).
+
+**Próxima sesión:** crear `feature/paginas` desde `feature/calculadora` y seguir el **plan 3 · páginas enlazadas** (aprobado el 2026-10-16):
+1. Páginas con texto aprobado: `/servicios/diagnostico-de-datos`, `/como-trabajamos`, `/sobre-nosotros`
+2. `/servicios` (índice con las 5 tarjetas)
+3. Redactar en `docs/contenido.md` los textos BORRADOR de Tableros, Limpieza, Automatización y Predictivo → esperar aprobación → construir esas 4 páginas
+4. `/agendar` con el texto aprobado + bloque «[PENDIENTE: agenda con Cal.com — Fase 5]»
+5. Páginas legales (solo estructura, `[REVISIÓN LEGAL PENDIENTE]`) y página 404
+6. Quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` (dependencia aprobada) y `robots.txt`
+Después: **plan 4 · efectos de marca.md** (aprobado): tubería con pulso → tarjetas con luz → terminal → antes/después → mini tablero en el hero → red de datos; presupuesto ≤ 30 KB de JS; cerrar con Lighthouse.
 
 **Pendientes técnicos conocidos:**
 - Imagen Open Graph (1200 × 630) por crear.
-- Páginas enlazadas en menú y pie aún no existen.
+- Páginas enlazadas en menú y pie aún no existen (plan 3).
+- Evento de analítica «uso de la calculadora» (Fase 5).
 
 - [ ] Fase 0 · Negocio y oferta
 - [x] Fase 1 · Entorno
