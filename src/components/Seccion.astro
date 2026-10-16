@@ -1,7 +1,8 @@
 ---
 /**
  * Sección de página: contenedor, espaciado vertical de marca y un título h2.
- * - Espaciado (marca.md §5): 64 px en celular, 96 px en tablet, 128 px en escritorio.
+ * - Espaciado (marca.md §5): el aire ENTRE secciones es 80 px en celular, 96 px en tablet y 128 px
+ *   en escritorio. Cada sección pone la mitad arriba y la mitad abajo; al apilarse suman eso.
  * - La sección se nombra con su propio título (`aria-labelledby`), así los lectores de pantalla
  *   pueden listarla como región y saltar entre secciones.
  * - `id` sirve también como ancla (ej. /#como-trabajamos).
@@ -17,7 +18,7 @@ const { id, titulo, intro, class: claseExtra } = Astro.props;
 const idTitulo = `${id}-titulo`;
 ---
 
-<section id={id} aria-labelledby={idTitulo} class:list={["py-16 sm:py-24 lg:py-32", claseExtra]}>
+<section id={id} aria-labelledby={idTitulo} class:list={["py-10 sm:py-12 lg:py-16", claseExtra]}>
 	<div class="contenedor">
 		<h2 id={idTitulo} class="max-w-3xl">{titulo}</h2>
 		{intro && <p class="mt-4 text-lg text-texto-2">{intro}</p>}

@@ -8,17 +8,24 @@
  * - `acento` colorea el ícono según su significado: cian = análisis, magenta = automatización,
  *   violeta = inteligencia artificial. Sin acento, el ícono va en --texto-2.
  * - Slot `icono`: un ícono de Lucide (decorativo). Slot por defecto: el texto de la tarjeta.
+ * - `titulo` es opcional: si el contenido es una frase suelta (no un título con párrafo),
+ *   se omite para no anunciar oraciones como encabezados.
+ * - `etiqueta`: `article` para piezas independientes; `div` cuando la tarjeta va dentro de una
+ *   lista (<li>) y la lista ya da la estructura.
  */
 interface Props {
-	titulo: string;
+	titulo?: string;
 	href?: string;
 	/** Nivel del título; 3 por defecto (la sección que la contiene usa h2). */
 	nivel?: 2 | 3 | 4;
 	acento?: "cian" | "magenta" | "violeta";
+	etiqueta?: "article" | "div";
 	class?: string;
 }
 
-const { titulo, href, nivel = 3, acento, class: claseExtra } = Astro.props;
+const { titulo, href, nivel = 3, acento, etiqueta = "article", class: claseExtra } = Astro.props;
+
+const Contenedor = etiqueta;
 
 const Titulo = `h${nivel}` as "h2" | "h3" | "h4";
 
@@ -30,7 +37,7 @@ const coloresAcento = {
 const colorIcono = acento ? coloresAcento[acento] : "text-texto-2";
 ---
 
-<article
+<Contenedor
 	class:list={[
 		"relative rounded-(--radio-tarjeta) border border-borde bg-cristal p-6 backdrop-blur-[14px] transition-shadow duration-150 ease-(--curva)",
 		href && "tarjeta-enlace",
@@ -45,19 +52,25 @@ const colorIcono = acento ? coloresAcento[acento] : "text-texto-2";
 		)
 	}
 
-	<Titulo class="text-[1.375rem] leading-snug">
-		{
-			href ? (
-				<a href={href} class="text-texto no-underline after:absolute after:inset-0">
-					{titulo}
-				</a>
-			) : (
-				titulo
-			)
-		}
-	</Titulo>
+	{
+		titulo && (
+			<Titulo class="text-[1.375rem] leading-snug">
+				{href ? (
+					<a href={href} class="text-texto no-underline after:absolute after:inset-0">
+						{titulo}
+					</a>
+				) : (
+					titulo
+				)}
+			</Titulo>
+		)
+	}
 
-	<div class="mt-3 text-texto-2">
-		<slot />
-	</div>
-</article>
+	{
+		Astro.slots.has("default") && (
+			<div class:list={[titulo && "mt-3", "text-texto-2"]}>
+				<slot />
+			</div>
+		)
+	}
+</Contenedor>

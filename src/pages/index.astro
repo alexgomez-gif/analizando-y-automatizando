@@ -1,7 +1,10 @@
 ---
+import { ClipboardCheck, Combine, FileSpreadsheet, Files, LayoutDashboard, MessageCircle, TrendingUp, Workflow } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
-// Textos de docs/contenido.md (Inicio). Las demás secciones del inicio se agregan después.
+import Card from "../components/Card.astro";
+import Seccion from "../components/Seccion.astro";
+// Textos de docs/contenido.md (Inicio, aprobados). Las demás secciones se agregan en los pasos siguientes.
 ---
 
 <BaseLayout
@@ -25,6 +28,67 @@ import Button from "../components/Button.astro";
 			</div>
 		</div>
 	</section>
+
+	{/* 1. Problema que resolvemos: frases sueltas en una lista, sin títulos (ver Card) */}
+	<Seccion id="problema" titulo="¿Tu negocio crece, pero tu tiempo no alcanza?">
+		<ul class="grid gap-6 md:grid-cols-3">
+			<li>
+				<Card etiqueta="div" class="h-full">
+					<MessageCircle slot="icono" stroke-width={1.5} size={28} />
+					<p class="text-texto">Pasas los pedidos de WhatsApp a una hoja de cálculo, uno por uno.</p>
+				</Card>
+			</li>
+			<li>
+				<Card etiqueta="div" class="h-full">
+					<FileSpreadsheet slot="icono" stroke-width={1.5} size={28} />
+					<p class="text-texto">Armas el reporte del mes a mano y te quita horas que necesitas para vender.</p>
+				</Card>
+			</li>
+			<li>
+				<Card etiqueta="div" class="h-full">
+					<Files slot="icono" stroke-width={1.5} size={28} />
+					<p class="text-texto">Tienes los números en varios archivos y ninguno cuadra con el otro.</p>
+				</Card>
+			</li>
+		</ul>
+		<p class="mt-10 text-lg text-texto-2">
+			Esas tareas se pueden hacer solas. Tú decides; el trabajo repetitivo lo hacen tus sistemas.
+		</p>
+	</Seccion>
+
+	{/* 2. Servicios: cian = análisis, magenta = automatización, violeta = predictivo (IA) */}
+	<Seccion id="servicios" titulo="Lo que hacemos por tu emprendimiento">
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			<Card titulo="Diagnóstico de datos" href="/servicios/diagnostico-de-datos" acento="cian">
+				<ClipboardCheck slot="icono" stroke-width={1.5} size={28} />
+				<p>Te mostramos dónde se te van las horas y qué conviene automatizar primero.</p>
+			</Card>
+			<Card titulo="Tableros" href="/servicios/tableros" acento="cian">
+				<LayoutDashboard slot="icono" stroke-width={1.5} size={28} />
+				<p>Tus números clave en una sola pantalla, actualizados solos.</p>
+			</Card>
+			<Card
+				titulo="Limpieza y consolidación de datos"
+				href="/servicios/limpieza-y-consolidacion-de-datos"
+				acento="cian"
+			>
+				<Combine slot="icono" stroke-width={1.5} size={28} />
+				<p>Juntamos tus hojas de cálculo y archivos en una sola fuente que sí cuadra.</p>
+			</Card>
+			<Card
+				titulo="Automatización de reportes y procesos"
+				href="/servicios/automatizacion-de-reportes"
+				acento="magenta"
+			>
+				<Workflow slot="icono" stroke-width={1.5} size={28} />
+				<p>Tus reportes listos cada lunes, sin que tengas que armarlos.</p>
+			</Card>
+			<Card titulo="Análisis predictivo" href="/servicios/analisis-predictivo" acento="violeta">
+				<TrendingUp slot="icono" stroke-width={1.5} size={28} />
+				<p>Cuando tus datos lo permiten, te ayudamos a anticipar ventas e inventario.</p>
+			</Card>
+		</div>
+	</Seccion>
 </BaseLayout>
 
 <style>
