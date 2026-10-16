@@ -1,10 +1,42 @@
 ---
-import { ClipboardCheck, Combine, FileSpreadsheet, Files, LayoutDashboard, MessageCircle, TrendingUp, Workflow } from "@lucide/astro";
+import {
+	ArrowRight,
+	ChevronRight,
+	ClipboardCheck,
+	Combine,
+	FileSpreadsheet,
+	Files,
+	LayoutDashboard,
+	MessageCircle,
+	TrendingUp,
+	Workflow,
+} from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Card from "../components/Card.astro";
 import Seccion from "../components/Seccion.astro";
 // Textos de docs/contenido.md (Inicio, aprobados). Las demás secciones se agregan en los pasos siguientes.
+
+// «Cómo trabajamos»: la tubería muestra el método; los pasos, el camino del cliente.
+const etapas = ["Datos", "Limpieza", "Análisis", "Automatización", "Decisión"];
+const pasos = [
+	{
+		titulo: "Diagnóstico gratis",
+		texto: "Conversamos 30 minutos, revisamos tus datos y en 3 días hábiles te entregamos un informe con lo que conviene automatizar.",
+	},
+	{
+		titulo: "Propuesta clara",
+		texto: "Te enviamos un plan con lo que vamos a hacer, cuánto tarda y cuánto cuesta. Sin letra pequeña.",
+	},
+	{
+		titulo: "Construcción",
+		texto: "Armamos la solución con las herramientas que ya usas, siempre que se pueda.",
+	},
+	{
+		titulo: "Entrega y acompañamiento",
+		texto: "Te capacitamos, te dejamos un manual y un video, y tienes 30 días de soporte incluidos.",
+	},
+];
 ---
 
 <BaseLayout
@@ -88,6 +120,47 @@ import Seccion from "../components/Seccion.astro";
 				<p>Cuando tus datos lo permiten, te ayudamos a anticipar ventas e inventario.</p>
 			</Card>
 		</div>
+	</Seccion>
+
+	{/* 3. Cómo trabajamos: tubería de 5 etapas (estática; el pulso de luz va con los efectos) + 4 pasos */}
+	<Seccion id="como-trabajamos" titulo="Del caos a tus procesos en automático, en cuatro pasos">
+		<ol aria-label="Nuestro método, en cinco etapas" class="flex flex-wrap items-center gap-x-2 gap-y-3">
+			{
+				etapas.map((etapa, i) => (
+					<li class="flex items-center gap-2">
+						{i > 0 && <ChevronRight size={18} stroke-width={1.5} class="text-texto-tenue" />}
+						<span
+							class:list={[
+								"inline-flex min-h-9 items-center rounded-full border px-4 font-mono text-[0.8125rem] tracking-[0.08em] uppercase",
+								i === etapas.length - 1 ? "border-lima text-lima" : "border-borde-fuerte text-texto-2",
+							]}
+						>
+							{etapa}
+						</span>
+					</li>
+				))
+			}
+		</ol>
+
+		<ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+			{
+				pasos.map(({ titulo, texto }, i) => (
+					<li>
+						<Card etiqueta="div" titulo={titulo} acento="cian" class="h-full">
+							<span slot="icono" aria-hidden="true" class="font-mono text-2xl">
+								{String(i + 1).padStart(2, "0")}
+							</span>
+							<p>{texto}</p>
+						</Card>
+					</li>
+				))
+			}
+		</ol>
+
+		<a href="/como-trabajamos" class="mt-10 inline-flex min-h-11 items-center gap-2 font-semibold underline-offset-4">
+			Ver tiempos y acompañamiento
+			<ArrowRight size={18} stroke-width={1.5} />
+		</a>
 	</Seccion>
 </BaseLayout>
 
