@@ -53,6 +53,7 @@ npm run dev          # servidor local (http://localhost:4321)
 npm run build        # compilación de producción — debe pasar sin errores ni advertencias
 npm run preview      # ver la compilación localmente
 npm run check        # astro check (tipos)
+npm run verificar    # con `npm run preview` abierto: contraste, desborde y teclado (capturas en .verificacion/)
 ```
 
 Python (demos):

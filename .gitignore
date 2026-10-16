@@ -29,3 +29,6 @@ npm-debug.log*
 Thumbs.db
 .vscode/*
 !.vscode/extensions.json
+
+# Capturas y perfil de Chrome de npm run verificar
+.verificacion/
