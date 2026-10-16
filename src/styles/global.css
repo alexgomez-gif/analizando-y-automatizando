@@ -26,6 +26,7 @@
   --color-ambar: var(--ambar);
   --color-coral: var(--coral);
   --color-sobre-neon: var(--texto-sobre-neon);
+  --color-cristal: var(--cristal);
   /* Las variables --fuente-* las crea la configuración `fonts` de astro.config.mjs */
   --font-titulo: var(--fuente-titulo);
   --font-texto: var(--fuente-texto);
@@ -97,6 +98,57 @@
       .boton-principal:hover {
         animation: girar-borde 4s linear infinite;
       }
+    }
+  }
+
+  /*
+   * Tarjeta que es enlace (Card con `href`, marca.md §5): con mouse o foco aparecen un anillo
+   * con el degradado Amanecer y el glow cian.
+   * - El anillo es una capa aparte (::before) recortada con máscara: así no se ve a través del
+   *   fondo semitransparente «cristal». Los colores de la máscara solo marcan qué se recorta.
+   * - El foco de teclado lo recibe el enlace del título, pero se dibuja en la tarjeta completa
+   *   (`:has`), para que el indicador rodee todo lo que se puede pulsar.
+   */
+  .tarjeta-enlace::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--grad-amanecer);
+    -webkit-mask:
+      linear-gradient(black, black) content-box,
+      linear-gradient(black, black);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(black, black) content-box exclude,
+      linear-gradient(black, black);
+    opacity: 0;
+    transition: opacity 150ms var(--curva);
+    pointer-events: none;
+  }
+
+  .tarjeta-enlace a:focus-visible {
+    outline: none;
+  }
+
+  .tarjeta-enlace:has(a:focus-visible) {
+    outline: 2px solid var(--cian);
+    outline-offset: 3px;
+    box-shadow: var(--glow-cian);
+  }
+
+  .tarjeta-enlace:has(a:focus-visible)::before {
+    opacity: 1;
+  }
+
+  @media (hover: hover) {
+    .tarjeta-enlace:hover {
+      box-shadow: var(--glow-cian);
+    }
+
+    .tarjeta-enlace:hover::before {
+      opacity: 1;
     }
   }
 }

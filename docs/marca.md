@@ -195,7 +195,7 @@ Con el tema claro activo (`[data-theme="light"]`), muestra `logo-horizontal-clar
 ## 5. Estilo visual de la interfaz
 
 - **Esquinas:** 12 px en tarjetas, 999 px en botones y chips, 8 px en inputs.
-- **Tarjetas «cristal»:** fondo `rgba(15,21,51,.65)`, `backdrop-filter: blur(14px)`, borde 1 px `--borde`. En hover: borde con degradado Amanecer neón + `--glow-cian`.
+- **Tarjetas «cristal»:** fondo `--cristal` (oscuro `rgba(15,21,51,.65)`, claro `rgba(255,255,255,.7)`), `backdrop-filter: blur(14px)`, borde 1 px `--borde`. Si la tarjeta es un enlace, en hover y foco: borde con degradado Amanecer neón + `--glow-cian`.
 - **Retícula de horizonte:** en el hero, una cuadrícula en perspectiva (estilo synthwave) que se pierde hacia el horizonte, en `--borde` con baja opacidad. Es la firma visual de la marca.
 - **Ruido sutil:** textura de grano al 3 % sobre los fondos para evitar degradados planos.
 - **Iconos:** de línea, trazo 1,5 px, esquinas redondeadas. Paquete `@lucide/astro` (oficial de Lucide, licencia ISC). Se usan como componentes (`<ChartLine />`), sin JavaScript en el navegador. Color `--texto-2`; en hover, cian.
@@ -276,6 +276,8 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
   --coral: #FF6B8B;
   /* Texto sobre botones de neón (marca.md §2.1) */
   --texto-sobre-neon: #070B1F;
+  /* Fondo de las tarjetas «cristal» (marca.md §5): --superficie al 65 % */
+  --cristal: rgba(15,21,51,.65);
   /* Degradados y glow */
   --grad-amanecer: linear-gradient(135deg, #00E5FF 0%, #A78BFA 50%, #FF3DDC 100%);
   --grad-horizonte: linear-gradient(90deg, #00E5FF 0%, #B8FF3D 100%);
@@ -305,6 +307,7 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
   --ambar: #9A5B00;
   --coral: #C8204A;
   --texto-sobre-neon: #FFFFFF;
+  --cristal: rgba(255,255,255,.7);
   /* Degradados con los neones oscurecidos del tema claro (todos ≥ 4,5:1 sobre --fondo) */
   --grad-amanecer: linear-gradient(135deg, #00788A 0%, #6233D6 50%, #B5148F 100%);
   --grad-horizonte: linear-gradient(90deg, #00788A 0%, #3F7A00 100%);
@@ -348,6 +351,7 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
   --color-ambar: var(--ambar);
   --color-coral: var(--coral);
   --color-sobre-neon: var(--texto-sobre-neon);
+  --color-cristal: var(--cristal);
   --font-titulo: "Space Grotesk", system-ui, sans-serif;
   --font-texto: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
