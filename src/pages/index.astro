@@ -1,6 +1,5 @@
 ---
 import {
-	ArrowRight,
 	ChevronRight,
 	ClipboardCheck,
 	Combine,
@@ -8,14 +7,18 @@ import {
 	Files,
 	LayoutDashboard,
 	MessageCircle,
+	Plus,
+	Quote,
 	TrendingUp,
 	Workflow,
 } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Card from "../components/Card.astro";
+import EnlaceFlecha from "../components/EnlaceFlecha.astro";
 import Seccion from "../components/Seccion.astro";
-// Textos de docs/contenido.md (Inicio, aprobados). Las demás secciones se agregan en los pasos siguientes.
+// Textos de docs/contenido.md (Inicio, aprobados).
+// Pendientes fuera de este plan: calculadora de ahorro (plan propio) y demos (ocultas hasta la Fase 6).
 
 // «Cómo trabajamos»: la tubería muestra el método; los pasos, el camino del cliente.
 const etapas = ["Datos", "Limpieza", "Análisis", "Automatización", "Decisión"];
@@ -37,13 +40,40 @@ const pasos = [
 		texto: "Te capacitamos, te dejamos un manual y un video, y tienes 30 días de soporte incluidos.",
 	},
 ];
+
+// Preguntas frecuentes (resumen). La respuesta de datos lleva enlace a la política (Ley 1581).
+const preguntas: {
+	pregunta: string;
+	respuesta: string;
+	enlace?: { antes: string; texto: string; href: string };
+}[] = [
+	{
+		pregunta: "¿Necesito saber de tecnología?",
+		respuesta: "No. Te explicamos todo en lenguaje sencillo y la solución queda lista para usar.",
+	},
+	{
+		pregunta: "¿Qué pasa en el diagnóstico?",
+		respuesta:
+			"Conversamos 30 minutos, revisamos tus datos y en 3 días hábiles recibes un informe con lo que se puede automatizar. Es gratis y el informe es tuyo, aunque no trabajes con nosotros.",
+	},
+	{
+		pregunta: "¿Cuánto cuesta?",
+		respuesta: "Depende de lo que necesites. Después del diagnóstico te damos un precio claro, antes de empezar.",
+	},
+	{
+		pregunta: "¿Qué pasa con mis datos?",
+		respuesta:
+			"Firmamos un acuerdo de confidencialidad antes de verlos y los eliminamos al terminar, si así lo prefieres.",
+		enlace: { antes: "Más detalles en la", texto: "Política de tratamiento de datos", href: "/politica-de-tratamiento-de-datos" },
+	},
+];
 ---
 
 <BaseLayout
 	title="Automatiza tu emprendimiento | Analizando y Automatizando"
 	description="Deja de perder horas en tareas repetitivas. Ponemos tus reportes y procesos en automático. Empieza con un diagnóstico gratis y sin compromiso."
 >
-	<section aria-labelledby="hero-titulo" class="hero relative isolate overflow-hidden">
+	<section aria-labelledby="hero-titulo" class="hero reticula-horizonte relative isolate overflow-hidden">
 		<div class="contenedor py-20 sm:py-28 lg:py-32">
 			<h1 id="hero-titulo">
 				Analizamos lo que tienes. <span class="degradado-amanecer block">Automatizamos lo que repites.</span>
@@ -157,11 +187,77 @@ const pasos = [
 			}
 		</ol>
 
-		<a href="/como-trabajamos" class="mt-10 inline-flex min-h-11 items-center gap-2 font-semibold underline-offset-4">
-			Ver tiempos y acompañamiento
-			<ArrowRight size={18} stroke-width={1.5} />
-		</a>
+		<EnlaceFlecha href="/como-trabajamos" class="mt-10">Ver tiempos y acompañamiento</EnlaceFlecha>
 	</Seccion>
+
+	{/* 4. Demos: oculta hasta la Fase 6 · 5. Calculadora de ahorro: plan propio (va aquí, antes de Quiénes somos) */}
+
+	{/* 6. Quiénes somos: texto + cita destacada con barra Horizonte (cian → lima: 2 neones) */}
+	<Seccion id="quienes-somos" titulo="Desde 2022, convirtiendo tecnología en claridad">
+		<div class="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+			<div>
+				<p class="text-lg text-texto-2">
+					Escuchamos primero, analizamos con rigor y automatizamos solo lo que de verdad libera tiempo.
+				</p>
+				<EnlaceFlecha href="/sobre-nosotros" class="mt-6">Conócenos</EnlaceFlecha>
+			</div>
+
+			<figure class="cita relative pl-6 sm:pl-8">
+				<Quote size={32} stroke-width={1.5} class="mb-4 text-cian" />
+				<blockquote>
+					<p class="font-titulo text-2xl leading-snug font-medium text-texto sm:text-3xl">
+						Cada dato cuenta una historia. Nosotros te ayudamos a escucharla y a escribir el siguiente capítulo.
+					</p>
+				</blockquote>
+			</figure>
+		</div>
+	</Seccion>
+
+	{/* 7. Preguntas frecuentes: acordeón nativo (<details>), funciona con teclado y sin JavaScript */}
+	<Seccion id="preguntas" titulo="Preguntas frecuentes">
+		<div class="max-w-3xl divide-y divide-borde border-y border-borde">
+			{
+				preguntas.map(({ pregunta, respuesta, enlace }) => (
+					<details class="pregunta">
+						<summary class="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-4 font-titulo text-lg font-medium text-texto hover:text-cian">
+							{pregunta}
+							<Plus size={24} stroke-width={1.5} class="icono-pregunta shrink-0 text-texto-2" />
+						</summary>
+						<p class="pr-10 pb-6 text-texto-2">
+							{respuesta}
+							{enlace && (
+								<>
+									{" "}
+									{enlace.antes}{" "}
+									<a href={enlace.href} class="underline underline-offset-4">
+										{enlace.texto}
+									</a>
+									.
+								</>
+							)}
+						</p>
+					</details>
+				))
+			}
+		</div>
+	</Seccion>
+
+	{/* 8. Llamado final: panel que repite la Aurora y la retícula del hero, como cierre de la página */}
+	<section aria-labelledby="cierre-titulo" class="py-10 sm:py-12 lg:py-16">
+		<div class="contenedor">
+			<div
+				class="cierre reticula-horizonte relative isolate overflow-hidden rounded-(--radio-tarjeta) border border-borde px-6 py-16 text-center sm:px-12 lg:py-24"
+			>
+				<h2 id="cierre-titulo" class="mx-auto max-w-2xl">Tu primer paso son 30 minutos</h2>
+				<p class="mx-auto mt-4 max-w-xl text-lg text-texto-2">
+					Cuéntanos qué tareas te quitan tiempo y te decimos qué se puede automatizar.
+				</p>
+				<div class="mt-8 flex justify-center">
+					<Button href="/agendar">Agenda tu diagnóstico gratis</Button>
+				</div>
+			</div>
+		</div>
+	</section>
 </BaseLayout>
 
 <style>
@@ -171,8 +267,8 @@ const pasos = [
 	}
 
 	/* Retícula de horizonte (marca.md §5): cuadrícula en perspectiva que se pierde hacia el fondo.
-	   Es decorativa y estática: sin animación, sin JavaScript. */
-	.hero::before {
+	   Decorativa y estática. Se usa en el hero y en el panel de cierre (necesitan relative + isolate). */
+	.reticula-horizonte::before {
 		content: "";
 		position: absolute;
 		inset-inline: -50%;
@@ -201,6 +297,39 @@ const pasos = [
 		z-index: -1;
 		background-image: linear-gradient(to bottom, transparent, var(--fondo));
 		pointer-events: none;
+	}
+
+	/* Cita de «Quiénes somos»: barra vertical de crecimiento (cian → lima, versión vertical de Horizonte) */
+	.cita::before {
+		content: "";
+		position: absolute;
+		inset-block: 0;
+		left: 0;
+		width: 3px;
+		border-radius: 999px;
+		background-image: linear-gradient(to bottom, var(--cian), var(--lima));
+	}
+
+	/* Preguntas frecuentes: sin el triángulo del navegador; el + gira hasta ser × al abrir */
+	.pregunta summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.icono-pregunta {
+		transition:
+			rotate 300ms var(--curva),
+			color 150ms var(--curva);
+	}
+
+	.pregunta[open] .icono-pregunta {
+		rotate: 45deg;
+		color: var(--cian);
+	}
+
+	/* Panel de cierre: superficie + Aurora, como un eco del hero */
+	.cierre {
+		background-color: var(--superficie);
+		background-image: var(--grad-aurora);
 	}
 
 	/* Degradado Amanecer neón solo en el titular corto (≤ 4 palabras, marca.md §2.3) */

@@ -1,0 +1,32 @@
+---
+/**
+ * Enlace de texto con flecha («Ver tiempos y acompañamiento →»).
+ * Para acciones secundarias dentro de una sección; la acción principal siempre usa Button.
+ * - 44 px de alto mínimo (objetivo táctil).
+ * - Con el mouse, la flecha avanza 4 px y aparece el subrayado. Con «reducir movimiento»,
+ *   la flecha cambia de lugar sin animación (regla global de tokens.css).
+ */
+import { ArrowRight } from "@lucide/astro";
+
+interface Props {
+	href: string;
+	class?: string;
+}
+
+const { href, class: claseExtra } = Astro.props;
+---
+
+<a
+	href={href}
+	class:list={[
+		"group/enlace inline-flex min-h-11 items-center gap-2 font-semibold underline-offset-4 hover:underline",
+		claseExtra,
+	]}
+>
+	<slot />
+	<ArrowRight
+		size={18}
+		stroke-width={1.5}
+		class="transition-transform duration-150 ease-(--curva) group-hover/enlace:translate-x-1"
+	/>
+</a>

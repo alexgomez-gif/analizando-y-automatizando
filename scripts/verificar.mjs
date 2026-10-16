@@ -92,5 +92,24 @@ for (let i = 1; i <= 16; i++) { await tecla("Tab", "Tab", 9); console.log(`  Tab
 await ir(1280, "oscuro");
 await tecla("Tab", "Tab", 9); await tecla("Enter", "Enter", 13); await tecla("Tab", "Tab", 9);
 console.log(`  Saltar al contenido → siguiente Tab: ${await ev(estadoFoco)}`);
+
+// --- Acordeones (<details>): se abren con Enter y el árbol de accesibilidad anuncia «expandido» ---
+const totalAcordeones = await ev("document.querySelectorAll('details').length");
+if (totalAcordeones) {
+	console.log(`== ACORDEONES (${totalAcordeones})`);
+	await cdp("DOM.enable"); await cdp("Accessibility.enable");
+	for (let i = 0; i < totalAcordeones; i++) {
+		const nombre = await ev(`document.querySelectorAll('details summary')[${i}].textContent.trim()`);
+		await ev(`document.querySelectorAll('details summary')[${i}].focus()`);
+		const antes = await ev(`document.querySelectorAll('details')[${i}].open`);
+		await tecla("Enter", "Enter", 13);
+		const despues = await ev(`document.querySelectorAll('details')[${i}].open`);
+		const { result: { root } } = await cdp("DOM.getDocument", { depth: -1 });
+		const { result: { nodeIds } } = await cdp("DOM.querySelectorAll", { nodeId: root.nodeId, selector: "details summary" });
+		const nodo = (await cdp("Accessibility.getPartialAXTree", { nodeId: nodeIds[i], fetchRelatives: false })).result.nodes[0];
+		const expandido = nodo.properties?.find((p) => p.name === "expanded")?.value.value;
+		console.log(`  ${i + 1}. «${nombre}» · Enter: ${antes ? "abierto" : "cerrado"} → ${despues ? "abierto" : "cerrado"} · rol ${nodo.role.value} · expandido=${expandido}`);
+	}
+}
 console.log(`  Errores de JavaScript: ${errores.length ? errores.join(" | ") : "ninguno"}`);
 ws.close(); chrome.kill(); process.exit(0);
