@@ -4,6 +4,7 @@
  * - La ruta (migas) es un <nav> con nombre propio; el último paso lleva aria-current="page".
  * - El slot por defecto recibe la acción principal de la página (un Button), si la tiene.
  * - El inicio no lo usa: su hero es propio (retícula de horizonte y lema).
+ * - `sobria`: sin Aurora, para páginas legales (marca.md §7: sobriedad en lo legal).
  */
 import { ChevronRight } from "@lucide/astro";
 
@@ -16,12 +17,13 @@ interface Props {
 	titulo: string;
 	subtitulo?: string;
 	migas?: Miga[];
+	sobria?: boolean;
 }
 
-const { titulo, subtitulo, migas } = Astro.props;
+const { titulo, subtitulo, migas, sobria = false } = Astro.props;
 ---
 
-<section aria-labelledby="pagina-titulo" class="cabecera relative isolate overflow-hidden">
+<section aria-labelledby="pagina-titulo" class:list={["cabecera relative isolate overflow-hidden", sobria && "sobria"]}>
 	<div class="contenedor pt-10 pb-10 sm:pt-14 lg:pt-20 lg:pb-14">
 		{
 			migas && (
@@ -54,12 +56,12 @@ const { titulo, subtitulo, migas } = Astro.props;
 
 <style>
 	/* Aurora de marca, más tranquila que el hero del inicio: sin retícula */
-	.cabecera {
+	.cabecera:not(.sobria) {
 		background-image: var(--grad-aurora);
 	}
 
 	/* Desvanecido inferior: la Aurora se funde con el fondo en vez de cortarse en línea recta */
-	.cabecera::after {
+	.cabecera:not(.sobria)::after {
 		content: "";
 		position: absolute;
 		inset-inline: 0;

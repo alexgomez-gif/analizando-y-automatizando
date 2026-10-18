@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import CabeceraPagina from "../components/CabeceraPagina.astro";
+import EnlaceFlecha from "../components/EnlaceFlecha.astro";
+// Página para direcciones que no existen. Astro la publica como 404.html y el servidor la muestra
+// en cualquier enlace roto. noindex: no debe aparecer en buscadores.
+// Textos BORRADOR (microtextos nuevos) hasta que el dueño los apruebe.
+---
+
+<BaseLayout
+	title="Página no encontrada | Analizando y Automatizando"
+	description="La página que buscas no existe o cambió de lugar. Vuelve al inicio o conoce nuestros servicios de análisis de datos y automatización."
+	noindex
+>
+	<CabeceraPagina
+		titulo="Esta página no existe"
+		subtitulo="Puede que el enlace esté mal escrito o que la página haya cambiado de lugar."
+	>
+		<div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+			<Button href="/">Volver al inicio</Button>
+			<EnlaceFlecha href="/servicios">Ver servicios</EnlaceFlecha>
+		</div>
+	</CabeceraPagina>
+</BaseLayout>

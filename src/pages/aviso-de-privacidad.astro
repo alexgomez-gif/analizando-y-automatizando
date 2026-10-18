@@ -1,0 +1,20 @@
+---
+import PlantillaLegal from "../components/PlantillaLegal.astro";
+// Estructura del aviso de privacidad (Ley 1581 de 2012). Sin texto legal (CLAUDE.md §10).
+// La meta description es BORRADOR hasta que el dueño la apruebe.
+---
+
+<PlantillaLegal
+	title="Aviso de privacidad | Analizando y Automatizando"
+	description="Aviso de privacidad de Analizando y Automatizando: quién trata tus datos personales, para qué los usamos y dónde consultar la política completa."
+	titulo="Aviso de privacidad"
+	secciones={[
+		{ titulo: "Quién trata tus datos", pendiente: "identificación y datos de contacto del responsable" },
+		{ titulo: "Para qué usamos tus datos", pendiente: "tratamiento y finalidades, en resumen" },
+		{ titulo: "Tus derechos", pendiente: "derechos del titular y cómo ejercerlos, en resumen" },
+		{
+			titulo: "Dónde consultar la política completa",
+			pendiente: "enlace a la Política de tratamiento de datos personales y cómo se informan sus cambios",
+		},
+	]}
+/>

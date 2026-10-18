@@ -16,9 +16,11 @@ interface Props {
 	description: string;
 	/** Imagen para compartir en redes (1200 × 630). Ruta desde /public. */
 	ogImage?: string;
+	/** true en páginas que no deben aparecer en buscadores (ej. 404) */
+	noindex?: boolean;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, noindex = false } = Astro.props;
 
 const nombreSitio = "Analizando y Automatizando";
 // URL canónica: la dirección oficial de esta página, armada con `site` de astro.config.mjs
@@ -44,6 +46,7 @@ const imagenSocial = ogImage ? new URL(ogImage, Astro.site) : undefined;
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonica} />
+		{noindex && <meta name="robots" content="noindex" />}
 
 		{/* Open Graph: cómo se ve la página al compartirla en redes y WhatsApp */}
 		<meta property="og:type" content="website" />

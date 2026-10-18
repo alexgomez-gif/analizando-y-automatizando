@@ -1,0 +1,28 @@
+---
+import PlantillaLegal from "../components/PlantillaLegal.astro";
+// Estructura de los términos y condiciones de uso del sitio. Sin texto legal (CLAUDE.md §10).
+// La meta description es BORRADOR hasta que el dueño la apruebe.
+---
+
+<PlantillaLegal
+	title="Términos y condiciones | Analizando y Automatizando"
+	description="Términos y condiciones de uso del sitio de Analizando y Automatizando: uso del sitio, diagnóstico gratuito, propuestas y propiedad intelectual."
+	titulo="Términos y condiciones"
+	secciones={[
+		{ titulo: "Quiénes somos", pendiente: "identificación del prestador del servicio" },
+		{ titulo: "Uso del sitio", pendiente: "condiciones de uso del sitio web" },
+		{
+			titulo: "Diagnóstico gratuito y propuestas",
+			pendiente: "alcance del diagnóstico gratuito y cómo se formalizan las propuestas y contratos",
+		},
+		{
+			titulo: "Calculadora de ahorro",
+			pendiente: "aclarar que el resultado es una estimación hecha solo con los números que ingresa el visitante",
+		},
+		{ titulo: "Propiedad intelectual", pendiente: "titularidad de la marca, el logo y los contenidos del sitio" },
+		{ titulo: "Limitación de responsabilidad", pendiente: "alcance de la responsabilidad sobre el uso del sitio" },
+		{ titulo: "Ley aplicable", pendiente: "legislación colombiana y jurisdicción" },
+		{ titulo: "Cambios a estos términos", pendiente: "cómo y cuándo se actualizan" },
+		{ titulo: "Contacto", pendiente: "correo y datos de contacto" },
+	]}
+/>
