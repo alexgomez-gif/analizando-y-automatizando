@@ -1,0 +1,70 @@
+---
+import { CircleAlert, CircleCheck } from "@lucide/astro";
+import Card from "../../components/Card.astro";
+import PlantillaServicio from "../../components/PlantillaServicio.astro";
+import Seccion from "../../components/Seccion.astro";
+// Textos aprobados el 2026-10-18 (docs/contenido.md › Servicios › 5. Análisis predictivo).
+// CLAUDE.md: el análisis predictivo se ofrece «solo cuando aporte valor real»; por eso el bloque
+// «Cuándo sí y cuándo no» (lima = sí sirve, ámbar = advertencia: 2 neones).
+---
+
+<PlantillaServicio
+	title="Análisis predictivo | Analizando y Automatizando"
+	description="Cuando tus datos lo permiten, te ayudamos a anticipar ventas e inventario. Y si todavía no es el momento para ti, te lo decimos con honestidad."
+	titulo="Anticipa tus ventas e inventario, cuando tus datos lo permiten"
+	subtitulo="Usamos tu historial para estimar lo que viene y ayudarte a planear compras, inventario y metas. Y si todavía no es el momento, te lo decimos."
+	nombre="Análisis predictivo"
+	paraQuien="Para emprendimientos que ya tienen un historial de ventas o inventario y quieren planear con más anticipación."
+	recibes={[
+		"Una estimación de lo que puede pasar en el periodo que acordemos, explicada sin tecnicismos.",
+		"Qué tan confiable es esa estimación, dicho con claridad.",
+		"Recomendaciones concretas para tus compras, inventario o metas.",
+		"Una sesión de capacitación y 30 días de soporte incluidos.",
+	]}
+	pasos={[
+		{ titulo: "Diagnóstico gratis", texto: "Revisamos si tus datos permiten anticipar con confianza." },
+		{
+			titulo: "Propuesta clara",
+			texto: "Acordamos qué quieres anticipar, para qué periodo y cómo lo vas a usar.",
+		},
+		{
+			titulo: "Preparación del análisis",
+			texto: "Ordenamos tu historial y comprobamos qué tan bien anticipa lo que ya pasó.",
+		},
+		{
+			titulo: "Entrega y acompañamiento",
+			texto: "Te explicamos los resultados, hacemos hasta dos rondas de ajustes y te capacitamos.",
+		},
+	]}
+	tiempo="15 a 30 días hábiles"
+	preguntas={[
+		{
+			pregunta: "¿Cuántos datos necesito?",
+			respuesta: "Depende de tu negocio. En el diagnóstico revisamos tu historial y te decimos con honestidad si alcanza.",
+		},
+		{
+			pregunta: "¿Una predicción es segura?",
+			respuesta:
+				"No. Es una estimación con un margen de error, y te lo explicamos para que decidas con la información completa.",
+		},
+	]}
+>
+	<Seccion slot="extra" id="cuando-si" titulo="Cuándo sí y cuándo no">
+		<div class="grid max-w-4xl gap-6 sm:grid-cols-2">
+			<Card titulo="Sí sirve" class="h-full">
+				<CircleCheck slot="icono" size={28} stroke-width={1.5} class="text-lima" />
+				<p>
+					Cuando tienes un historial ordenado de varios meses y decisiones que dependen de lo que viene: compras,
+					inventario o personal.
+				</p>
+			</Card>
+			<Card titulo="Todavía no" class="h-full">
+				<CircleAlert slot="icono" size={28} stroke-width={1.5} class="text-ambar" />
+				<p>
+					Cuando los datos son pocos, están desordenados o tu negocio cambió mucho hace poco. En ese caso te
+					recomendamos empezar por ordenar tus datos o por un tablero.
+				</p>
+			</Card>
+		</div>
+	</Seccion>
+</PlantillaServicio>

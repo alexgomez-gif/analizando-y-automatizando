@@ -164,7 +164,7 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 
 ### 2. Tableros · `/servicios/tableros`
 
-> **Estado: BORRADOR (2026-10-18).** Redactado por Claude solo con hechos ya aprobados (tiempos confirmados, acompañamiento, herramientas que ya usas, precio en la propuesta). Lo marcado ⚠️ es una promesa nueva que el dueño debe confirmar.
+> **Estado: APROBADO (2026-10-18)** por el dueño del proyecto, incluidas las promesas que estaban marcadas ⚠️. Redactado por Claude.
 
 - **title:** Tableros a la medida | Analizando y Automatizando
 - **meta description:** Tus números clave en una sola pantalla, actualizados solos. Diseñamos tableros a la medida de tu emprendimiento para que decidas con datos.
@@ -175,7 +175,7 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 - **Qué recibes:**
   - Un tablero con los indicadores que definimos contigo, conectado a la información que ya tienes.
   - Actualización automática, para que no tengas que copiar datos a mano.
-  - Gráficos claros, cada uno con una explicación corta de qué mide. ⚠️
+  - Gráficos claros, cada uno con una explicación corta de qué mide.
   - Una sesión de capacitación, un manual sencillo y un video corto para tu equipo.
   - 30 días de soporte incluidos.
 - **Cómo funciona:**
@@ -193,7 +193,7 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 
 ### 3. Limpieza y consolidación de datos · `/servicios/limpieza-y-consolidacion-de-datos`
 
-> **Estado: BORRADOR (2026-10-18).** Redactado por Claude solo con hechos ya aprobados (tiempos confirmados, acompañamiento, herramientas que ya usas, precio en la propuesta). Lo marcado ⚠️ es una promesa nueva que el dueño debe confirmar.
+> **Estado: APROBADO (2026-10-18)** por el dueño del proyecto, incluidas las promesas que estaban marcadas ⚠️. Redactado por Claude.
 
 - **title:** Limpieza de datos | Analizando y Automatizando
 - **meta description:** Juntamos tus hojas de cálculo y archivos en una sola fuente que sí cuadra: sin duplicados, sin errores y lista para analizar o automatizar.
@@ -204,7 +204,7 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 - **Qué recibes:**
   - Tu información unida en una sola fuente, con un formato consistente.
   - Duplicados, errores y vacíos corregidos, o señalados cuando necesitan tu decisión.
-  - Un resumen de qué cambiamos y por qué. ⚠️
+  - Un resumen de qué cambiamos y por qué.
   - Recomendaciones para que tus datos se mantengan ordenados.
   - 30 días de soporte incluidos.
 - **Cómo funciona:**
@@ -216,13 +216,13 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 - **Precio:** Te damos un precio claro en la propuesta, después del diagnóstico gratis. No publicamos precios.
 - **Acción principal:** Agenda tu diagnóstico gratis
 - **Preguntas frecuentes:**
-  - **¿Pierdo mis archivos originales?** No. Trabajamos sobre una copia y tus archivos originales quedan como están. ⚠️
+  - **¿Pierdo mis archivos originales?** No. Trabajamos sobre una copia y tus archivos originales quedan como están.
   - **¿Es el primer paso antes de un tablero o una automatización?** Muchas veces sí: con datos ordenados, los tableros y las automatizaciones funcionan mejor. El diagnóstico te dice si lo necesitas.
 
 
 ### 4. Automatización de reportes y procesos · `/servicios/automatizacion-de-reportes`
 
-> **Estado: BORRADOR (2026-10-18).** Redactado por Claude solo con hechos ya aprobados (tiempos confirmados, acompañamiento, herramientas que ya usas, precio en la propuesta). Lo marcado ⚠️ es una promesa nueva que el dueño debe confirmar.
+> **Estado: APROBADO (2026-10-18)** por el dueño del proyecto, incluidas las promesas que estaban marcadas ⚠️. Redactado por Claude.
 
 - **title:** Automatización de reportes | Analizando y Automatizando
 - **meta description:** Tus reportes listos cada lunes, sin que tengas que armarlos. Automatizamos las tareas que repites cada semana para que recuperes horas.
@@ -250,7 +250,7 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 
 ### 5. Análisis predictivo · `/servicios/analisis-predictivo`
 
-> **Estado: BORRADOR (2026-10-18).** Redactado por Claude solo con hechos ya aprobados (tiempos confirmados, acompañamiento, herramientas que ya usas, precio en la propuesta). Lo marcado ⚠️ es una promesa nueva que el dueño debe confirmar.
+> **Estado: APROBADO (2026-10-18)** por el dueño del proyecto, incluidas las promesas que estaban marcadas ⚠️. Redactado por Claude.
 
 - **title:** Análisis predictivo | Analizando y Automatizando
 - **meta description:** Cuando tus datos lo permiten, te ayudamos a anticipar ventas e inventario. Y si todavía no es el momento para ti, te lo decimos con honestidad.
@@ -262,7 +262,7 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
   - **Todavía no** cuando los datos son pocos, están desordenados o tu negocio cambió mucho hace poco. En ese caso te recomendamos empezar por ordenar tus datos o por un tablero.
 - **Qué recibes:**
   - Una estimación de lo que puede pasar en el periodo que acordemos, explicada sin tecnicismos.
-  - Qué tan confiable es esa estimación, dicho con claridad. ⚠️
+  - Qué tan confiable es esa estimación, dicho con claridad.
   - Recomendaciones concretas para tus compras, inventario o metas.
   - Una sesión de capacitación y 30 días de soporte incluidos.
 - **Cómo funciona:**

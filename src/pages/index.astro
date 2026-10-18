@@ -4,13 +4,13 @@ import {
 	FileSpreadsheet,
 	Files,
 	MessageCircle,
-	Plus,
 } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Calculadora from "../components/Calculadora.astro";
 import Cita from "../components/Cita.astro";
 import LlamadoFinal from "../components/LlamadoFinal.astro";
+import PreguntasFrecuentes, { type Pregunta } from "../components/PreguntasFrecuentes.astro";
 import Card from "../components/Card.astro";
 import EnlaceFlecha from "../components/EnlaceFlecha.astro";
 import Seccion from "../components/Seccion.astro";
@@ -40,11 +40,7 @@ const pasos = [
 ];
 
 // Preguntas frecuentes (resumen). La respuesta de datos lleva enlace a la política (Ley 1581).
-const preguntas: {
-	pregunta: string;
-	respuesta: string;
-	enlace?: { antes: string; texto: string; href: string };
-}[] = [
+const preguntas: Pregunta[] = [
 	{
 		pregunta: "¿Necesito saber de tecnología?",
 		respuesta: "No. Te explicamos todo en lenguaje sencillo y la solución queda lista para usar.",
@@ -184,34 +180,8 @@ const preguntas: {
 		</div>
 	</Seccion>
 
-	{/* 7. Preguntas frecuentes: acordeón nativo (<details>), funciona con teclado y sin JavaScript */}
-	<Seccion id="preguntas" titulo="Preguntas frecuentes">
-		<div class="max-w-3xl divide-y divide-borde border-y border-borde">
-			{
-				preguntas.map(({ pregunta, respuesta, enlace }) => (
-					<details class="pregunta">
-						<summary class="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-4 font-titulo text-lg font-medium text-texto hover:text-cian">
-							{pregunta}
-							<Plus size={24} stroke-width={1.5} class="icono-pregunta shrink-0 text-texto-2" />
-						</summary>
-						<p class="pr-10 pb-6 text-texto-2">
-							{respuesta}
-							{enlace && (
-								<>
-									{" "}
-									{enlace.antes}{" "}
-									<a href={enlace.href} class="underline underline-offset-4">
-										{enlace.texto}
-									</a>
-									.
-								</>
-							)}
-						</p>
-					</details>
-				))
-			}
-		</div>
-	</Seccion>
+	{/* 7. Preguntas frecuentes: acordeón nativo (componente PreguntasFrecuentes) */}
+	<PreguntasFrecuentes preguntas={preguntas} />
 
 	{/* 5. Calculadora de ahorro: justo antes del llamado final (marca.md §6.1), su resultado lleva al cierre */}
 	<Calculadora />
@@ -237,22 +207,6 @@ const preguntas: {
 		z-index: -1;
 		background-image: linear-gradient(to bottom, transparent, var(--fondo));
 		pointer-events: none;
-	}
-
-	/* Preguntas frecuentes: sin el triángulo del navegador; el + gira hasta ser × al abrir */
-	.pregunta summary::-webkit-details-marker {
-		display: none;
-	}
-
-	.icono-pregunta {
-		transition:
-			rotate 300ms var(--curva),
-			color 150ms var(--curva);
-	}
-
-	.pregunta[open] .icono-pregunta {
-		rotate: 45deg;
-		color: var(--cian);
 	}
 
 	/* Degradado Amanecer neón solo en el titular corto (≤ 4 palabras, marca.md §2.3) */

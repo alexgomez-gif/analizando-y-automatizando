@@ -1,0 +1,70 @@
+---
+/**
+ * Preguntas frecuentes en acordeón nativo (<details>/<summary>): funciona con teclado y sin
+ * JavaScript, y el navegador anuncia «expandido / contraído» (equivale a aria-expanded).
+ * - Una respuesta puede terminar con un enlace (por ejemplo, a la Política de tratamiento de datos).
+ * - El + gira hasta ser × al abrir; sin giro con «reducir movimiento» (regla global de tokens.css).
+ */
+import { Plus } from "@lucide/astro";
+import Seccion from "./Seccion.astro";
+
+export interface Pregunta {
+	pregunta: string;
+	respuesta: string;
+	enlace?: { antes: string; texto: string; href: string };
+}
+
+interface Props {
+	preguntas: Pregunta[];
+	id?: string;
+	titulo?: string;
+}
+
+const { preguntas, id = "preguntas", titulo = "Preguntas frecuentes" } = Astro.props;
+---
+
+<Seccion id={id} titulo={titulo}>
+	<div class="max-w-3xl divide-y divide-borde border-y border-borde">
+		{
+			preguntas.map(({ pregunta, respuesta, enlace }) => (
+				<details class="pregunta">
+					<summary class="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-4 font-titulo text-lg font-medium text-texto hover:text-cian">
+						{pregunta}
+						<Plus size={24} stroke-width={1.5} class="icono-pregunta shrink-0 text-texto-2" />
+					</summary>
+					<p class="pr-10 pb-6 text-texto-2">
+						{respuesta}
+						{enlace && (
+							<>
+								{" "}
+								{enlace.antes}{" "}
+								<a href={enlace.href} class="underline underline-offset-4">
+									{enlace.texto}
+								</a>
+								.
+							</>
+						)}
+					</p>
+				</details>
+			))
+		}
+	</div>
+</Seccion>
+
+<style>
+	/* Sin el triángulo del navegador; el + gira hasta ser × al abrir */
+	.pregunta summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.icono-pregunta {
+		transition:
+			rotate 300ms var(--curva),
+			color 150ms var(--curva);
+	}
+
+	.pregunta[open] .icono-pregunta {
+		rotate: 45deg;
+		color: var(--cian);
+	}
+</style>

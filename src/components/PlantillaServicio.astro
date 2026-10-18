@@ -1,0 +1,117 @@
+---
+/**
+ * Plantilla de las páginas de servicio (Tableros, Limpieza, Automatización, Predictivo).
+ * Misma estructura que pide docs/contenido.md: para quién es, el problema, qué recibes,
+ * cómo funciona (4 pasos), tiempo y precio, preguntas frecuentes y llamado final.
+ * - Slot «extra»: bloque propio de un servicio, después del problema (ej. «Cuándo sí y cuándo no»).
+ * - El diagnóstico tiene su propia página: su estructura es distinta.
+ */
+import { CircleCheck } from "@lucide/astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "./Button.astro";
+import CabeceraPagina from "./CabeceraPagina.astro";
+import Card from "./Card.astro";
+import EnlaceFlecha from "./EnlaceFlecha.astro";
+import LlamadoFinal from "./LlamadoFinal.astro";
+import PreguntasFrecuentes, { type Pregunta } from "./PreguntasFrecuentes.astro";
+import Seccion from "./Seccion.astro";
+
+interface Props {
+	/** Etiqueta <title> y meta description (únicas por página) */
+	title: string;
+	description: string;
+	/** h1, subtítulo y nombre corto para la ruta de navegación */
+	titulo: string;
+	subtitulo: string;
+	nombre: string;
+	paraQuien: string;
+	/** Opcional: el análisis predictivo no lo tiene (usa «Cuándo sí y cuándo no») */
+	problema?: string;
+	recibes: string[];
+	pasos: { titulo: string; texto: string }[];
+	/** Tiempo de referencia confirmado (ej. «10 a 15 días hábiles») */
+	tiempo: string;
+	preguntas: Pregunta[];
+}
+
+const { title, description, titulo, subtitulo, nombre, paraQuien, problema, recibes, pasos, tiempo, preguntas } =
+	Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+	<CabeceraPagina
+		titulo={titulo}
+		subtitulo={subtitulo}
+		migas={[{ texto: "Inicio", href: "/" }, { texto: "Servicios", href: "/servicios" }, { texto: nombre }]}
+	>
+		<div class="mt-10">
+			<Button href="/agendar">Agenda tu diagnóstico gratis</Button>
+		</div>
+	</CabeceraPagina>
+
+	<div class="contenedor py-10 sm:py-12 lg:py-16">
+		<div class="grid gap-10 lg:grid-cols-2 lg:gap-16">
+			<div>
+				<h2 class="text-[1.75rem]">Para quién es</h2>
+				<p class="mt-4 text-lg text-texto-2">{paraQuien}</p>
+			</div>
+			{
+				problema && (
+					<div>
+						<h2 class="text-[1.75rem]">El problema</h2>
+						<p class="mt-4 text-lg text-texto-2">{problema}</p>
+					</div>
+				)
+			}
+		</div>
+	</div>
+
+	<slot name="extra" />
+
+	<Seccion id="que-recibes" titulo="Qué recibes">
+		<ul class="grid max-w-4xl gap-4 sm:grid-cols-2">
+			{
+				recibes.map((punto) => (
+					<li class="flex gap-3">
+						<CircleCheck size={22} stroke-width={1.5} class="mt-0.5 shrink-0 text-lima" />
+						<span>{punto}</span>
+					</li>
+				))
+			}
+		</ul>
+	</Seccion>
+
+	<Seccion id="como-funciona" titulo="Cómo funciona">
+		<ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+			{
+				pasos.map(({ titulo: tituloPaso, texto }, i) => (
+					<li>
+						<Card etiqueta="div" titulo={tituloPaso} acento="cian" class="h-full">
+							<span slot="icono" aria-hidden="true" class="font-mono text-2xl">
+								{String(i + 1).padStart(2, "0")}
+							</span>
+							<p>{texto}</p>
+						</Card>
+					</li>
+				))
+			}
+		</ol>
+	</Seccion>
+
+	<Seccion id="tiempo-y-precio" titulo="Tiempo y precio">
+		<div class="grid max-w-4xl gap-6 sm:grid-cols-2">
+			<Card titulo="Tiempo de referencia" class="h-full">
+				<p class="font-mono text-2xl text-cian">{tiempo}</p>
+				<p class="mt-2">El tiempo exacto va en la propuesta.</p>
+			</Card>
+			<Card titulo="Precio" class="h-full">
+				<p>Te damos un precio claro en la propuesta, después del diagnóstico gratis.</p>
+			</Card>
+		</div>
+		<EnlaceFlecha href="/como-trabajamos" class="mt-8">Ver tiempos y acompañamiento</EnlaceFlecha>
+	</Seccion>
+
+	<PreguntasFrecuentes preguntas={preguntas} />
+
+	<LlamadoFinal />
+</BaseLayout>
