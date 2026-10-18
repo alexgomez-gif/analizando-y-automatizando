@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CabeceraPagina from "../components/CabeceraPagina.astro";
+import Cita from "../components/Cita.astro";
+import LlamadoFinal from "../components/LlamadoFinal.astro";
+import Seccion from "../components/Seccion.astro";
+// Textos aprobados de docs/contenido.md (Sobre nosotros). Sin certificaciones (decisión del 2026-10-14).
+// La meta description es BORRADOR (armada con frases aprobadas) hasta que el dueño la apruebe.
+
+const hitos = [
+	{ momento: "2022", texto: "Empieza el camino en la tecnología y los datos." },
+	{ momento: "2026", texto: "Nace Analizando y Automatizando." },
+	{ momento: "Hoy", texto: "Ayudamos a emprendimientos a decidir con datos y a trabajar en automático." },
+];
+---
+
+<BaseLayout
+	title="Sobre nosotros | Analizando y Automatizando"
+	description="Desde 2022 convertimos tecnología en claridad: escuchamos primero, analizamos con rigor y automatizamos solo lo que de verdad libera tiempo."
+>
+	<CabeceraPagina
+		titulo="Desde 2022, convirtiendo tecnología en claridad"
+		migas={[{ texto: "Inicio", href: "/" }, { texto: "Sobre nosotros" }]}
+	/>
+
+	<div class="contenedor py-10 sm:py-12 lg:py-16">
+		<div class="max-w-3xl space-y-6 text-lg">
+			<p>
+				Nuestra historia con la tecnología empezó en 2022, con una pregunta sencilla: ¿cómo hacer que los datos trabajen
+				para las personas, y no al revés?
+			</p>
+			<p>
+				Desde entonces hemos aprendido, construido y probado. Hemos pasado horas frente a hojas de cálculo desordenadas,
+				programas que fallan a la primera y reportes que nadie lee, y de cada uno aprendimos algo. Así formamos una manera
+				de trabajar: escuchar primero, analizar con rigor y automatizar solo lo que de verdad libera tiempo.
+			</p>
+			<p>
+				Seguimos estudiando cada día programación, automatización, inteligencia artificial y aprendizaje automático,
+				porque la tecnología avanza rápido y nuestros clientes merecen lo mejor de ella.
+			</p>
+			<p>
+				Detrás de cada tablero hay una persona que quiere decidir mejor. Detrás de cada automatización, alguien que
+				recupera horas para su familia, su equipo o sus sueños. Para eso existimos: para que la tecnología deje de ser un
+				obstáculo y se convierta en el viento a favor de tu negocio.
+			</p>
+		</div>
+
+		<Cita
+			class="mt-16 max-w-3xl"
+			texto="Cada dato cuenta una historia. Nosotros te ayudamos a escucharla y a escribir el siguiente capítulo."
+		/>
+	</div>
+
+	<Seccion id="nuestro-camino" titulo="Nuestro camino">
+		<ol class="linea-tiempo relative max-w-2xl space-y-10 pl-10">
+			{
+				hitos.map(({ momento, texto }, i) => (
+					<li class="relative">
+						<span
+							aria-hidden="true"
+							class:list={[
+								"absolute top-1.5 -left-10 size-4 rounded-full border-2 bg-fondo",
+								i === hitos.length - 1 ? "border-lima" : "border-cian",
+							]}
+						/>
+						<p
+							class:list={[
+								"font-mono text-[0.8125rem] tracking-[0.08em] uppercase",
+								i === hitos.length - 1 ? "text-lima" : "text-cian",
+							]}
+						>
+							{momento}
+						</p>
+						<p class="mt-1 text-lg">{texto}</p>
+					</li>
+				))
+			}
+		</ol>
+	</Seccion>
+
+	<LlamadoFinal />
+</BaseLayout>
+
+<style>
+	/* Línea vertical de la línea de tiempo: crecimiento de cian a lima (2 neones) */
+	.linea-tiempo::before {
+		content: "";
+		position: absolute;
+		top: 0.5rem;
+		bottom: 0.5rem;
+		left: 0.4375rem;
+		width: 2px;
+		border-radius: 999px;
+		background-image: linear-gradient(to bottom, var(--cian), var(--lima));
+	}
+</style>

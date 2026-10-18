@@ -1,0 +1,44 @@
+---
+/**
+ * Panel de cierre de página: Aurora + retícula de horizonte (eco del hero) y el botón principal.
+ * Por defecto lleva el texto aprobado del inicio; cada página puede cambiar título, texto y botón.
+ * Para omitir el párrafo, pasa texto="".
+ */
+import Button from "./Button.astro";
+
+interface Props {
+	titulo?: string;
+	texto?: string;
+	boton?: string;
+	href?: string;
+}
+
+const {
+	titulo = "Tu primer paso son 30 minutos",
+	texto = "Cuéntanos qué tareas te quitan tiempo y te decimos qué se puede automatizar.",
+	boton = "Agenda tu diagnóstico gratis",
+	href = "/agendar",
+} = Astro.props;
+---
+
+<section aria-labelledby="cierre-titulo" class="py-10 sm:py-12 lg:py-16">
+	<div class="contenedor">
+		<div
+			class="cierre reticula-horizonte relative isolate overflow-hidden rounded-(--radio-tarjeta) border border-borde px-6 py-16 text-center sm:px-12 lg:py-24"
+		>
+			<h2 id="cierre-titulo" class="mx-auto max-w-2xl">{titulo}</h2>
+			{texto && <p class="mx-auto mt-4 max-w-xl text-lg text-texto-2">{texto}</p>}
+			<div class="mt-8 flex justify-center">
+				<Button href={href}>{boton}</Button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	/* Superficie + Aurora, como un eco del hero */
+	.cierre {
+		background-color: var(--superficie);
+		background-image: var(--grad-aurora);
+	}
+</style>

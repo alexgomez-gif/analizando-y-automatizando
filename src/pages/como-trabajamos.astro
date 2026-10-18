@@ -1,0 +1,130 @@
+---
+import { CircleCheck, Compass, Hammer, LifeBuoy, PackageCheck } from "@lucide/astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CabeceraPagina from "../components/CabeceraPagina.astro";
+import Card from "../components/Card.astro";
+import LlamadoFinal from "../components/LlamadoFinal.astro";
+import Seccion from "../components/Seccion.astro";
+// Textos aprobados de docs/contenido.md (Cómo trabajamos). Tiempos confirmados el 2026-10-14.
+// La meta description es BORRADOR (armada con frases aprobadas) hasta que el dueño la apruebe.
+
+const tiempos = [
+	{ servicio: "Conversación inicial", tiempo: "en menos de 48 horas" },
+	{ servicio: "Diagnóstico de datos", tiempo: "3 días" },
+	{ servicio: "Limpieza y consolidación de datos", tiempo: "5 a 10 días" },
+	{ servicio: "Tablero", tiempo: "10 a 15 días" },
+	{ servicio: "Automatización de reportes o procesos", tiempo: "7 a 20 días" },
+	{ servicio: "Análisis predictivo", tiempo: "15 a 30 días" },
+	{ servicio: "Ajustes después de la entrega", tiempo: "2 a 3 días por ronda" },
+];
+
+const compromisos = [
+	"El reloj empieza cuando recibimos tus datos y accesos completos.",
+	"Respondemos tus mensajes en máximo un día hábil.",
+	"Te enviamos un avance cada semana, para que nunca te preguntes cómo va tu proyecto.",
+	"Cada proyecto incluye dos rondas de ajustes sin costo.",
+	"Si algo depende de ti (aprobar un avance, enviar un archivo), te lo pedimos con anticipación y ajustamos la fecha de entrega de forma transparente.",
+	"Si necesitas el trabajo antes, ofrecemos entrega prioritaria, según disponibilidad.",
+];
+
+const acompanamiento = [
+	{
+		icono: Compass,
+		titulo: "Antes",
+		texto: "Entendemos tu negocio, tus metas y la forma en que trabaja tu equipo. Diseñamos la solución pensando en quién la va a usar todos los días.",
+	},
+	{
+		icono: Hammer,
+		titulo: "Durante",
+		texto: "Avances semanales, un canal directo para tus preguntas y decisiones tomadas contigo, no por ti.",
+	},
+	{
+		icono: PackageCheck,
+		titulo: "En la entrega",
+		texto: "Una sesión de capacitación, un manual sencillo y un video corto para que cualquier persona de tu equipo pueda usar lo que construimos.",
+	},
+	{
+		icono: LifeBuoy,
+		titulo: "Después",
+		texto: "30 días de soporte incluidos para resolver dudas y hacer ajustes. Si quieres seguir creciendo, tenemos planes mensuales de mantenimiento: actualizaciones, mejoras y reportes, sin que tengas que preocuparte por la parte técnica.",
+	},
+];
+---
+
+<BaseLayout
+	title="Cómo trabajamos | Analizando y Automatizando"
+	description="Plazos claros acordados por escrito, avances cada semana, dos rondas de ajustes y 30 días de soporte incluidos. Así trabajamos contigo."
+>
+	<CabeceraPagina
+		titulo="Tiempos claros desde el primer día"
+		subtitulo="Sabemos que tu tiempo vale. Por eso trabajamos con plazos realistas, que podemos cumplir con calidad y que tú puedes planear con tranquilidad. Cada proyecto tiene fechas acordadas por escrito desde el inicio."
+		migas={[{ texto: "Inicio", href: "/" }, { texto: "Cómo trabajamos" }]}
+	/>
+
+	<Seccion id="tiempos" titulo="Tiempos de entrega">
+		<div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+			<div>
+				<table class="w-full border-collapse text-left">
+					<caption class="mb-4 text-left font-semibold text-texto">Tiempos de referencia (días hábiles)</caption>
+					<thead>
+						<tr class="border-b border-borde-fuerte text-sm text-texto-2">
+							<th scope="col" class="py-3 pr-4 font-semibold">Servicio</th>
+							<th scope="col" class="py-3 font-semibold">Tiempo</th>
+						</tr>
+					</thead>
+					<tbody class="divide-y divide-borde">
+						{
+							tiempos.map(({ servicio, tiempo }) => (
+								<tr>
+									<th scope="row" class="py-3 pr-4 font-normal text-texto">
+										{servicio}
+									</th>
+									<td class="py-3 font-mono text-cian">{tiempo}</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+				<p class="mt-6 text-texto-2">
+					El tiempo exacto de cada proyecto depende de cuántas fuentes de datos tenga y de su estado. Te lo confirmamos en
+					la propuesta, antes de que pagues nada.
+				</p>
+			</div>
+
+			<div>
+				<h3>Así cuidamos los tiempos de ambos</h3>
+				<ul class="mt-6 space-y-4">
+					{
+						compromisos.map((compromiso) => (
+							<li class="flex gap-3">
+								<CircleCheck size={22} stroke-width={1.5} class="mt-0.5 shrink-0 text-lima" />
+								<span>{compromiso}</span>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</Seccion>
+
+	<Seccion
+		id="acompanamiento"
+		titulo="No te entregamos un archivo y desaparecemos"
+		intro="Una herramienta solo sirve si tu equipo la usa con confianza. Por eso te acompañamos antes, durante y después de cada entrega."
+	>
+		<ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+			{
+				acompanamiento.map(({ icono: Icono, titulo, texto }) => (
+					<li>
+						<Card etiqueta="div" titulo={titulo} acento="cian" class="h-full">
+							<Icono slot="icono" stroke-width={1.5} size={28} />
+							<p>{texto}</p>
+						</Card>
+					</li>
+				))
+			}
+		</ol>
+	</Seccion>
+
+	<LlamadoFinal titulo="Tu negocio no se detiene, y nosotros tampoco." texto="" />
+</BaseLayout>

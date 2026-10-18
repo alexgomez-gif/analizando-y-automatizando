@@ -1,0 +1,72 @@
+---
+/**
+ * Encabezado de las páginas internas: ruta de navegación, h1, subtítulo y fondo Aurora.
+ * - La ruta (migas) es un <nav> con nombre propio; el último paso lleva aria-current="page".
+ * - El slot por defecto recibe la acción principal de la página (un Button), si la tiene.
+ * - El inicio no lo usa: su hero es propio (retícula de horizonte y lema).
+ */
+import { ChevronRight } from "@lucide/astro";
+
+interface Miga {
+	texto: string;
+	href?: string;
+}
+
+interface Props {
+	titulo: string;
+	subtitulo?: string;
+	migas?: Miga[];
+}
+
+const { titulo, subtitulo, migas } = Astro.props;
+---
+
+<section aria-labelledby="pagina-titulo" class="cabecera relative isolate overflow-hidden">
+	<div class="contenedor pt-10 pb-10 sm:pt-14 lg:pt-20 lg:pb-14">
+		{
+			migas && (
+				<nav aria-label="Ruta de navegación" class="mb-4">
+					<ol class="flex flex-wrap items-center gap-x-2 text-sm text-texto-2">
+						{migas.map(({ texto, href }, i) => (
+							<li class="flex items-center gap-2">
+								{i > 0 && <ChevronRight size={14} stroke-width={1.5} class="text-texto-tenue" />}
+								{href ? (
+									<a href={href} class="inline-flex min-h-11 min-w-11 items-center justify-center text-texto-2 hover:text-cian">
+										{texto}
+									</a>
+								) : (
+									<span aria-current="page" class="inline-flex min-h-11 items-center text-texto">
+										{texto}
+									</span>
+								)}
+							</li>
+						))}
+					</ol>
+				</nav>
+			)
+		}
+
+		<h1 id="pagina-titulo" class="max-w-4xl">{titulo}</h1>
+		{subtitulo && <p class="mt-6 max-w-2xl text-lg text-texto-2 sm:text-xl">{subtitulo}</p>}
+		<slot />
+	</div>
+</section>
+
+<style>
+	/* Aurora de marca, más tranquila que el hero del inicio: sin retícula */
+	.cabecera {
+		background-image: var(--grad-aurora);
+	}
+
+	/* Desvanecido inferior: la Aurora se funde con el fondo en vez de cortarse en línea recta */
+	.cabecera::after {
+		content: "";
+		position: absolute;
+		inset-inline: 0;
+		bottom: 0;
+		height: 35%;
+		z-index: -1;
+		background-image: linear-gradient(to bottom, transparent, var(--fondo));
+		pointer-events: none;
+	}
+</style>

@@ -178,7 +178,8 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 > **Tiempos CONFIRMADOS (2026-10-14)** por el dueño del proyecto.
 
 - **title:** Cómo trabajamos | Analizando y Automatizando
-- **meta description:** [PENDIENTE]
+- **meta description:** Plazos claros acordados por escrito, avances cada semana, dos rondas de ajustes y 30 días de soporte incluidos. Así trabajamos contigo.
+  - BORRADOR (2026-10-18): armada por Claude con frases aprobadas de esta página; falta aprobación.
 - **H1:** Tiempos claros desde el primer día
 - **Acción principal:** Agenda tu diagnóstico gratis
 
@@ -265,7 +266,8 @@ Cada artículo es un archivo en `src/content/blog/`.
 > Fuente: `textos-diagnostico-y-trayectoria.txt` (v1, octubre 2026), entregado por el dueño del proyecto, con ajustes de estilo de Claude.
 
 - **title:** Sobre nosotros | Analizando y Automatizando
-- **meta description:** [PENDIENTE]
+- **meta description:** Desde 2022 convertimos tecnología en claridad: escuchamos primero, analizamos con rigor y automatizamos solo lo que de verdad libera tiempo.
+  - BORRADOR (2026-10-18): armada por Claude con frases aprobadas de esta página; falta aprobación.
 - **H1:** Desde 2022, convirtiendo tecnología en claridad
 - **Acción principal:** Agenda tu diagnóstico gratis
 

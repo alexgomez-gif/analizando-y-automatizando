@@ -101,6 +101,26 @@
     }
   }
 
+  /* Retícula de horizonte (marca.md §5): cuadrícula en perspectiva que se pierde hacia el fondo.
+     Decorativa y estática. La usan el hero del inicio y LlamadoFinal (necesitan relative + isolate). */
+  .reticula-horizonte::before {
+    content: "";
+    position: absolute;
+    inset-inline: -50%;
+    bottom: 0;
+    height: 45%;
+    z-index: -1;
+    background-image:
+      linear-gradient(to right, var(--borde) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--borde) 1px, transparent 1px);
+    background-size: 56px 56px;
+    transform: perspective(360px) rotateX(62deg);
+    transform-origin: bottom;
+    mask-image: linear-gradient(to top, black 10%, transparent 90%);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   /*
    * Tarjeta que es enlace (Card con `href`, marca.md §5): con mouse o foco aparecen un anillo
    * con el degradado Amanecer y el glow cian.

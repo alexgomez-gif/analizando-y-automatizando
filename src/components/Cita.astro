@@ -1,0 +1,33 @@
+---
+/**
+ * Frase destacada de la marca: comillas cian y barra vertical de crecimiento (cian → lima,
+ * versión vertical del degradado Horizonte; 2 neones, marca.md §9).
+ */
+import { Quote } from "@lucide/astro";
+
+interface Props {
+	texto: string;
+	class?: string;
+}
+
+const { texto, class: claseExtra } = Astro.props;
+---
+
+<figure class:list={["cita relative pl-6 sm:pl-8", claseExtra]}>
+	<Quote size={32} stroke-width={1.5} class="mb-4 text-cian" />
+	<blockquote>
+		<p class="font-titulo text-2xl leading-snug font-medium text-texto sm:text-3xl">{texto}</p>
+	</blockquote>
+</figure>
+
+<style>
+	.cita::before {
+		content: "";
+		position: absolute;
+		inset-block: 0;
+		left: 0;
+		width: 3px;
+		border-radius: 999px;
+		background-image: linear-gradient(to bottom, var(--cian), var(--lima));
+	}
+</style>

@@ -8,13 +8,14 @@ import {
 	LayoutDashboard,
 	MessageCircle,
 	Plus,
-	Quote,
 	TrendingUp,
 	Workflow,
 } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Calculadora from "../components/Calculadora.astro";
+import Cita from "../components/Cita.astro";
+import LlamadoFinal from "../components/LlamadoFinal.astro";
 import Card from "../components/Card.astro";
 import EnlaceFlecha from "../components/EnlaceFlecha.astro";
 import Seccion from "../components/Seccion.astro";
@@ -203,14 +204,7 @@ const preguntas: {
 				<EnlaceFlecha href="/sobre-nosotros" class="mt-6">Conócenos</EnlaceFlecha>
 			</div>
 
-			<figure class="cita relative pl-6 sm:pl-8">
-				<Quote size={32} stroke-width={1.5} class="mb-4 text-cian" />
-				<blockquote>
-					<p class="font-titulo text-2xl leading-snug font-medium text-texto sm:text-3xl">
-						Cada dato cuenta una historia. Nosotros te ayudamos a escucharla y a escribir el siguiente capítulo.
-					</p>
-				</blockquote>
-			</figure>
+			<Cita texto="Cada dato cuenta una historia. Nosotros te ayudamos a escucharla y a escribir el siguiente capítulo." />
 		</div>
 	</Seccion>
 
@@ -246,48 +240,14 @@ const preguntas: {
 	{/* 5. Calculadora de ahorro: justo antes del llamado final (marca.md §6.1), su resultado lleva al cierre */}
 	<Calculadora />
 
-	{/* 8. Llamado final: panel que repite la Aurora y la retícula del hero, como cierre de la página */}
-	<section aria-labelledby="cierre-titulo" class="py-10 sm:py-12 lg:py-16">
-		<div class="contenedor">
-			<div
-				class="cierre reticula-horizonte relative isolate overflow-hidden rounded-(--radio-tarjeta) border border-borde px-6 py-16 text-center sm:px-12 lg:py-24"
-			>
-				<h2 id="cierre-titulo" class="mx-auto max-w-2xl">Tu primer paso son 30 minutos</h2>
-				<p class="mx-auto mt-4 max-w-xl text-lg text-texto-2">
-					Cuéntanos qué tareas te quitan tiempo y te decimos qué se puede automatizar.
-				</p>
-				<div class="mt-8 flex justify-center">
-					<Button href="/agendar">Agenda tu diagnóstico gratis</Button>
-				</div>
-			</div>
-		</div>
-	</section>
+	{/* 8. Llamado final: panel con Aurora y retícula, eco del hero (texto por defecto del componente) */}
+	<LlamadoFinal />
 </BaseLayout>
 
 <style>
 	/* Fondo Aurora (marca.md §2.3); cambia sola con el tema */
 	.hero {
 		background-image: var(--grad-aurora);
-	}
-
-	/* Retícula de horizonte (marca.md §5): cuadrícula en perspectiva que se pierde hacia el fondo.
-	   Decorativa y estática. Se usa en el hero y en el panel de cierre (necesitan relative + isolate). */
-	.reticula-horizonte::before {
-		content: "";
-		position: absolute;
-		inset-inline: -50%;
-		bottom: 0;
-		height: 45%;
-		z-index: -1;
-		background-image:
-			linear-gradient(to right, var(--borde) 1px, transparent 1px),
-			linear-gradient(to bottom, var(--borde) 1px, transparent 1px);
-		background-size: 56px 56px;
-		transform: perspective(360px) rotateX(62deg);
-		transform-origin: bottom;
-		mask-image: linear-gradient(to top, black 10%, transparent 90%);
-		opacity: 0.5;
-		pointer-events: none;
 	}
 
 	/* Desvanecido inferior: el hero se funde con el fondo en vez de cortarse en línea recta.
@@ -301,17 +261,6 @@ const preguntas: {
 		z-index: -1;
 		background-image: linear-gradient(to bottom, transparent, var(--fondo));
 		pointer-events: none;
-	}
-
-	/* Cita de «Quiénes somos»: barra vertical de crecimiento (cian → lima, versión vertical de Horizonte) */
-	.cita::before {
-		content: "";
-		position: absolute;
-		inset-block: 0;
-		left: 0;
-		width: 3px;
-		border-radius: 999px;
-		background-image: linear-gradient(to bottom, var(--cian), var(--lima));
 	}
 
 	/* Preguntas frecuentes: sin el triángulo del navegador; el + gira hasta ser × al abrir */
@@ -328,12 +277,6 @@ const preguntas: {
 	.pregunta[open] .icono-pregunta {
 		rotate: 45deg;
 		color: var(--cian);
-	}
-
-	/* Panel de cierre: superficie + Aurora, como un eco del hero */
-	.cierre {
-		background-color: var(--superficie);
-		background-image: var(--grad-aurora);
 	}
 
 	/* Degradado Amanecer neón solo en el titular corto (≤ 4 palabras, marca.md §2.3) */

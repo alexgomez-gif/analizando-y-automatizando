@@ -1,0 +1,126 @@
+---
+import { Crosshair, FileCheck, Gift, ListChecks, ShieldCheck, Zap } from "@lucide/astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/Button.astro";
+import CabeceraPagina from "../../components/CabeceraPagina.astro";
+import Card from "../../components/Card.astro";
+import LlamadoFinal from "../../components/LlamadoFinal.astro";
+import Seccion from "../../components/Seccion.astro";
+// Textos aprobados de docs/contenido.md (Servicios › 1. Diagnóstico de datos).
+// Notas internas que NO se publican: canal seguro por definir y revisión legal de la confidencialidad.
+
+const pasos = [
+	{
+		titulo: "Conversación inicial",
+		detalle: "Llamada de 30 minutos · gratis",
+		texto: "Nos cuentas cómo trabaja tu negocio, qué herramientas usas y qué te quita más tiempo. Sin compromiso.",
+	},
+	{
+		titulo: "Revisión de tus datos",
+		texto: "Nos compartes, por un canal seguro, una muestra de tus archivos o acceso de solo lectura a tus sistemas. Analizamos calidad, orden, duplicados, errores y tareas que se repiten a mano.",
+	},
+	{
+		titulo: "Informe de diagnóstico",
+		texto: "Recibes un documento claro con:",
+		lista: [
+			"El estado de tus datos, explicado sin tecnicismos.",
+			"Los 3 a 5 problemas más importantes y lo que cada uno te cuesta.",
+			"Las tareas que se pueden automatizar y cuánto tiempo liberarían.",
+			"Una ruta recomendada: qué hacer primero, después y al final.",
+			"Una propuesta con alcance, tiempos y precio, si decides avanzar.",
+		],
+	},
+	{
+		titulo: "Reunión de resultados",
+		detalle: "45 minutos",
+		texto: "Repasamos juntos el informe, resolvemos tus dudas y decides con calma, sin presión.",
+	},
+];
+
+const diferencias = [
+	{ icono: Gift, titulo: "Gratis", texto: "La conversación y el diagnóstico completo no tienen costo." },
+	{ icono: Zap, titulo: "Rápido", texto: "El informe está listo en 3 días hábiles desde que recibimos tus datos." },
+	{ icono: Crosshair, titulo: "Preciso", texto: "Trabajamos sobre tu información real, no sobre supuestos." },
+	{ icono: ListChecks, titulo: "Accionable", texto: "Cada hallazgo viene con una recomendación concreta." },
+	{
+		icono: ShieldCheck,
+		titulo: "Confidencial",
+		texto: "Firmamos un acuerdo de confidencialidad antes de ver tus datos y los eliminamos al terminar, si así lo prefieres.",
+	},
+	{ icono: FileCheck, titulo: "Tuyo", texto: "El informe es tuyo, trabajes o no con nosotros después." },
+];
+---
+
+<BaseLayout
+	title="Diagnóstico de datos gratis | Analizando y Automatizando"
+	description="Conoce el estado real de tus datos y qué puedes automatizar. Informe claro en 3 días hábiles, gratis y confidencial. Agenda tu conversación."
+>
+	<CabeceraPagina
+		titulo="Conoce el estado real de tus datos en 3 días hábiles"
+		subtitulo="Un diagnóstico claro y accionable para saber qué está frenando a tu negocio y qué puedes automatizar desde mañana."
+		migas={[{ texto: "Inicio", href: "/" }, { texto: "Servicios", href: "/servicios" }, { texto: "Diagnóstico de datos" }]}
+	>
+		<div class="mt-10 flex flex-col items-start gap-3">
+			<Button href="/agendar">Agenda tu conversación gratuita</Button>
+			<p class="text-sm text-texto-2">Gratis · informe en 3 días hábiles</p>
+		</div>
+	</CabeceraPagina>
+
+	<div class="contenedor py-10 sm:py-12 lg:py-16">
+		<div class="max-w-3xl space-y-6 text-lg">
+			<p>
+				Antes de construir cualquier tablero o automatización, necesitas saber dónde estás parado. Nuestro diagnóstico
+				revisa cómo guardas, usas y compartes tu información, y la convierte en un mapa sencillo: lo que funciona, lo que
+				se puede mejorar y lo que hoy te está costando tiempo y dinero.
+			</p>
+			<p>
+				No es un informe genérico. Revisamos tus propios archivos y procesos con herramientas de análisis profesionales y
+				te entregamos recomendaciones ordenadas por impacto, para que sepas exactamente por dónde empezar.
+			</p>
+		</div>
+	</div>
+
+	<Seccion id="como-funciona" titulo="Cómo funciona">
+		<ol class="grid gap-6 sm:grid-cols-2">
+			{
+				pasos.map(({ titulo, detalle, texto, lista }, i) => (
+					<li>
+						<Card etiqueta="div" titulo={titulo} acento="cian" class="h-full">
+							<span slot="icono" aria-hidden="true" class="font-mono text-2xl">
+								{String(i + 1).padStart(2, "0")}
+							</span>
+							{detalle && (
+								<p class="mb-2 font-mono text-[0.8125rem] tracking-[0.08em] text-texto uppercase">{detalle}</p>
+							)}
+							<p>{texto}</p>
+							{lista && (
+								<ul class="mt-3 list-disc space-y-1 pl-5 marker:text-cian">
+									{lista.map((punto) => (
+										<li>{punto}</li>
+									))}
+								</ul>
+							)}
+						</Card>
+					</li>
+				))
+			}
+		</ol>
+	</Seccion>
+
+	<Seccion id="diferencias" titulo="Qué lo hace diferente">
+		<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				diferencias.map(({ icono: Icono, titulo, texto }) => (
+					<li>
+						<Card etiqueta="div" titulo={titulo} class="h-full">
+							<Icono slot="icono" stroke-width={1.5} size={28} />
+							<p>{texto}</p>
+						</Card>
+					</li>
+				))
+			}
+		</ul>
+	</Seccion>
+
+	<LlamadoFinal boton="Agenda tu conversación gratuita" />
+</BaseLayout>
