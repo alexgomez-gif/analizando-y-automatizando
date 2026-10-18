@@ -167,20 +167,25 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 **Secciones estáticas del inicio (aprobado el 2026-10-14): completo** en la rama `feature/secciones-inicio`.
 1. ✅ `Seccion` y `Card` · 2. ✅ Problema y Servicios · 3. ✅ Cómo trabajamos · 4. ✅ Quiénes somos, Preguntas frecuentes y Llamado final · 5. ✅ Verificación
 
-**Calculadora de ahorro: completa** en la rama `feature/calculadora` (aún sin fusionar a `main`; contiene también las decisiones del 2026-10-16).
+**Calculadora de ahorro: completa** (rama `feature/calculadora`).
 
-**Próxima sesión:** crear `feature/paginas` desde `feature/calculadora` y seguir el **plan 3 · páginas enlazadas** (aprobado el 2026-10-16):
-1. Páginas con texto aprobado: `/servicios/diagnostico-de-datos`, `/como-trabajamos`, `/sobre-nosotros`
-2. `/servicios` (índice con las 5 tarjetas)
-3. Redactar en `docs/contenido.md` los textos BORRADOR de Tableros, Limpieza, Automatización y Predictivo → esperar aprobación → construir esas 4 páginas
-4. `/agendar` con el texto aprobado + bloque «[PENDIENTE: agenda con Cal.com — Fase 5]»
-5. Páginas legales (solo estructura, `[REVISIÓN LEGAL PENDIENTE]`) y página 404
-6. Quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` (dependencia aprobada) y `robots.txt`
-Después: **plan 4 · efectos de marca.md** (aprobado): tubería con pulso → tarjetas con luz → terminal → antes/después → mini tablero en el hero → red de datos; presupuesto ≤ 30 KB de JS; cerrar con Lighthouse.
+**Plan 3 · páginas enlazadas (aprobado el 2026-10-16):** pasos 1 a 5 completos en la rama `feature/paginas` (aún sin fusionar a `main`; contiene también la calculadora).
+1. ✅ Diagnóstico, cómo trabajamos, sobre nosotros · 2. ✅ `/servicios` · 3. ✅ Tableros, limpieza, automatización, predictivo · 4. ✅ `/agendar` (agenda pendiente, Fase 5) · 5. ✅ Legales (solo estructura) y 404
+6. ⏭️ Quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` y `robots.txt` · marcar como página actual el botón «Agenda» del encabezado en `/agendar`
+
+**Próxima sesión:**
+- Pedir aprobación pendiente de: meta descriptions de las 3 páginas legales y microtextos de la 404 (BORRADOR en `docs/contenido.md`).
+- Pedir respuesta al **plan de scroll-craft** (propuesto el 2026-10-18, aún sin aprobar), con 4 decisiones:
+  1. ¿Aprueba el plan? (rama `feature/scroll`: integrar el motor en `src/vendor/scrollcraft/` con su CSS en una capa de baja prioridad y sus tokens apuntando a los de marca → partitura del inicio en `docs/scroll.md` → efectos uno por uno → verificación).
+  2. Momento cumbre: pulso de datos que recorre la tubería de «Cómo trabajamos» (recomendado).
+  3. ¿Posponer red de datos, mini tablero, terminal y antes/después? (el motor usa 19 de los 30 KB).
+  4. ¿Terminar antes el paso 6 del plan 3?
+  Partitura propuesta: hero = profundidad (retícula, Aurora y titular a distinto ritmo) + lema línea por línea · problema = sección sostenida con frases una a una · servicios = tarjetas con luz · cómo trabajamos = PICO, pulso de datos · quiénes somos = cita con cortina · preguntas y calculadora = sin efectos · cierre = quieto.
+  No se usa de scroll-craft: video scrub, KIE AI, ffmpeg, Playwright, contadores, ni sus reglas que contradicen la marca (degradado del titular y glow se quedan).
 
 **Pendientes técnicos conocidos:**
 - Imagen Open Graph (1200 × 630) por crear.
-- Páginas enlazadas en menú y pie aún no existen (plan 3).
+- Textos legales definitivos (Fase 8) y agenda con Cal.com en `/agendar` (Fase 5).
 - Evento de analítica «uso de la calculadora» (Fase 5).
 
 - [ ] Fase 0 · Negocio y oferta
@@ -200,6 +205,10 @@ Después: **plan 4 · efectos de marca.md** (aprobado): tubería con pulso → t
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-18 · Skill scroll-craft (MIT, plugin `nateherk-design` 0.3.1) instalada por el dueño; se usa **dentro de la marca**: se toman sus técnicas de scroll, no su estética · sus reglas duras prohíben el degradado del titular y el glow, que son la firma de «Neón al amanecer»; marca.md manda.
+- 2026-10-18 · Páginas legales solo con estructura y notas `[REVISIÓN LEGAL PENDIENTE]`, estilo sobrio; sin política de cookies mientras la analítica no use cookies · CLAUDE.md §10 y marca.md §7.
+- 2026-10-18 · Datos compartidos en `src/lib/` (servicios y pasos del diagnóstico) y plantillas `PlantillaServicio` y `PlantillaLegal` · una sola fuente por texto; las refactorizaciones se verificaron con capturas idénticas byte por byte.
+- 2026-10-18 · Textos de las 4 páginas de servicio aprobados, incluidas sus promesas nuevas (explicación por gráfico, resumen de cambios, trabajo sobre copia, confiabilidad de la estimación) · decisión del dueño.
 - 2026-10-16 · Planes aprobados: calculadora (antes del llamado final), páginas enlazadas y efectos de marca.md · decisión del dueño del proyecto.
 - 2026-10-16 · Textos de las páginas de Tableros, Limpieza, Automatización y Predictivo: los redacta Claude como borrador para aprobación · no existían; no se publican sin aprobar.
 - 2026-10-16 · «Demos» sale del menú hasta la Fase 6 · coherente con la sección de demos oculta.
