@@ -101,7 +101,7 @@ Fuente única de los textos de cada página. El código toma los textos de aquí
 
 - **title:** Servicios | Analizando y Automatizando
 - **meta description:** Diagnóstico gratis, tableros, limpieza de datos, automatización de reportes y análisis predictivo para emprendimientos emergentes en Colombia.
-  - BORRADOR (2026-10-18): falta aprobación.
+  - Aprobada el 2026-10-18.
 - **H1:** Lo que hacemos por tu emprendimiento
 - **Introducción:** Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, mediante automatización y análisis a la medida, sin jerga técnica.
 - **Contenido:** las 5 tarjetas de servicio del inicio (mismas frases).
@@ -163,16 +163,120 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 **Botón:** Agenda tu conversación gratuita
 
 ### 2. Tableros · `/servicios/tableros`
-[PENDIENTE: llenar con la plantilla]
+
+> **Estado: BORRADOR (2026-10-18).** Redactado por Claude solo con hechos ya aprobados (tiempos confirmados, acompañamiento, herramientas que ya usas, precio en la propuesta). Lo marcado ⚠️ es una promesa nueva que el dueño debe confirmar.
+
+- **title:** Tableros a la medida | Analizando y Automatizando
+- **meta description:** Tus números clave en una sola pantalla, actualizados solos. Diseñamos tableros a la medida de tu emprendimiento para que decidas con datos.
+- **H1:** Tus números clave en una sola pantalla
+- **Subtítulo:** Un tablero hecho a la medida de tu negocio, que se actualiza solo y te muestra lo que necesitas para decidir, sin armar reportes a mano.
+- **Para quién es:** Para emprendimientos que tienen sus ventas, gastos o inventario repartidos en varios archivos y necesitan verlos juntos para decidir.
+- **El problema:** Cada vez que quieres saber cómo va el negocio, abres varios archivos, copias datos y haces cuentas. Cuando terminas, la información ya cambió.
+- **Qué recibes:**
+  - Un tablero con los indicadores que definimos contigo, conectado a la información que ya tienes.
+  - Actualización automática, para que no tengas que copiar datos a mano.
+  - Gráficos claros, cada uno con una explicación corta de qué mide. ⚠️
+  - Una sesión de capacitación, un manual sencillo y un video corto para tu equipo.
+  - 30 días de soporte incluidos.
+- **Cómo funciona:**
+  1. **Diagnóstico gratis.** Entendemos qué decisiones tomas y con qué datos cuentas.
+  2. **Definimos los indicadores.** Elegimos juntos los números que de verdad te ayudan a decidir.
+  3. **Construcción.** Conectamos tu información y armamos el tablero con las herramientas que ya usas, siempre que se pueda.
+  4. **Entrega y ajustes.** Lo revisamos contigo, hacemos hasta dos rondas de ajustes y te capacitamos.
+- **Tiempo de referencia:** 10 a 15 días hábiles. El tiempo exacto va en la propuesta.
+- **Precio:** Te damos un precio claro en la propuesta, después del diagnóstico gratis. No publicamos precios.
+- **Acción principal:** Agenda tu diagnóstico gratis
+- **Preguntas frecuentes:**
+  - **¿Tengo que cambiar las herramientas que uso?** No necesariamente. Siempre que se pueda, construimos sobre lo que ya usas.
+  - **¿Mis datos tienen que estar ordenados?** No. Si están dispersos o desordenados, el diagnóstico lo muestra y, si hace falta, empezamos por ordenarlos.
+
 
 ### 3. Limpieza y consolidación de datos · `/servicios/limpieza-y-consolidacion-de-datos`
-[PENDIENTE: llenar con la plantilla]
+
+> **Estado: BORRADOR (2026-10-18).** Redactado por Claude solo con hechos ya aprobados (tiempos confirmados, acompañamiento, herramientas que ya usas, precio en la propuesta). Lo marcado ⚠️ es una promesa nueva que el dueño debe confirmar.
+
+- **title:** Limpieza de datos | Analizando y Automatizando
+- **meta description:** Juntamos tus hojas de cálculo y archivos en una sola fuente que sí cuadra: sin duplicados, sin errores y lista para analizar o automatizar.
+- **H1:** Una sola fuente de datos que sí cuadra
+- **Subtítulo:** Juntamos tus hojas de cálculo y archivos, corregimos duplicados y errores, y te dejamos tu información ordenada para decidir con confianza.
+- **Para quién es:** Para emprendimientos con la misma información repartida en varios archivos, versiones que no coinciden o datos escritos de formas distintas.
+- **El problema:** Los números de un archivo no cuadran con los de otro, hay clientes repetidos y nadie sabe cuál es la versión correcta. Así es difícil confiar en cualquier reporte.
+- **Qué recibes:**
+  - Tu información unida en una sola fuente, con un formato consistente.
+  - Duplicados, errores y vacíos corregidos, o señalados cuando necesitan tu decisión.
+  - Un resumen de qué cambiamos y por qué. ⚠️
+  - Recomendaciones para que tus datos se mantengan ordenados.
+  - 30 días de soporte incluidos.
+- **Cómo funciona:**
+  1. **Diagnóstico gratis.** Vemos qué archivos tienes y dónde están los problemas.
+  2. **Mapa de tu información.** Revisamos cómo se relacionan tus archivos y acordamos cómo debe quedar todo.
+  3. **Limpieza y unión.** Corregimos, unificamos y dejamos todo en una sola fuente, con las herramientas que ya usas, siempre que se pueda.
+  4. **Entrega y ajustes.** Lo revisamos contigo, hacemos hasta dos rondas de ajustes y te mostramos cómo mantenerlo en orden.
+- **Tiempo de referencia:** 5 a 10 días hábiles. El tiempo exacto va en la propuesta.
+- **Precio:** Te damos un precio claro en la propuesta, después del diagnóstico gratis. No publicamos precios.
+- **Acción principal:** Agenda tu diagnóstico gratis
+- **Preguntas frecuentes:**
+  - **¿Pierdo mis archivos originales?** No. Trabajamos sobre una copia y tus archivos originales quedan como están. ⚠️
+  - **¿Es el primer paso antes de un tablero o una automatización?** Muchas veces sí: con datos ordenados, los tableros y las automatizaciones funcionan mejor. El diagnóstico te dice si lo necesitas.
+
 
 ### 4. Automatización de reportes y procesos · `/servicios/automatizacion-de-reportes`
-[PENDIENTE: llenar con la plantilla]
+
+> **Estado: BORRADOR (2026-10-18).** Redactado por Claude solo con hechos ya aprobados (tiempos confirmados, acompañamiento, herramientas que ya usas, precio en la propuesta). Lo marcado ⚠️ es una promesa nueva que el dueño debe confirmar.
+
+- **title:** Automatización de reportes | Analizando y Automatizando
+- **meta description:** Tus reportes listos cada lunes, sin que tengas que armarlos. Automatizamos las tareas que repites cada semana para que recuperes horas.
+- **H1:** Tus reportes listos cada lunes, sin que tengas que armarlos
+- **Subtítulo:** Automatizamos los reportes y las tareas que repites cada semana, para que dejes de copiar y pegar y dediques esas horas a tu negocio.
+- **Para quién es:** Para emprendimientos que dedican horas cada semana a tareas repetitivas: pasar pedidos a una hoja de cálculo, armar el reporte del mes o enviar la misma información una y otra vez.
+- **El problema:** Las tareas manuales se comen el tiempo que necesitas para vender, y cada vez que alguien copia datos a mano, aparece la oportunidad de un error.
+- **Qué recibes:**
+  - Las tareas que acordamos contigo, funcionando solas con tus herramientas, siempre que se pueda.
+  - Reportes que se arman solos, con la frecuencia que necesites.
+  - Una sesión de capacitación, un manual sencillo y un video corto para tu equipo.
+  - 30 días de soporte incluidos y, si quieres, planes mensuales de mantenimiento.
+- **Cómo funciona:**
+  1. **Diagnóstico gratis.** Identificamos qué tareas repites y cuánto tiempo te quitan.
+  2. **Propuesta clara.** Empezamos por lo que más horas te libera, con alcance, tiempo y precio antes de empezar.
+  3. **Construcción.** Automatizamos con las herramientas que ya usas, siempre que se pueda, y te mostramos avances cada semana.
+  4. **Entrega y acompañamiento.** Lo probamos contigo, hacemos hasta dos rondas de ajustes y te capacitamos.
+- **Tiempo de referencia:** 7 a 20 días hábiles. El tiempo exacto va en la propuesta.
+- **Precio:** Te damos un precio claro en la propuesta, después del diagnóstico gratis. No publicamos precios.
+- **Acción principal:** Agenda tu diagnóstico gratis
+- **Preguntas frecuentes:**
+  - **¿Cuánto tiempo voy a ahorrar?** Depende de tus tareas. En el diagnóstico estimamos cuánto tiempo liberaría cada automatización, y puedes hacer tu propia cuenta con nuestra calculadora de ahorro (enlace a `/#calculadora`).
+  - **¿Qué pasa si mi proceso cambia?** Durante los 30 días de soporte hacemos los ajustes necesarios, y si quieres seguir creciendo, tenemos planes mensuales de mantenimiento.
+
 
 ### 5. Análisis predictivo · `/servicios/analisis-predictivo`
-[PENDIENTE: llenar con la plantilla. Aclarar cuándo sí aporta valor y cuándo no.]
+
+> **Estado: BORRADOR (2026-10-18).** Redactado por Claude solo con hechos ya aprobados (tiempos confirmados, acompañamiento, herramientas que ya usas, precio en la propuesta). Lo marcado ⚠️ es una promesa nueva que el dueño debe confirmar.
+
+- **title:** Análisis predictivo | Analizando y Automatizando
+- **meta description:** Cuando tus datos lo permiten, te ayudamos a anticipar ventas e inventario. Y si todavía no es el momento para ti, te lo decimos con honestidad.
+- **H1:** Anticipa tus ventas e inventario, cuando tus datos lo permiten
+- **Subtítulo:** Usamos tu historial para estimar lo que viene y ayudarte a planear compras, inventario y metas. Y si todavía no es el momento, te lo decimos.
+- **Para quién es:** Para emprendimientos que ya tienen un historial de ventas o inventario y quieren planear con más anticipación.
+- **Cuándo sí y cuándo no** (bloque destacado):
+  - **Sí sirve** cuando tienes un historial ordenado de varios meses y decisiones que dependen de lo que viene: compras, inventario o personal.
+  - **Todavía no** cuando los datos son pocos, están desordenados o tu negocio cambió mucho hace poco. En ese caso te recomendamos empezar por ordenar tus datos o por un tablero.
+- **Qué recibes:**
+  - Una estimación de lo que puede pasar en el periodo que acordemos, explicada sin tecnicismos.
+  - Qué tan confiable es esa estimación, dicho con claridad. ⚠️
+  - Recomendaciones concretas para tus compras, inventario o metas.
+  - Una sesión de capacitación y 30 días de soporte incluidos.
+- **Cómo funciona:**
+  1. **Diagnóstico gratis.** Revisamos si tus datos permiten anticipar con confianza.
+  2. **Propuesta clara.** Acordamos qué quieres anticipar, para qué periodo y cómo lo vas a usar.
+  3. **Preparación del análisis.** Ordenamos tu historial y comprobamos qué tan bien anticipa lo que ya pasó.
+  4. **Entrega y acompañamiento.** Te explicamos los resultados, hacemos hasta dos rondas de ajustes y te capacitamos.
+- **Tiempo de referencia:** 15 a 30 días hábiles. El tiempo exacto va en la propuesta.
+- **Precio:** Te damos un precio claro en la propuesta, después del diagnóstico gratis. No publicamos precios.
+- **Acción principal:** Agenda tu diagnóstico gratis
+- **Preguntas frecuentes:**
+  - **¿Cuántos datos necesito?** Depende de tu negocio. En el diagnóstico revisamos tu historial y te decimos con honestidad si alcanza.
+  - **¿Una predicción es segura?** No. Es una estimación con un margen de error, y te lo explicamos para que decidas con la información completa.
+
 
 ---
 
