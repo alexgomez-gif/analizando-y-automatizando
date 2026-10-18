@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CabeceraPagina from "../../components/CabeceraPagina.astro";
+import Card from "../../components/Card.astro";
+import LlamadoFinal from "../../components/LlamadoFinal.astro";
+import { servicios } from "../../lib/servicios";
+// Índice de servicios, armado con textos aprobados del inicio (docs/contenido.md › Servicios).
+// La meta description es BORRADOR hasta que el dueño la apruebe.
+// Las tarjetas van directamente bajo el h1, así que su título es h2 (sin saltos de jerarquía).
+---
+
+<BaseLayout
+	title="Servicios | Analizando y Automatizando"
+	description="Diagnóstico gratis, tableros, limpieza de datos, automatización de reportes y análisis predictivo para emprendimientos emergentes en Colombia."
+>
+	<CabeceraPagina
+		titulo="Lo que hacemos por tu emprendimiento"
+		subtitulo="Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, mediante automatización y análisis a la medida, sin jerga técnica."
+		migas={[{ texto: "Inicio", href: "/" }, { texto: "Servicios" }]}
+	/>
+
+	<div class="contenedor py-10 sm:py-12 lg:py-16">
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				servicios.map(({ titulo, href, acento, icono: Icono, texto }) => (
+					<Card titulo={titulo} href={href} acento={acento} nivel={2}>
+						<Icono slot="icono" stroke-width={1.5} size={28} />
+						<p>{texto}</p>
+					</Card>
+				))
+			}
+		</div>
+	</div>
+
+	<LlamadoFinal />
+</BaseLayout>

@@ -97,11 +97,15 @@ Fuente única de los textos de cada página. El código toma los textos de aquí
 
 ## Servicios · `/servicios`
 
-- **title:** [PENDIENTE]
-- **meta description:** [PENDIENTE]
-- **H1:** [PENDIENTE]
-- **Introducción:** [PENDIENTE]
-- **Acción principal:** Agendar diagnóstico
+> Armada el 2026-10-18 con textos ya aprobados del inicio (título de la sección de servicios, propuesta de valor y frases de las tarjetas).
+
+- **title:** Servicios | Analizando y Automatizando
+- **meta description:** Diagnóstico gratis, tableros, limpieza de datos, automatización de reportes y análisis predictivo para emprendimientos emergentes en Colombia.
+  - BORRADOR (2026-10-18): falta aprobación.
+- **H1:** Lo que hacemos por tu emprendimiento
+- **Introducción:** Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, mediante automatización y análisis a la medida, sin jerga técnica.
+- **Contenido:** las 5 tarjetas de servicio del inicio (mismas frases).
+- **Acción principal:** Agendar diagnóstico (panel de cierre)
 
 ### Plantilla para cada servicio
 
@@ -179,7 +183,7 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 
 - **title:** Cómo trabajamos | Analizando y Automatizando
 - **meta description:** Plazos claros acordados por escrito, avances cada semana, dos rondas de ajustes y 30 días de soporte incluidos. Así trabajamos contigo.
-  - BORRADOR (2026-10-18): armada por Claude con frases aprobadas de esta página; falta aprobación.
+  - Aprobada el 2026-10-18.
 - **H1:** Tiempos claros desde el primer día
 - **Acción principal:** Agenda tu diagnóstico gratis
 
@@ -267,7 +271,7 @@ Cada artículo es un archivo en `src/content/blog/`.
 
 - **title:** Sobre nosotros | Analizando y Automatizando
 - **meta description:** Desde 2022 convertimos tecnología en claridad: escuchamos primero, analizamos con rigor y automatizamos solo lo que de verdad libera tiempo.
-  - BORRADOR (2026-10-18): armada por Claude con frases aprobadas de esta página; falta aprobación.
+  - Aprobada el 2026-10-18.
 - **H1:** Desde 2022, convirtiendo tecnología en claridad
 - **Acción principal:** Agenda tu diagnóstico gratis
 
@@ -282,7 +286,7 @@ Detrás de cada tablero hay una persona que quiere decidir mejor. Detrás de cad
 
 **Frase destacada:** «Cada dato cuenta una historia. Nosotros te ayudamos a escucharla y a escribir el siguiente capítulo.»
 
-**Línea de tiempo** (opcional, como gráfico):
+**Línea de tiempo** · título de la sección: «Nuestro camino» (aprobado el 2026-10-18):
 - **2022** · Empieza el camino en la tecnología y los datos.
 - **2026** · Nace Analizando y Automatizando.
 - **Hoy** · Ayudamos a emprendimientos a decidir con datos y a trabajar en automático.

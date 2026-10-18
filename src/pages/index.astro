@@ -1,15 +1,10 @@
 ---
 import {
 	ChevronRight,
-	ClipboardCheck,
-	Combine,
 	FileSpreadsheet,
 	Files,
-	LayoutDashboard,
 	MessageCircle,
 	Plus,
-	TrendingUp,
-	Workflow,
 } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
@@ -19,6 +14,7 @@ import LlamadoFinal from "../components/LlamadoFinal.astro";
 import Card from "../components/Card.astro";
 import EnlaceFlecha from "../components/EnlaceFlecha.astro";
 import Seccion from "../components/Seccion.astro";
+import { servicios } from "../lib/servicios";
 // Textos de docs/contenido.md (Inicio, aprobados).
 // Demos: ocultas hasta la Fase 6.
 
@@ -120,37 +116,17 @@ const preguntas: {
 		</p>
 	</Seccion>
 
-	{/* 2. Servicios: cian = análisis, magenta = automatización, violeta = predictivo (IA) */}
+	{/* 2. Servicios: datos en src/lib/servicios.ts (también los usa /servicios) */}
 	<Seccion id="servicios" titulo="Lo que hacemos por tu emprendimiento">
 		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-			<Card titulo="Diagnóstico de datos" href="/servicios/diagnostico-de-datos" acento="cian">
-				<ClipboardCheck slot="icono" stroke-width={1.5} size={28} />
-				<p>Te mostramos dónde se te van las horas y qué conviene automatizar primero.</p>
-			</Card>
-			<Card titulo="Tableros" href="/servicios/tableros" acento="cian">
-				<LayoutDashboard slot="icono" stroke-width={1.5} size={28} />
-				<p>Tus números clave en una sola pantalla, actualizados solos.</p>
-			</Card>
-			<Card
-				titulo="Limpieza y consolidación de datos"
-				href="/servicios/limpieza-y-consolidacion-de-datos"
-				acento="cian"
-			>
-				<Combine slot="icono" stroke-width={1.5} size={28} />
-				<p>Juntamos tus hojas de cálculo y archivos en una sola fuente que sí cuadra.</p>
-			</Card>
-			<Card
-				titulo="Automatización de reportes y procesos"
-				href="/servicios/automatizacion-de-reportes"
-				acento="magenta"
-			>
-				<Workflow slot="icono" stroke-width={1.5} size={28} />
-				<p>Tus reportes listos cada lunes, sin que tengas que armarlos.</p>
-			</Card>
-			<Card titulo="Análisis predictivo" href="/servicios/analisis-predictivo" acento="violeta">
-				<TrendingUp slot="icono" stroke-width={1.5} size={28} />
-				<p>Cuando tus datos lo permiten, te ayudamos a anticipar ventas e inventario.</p>
-			</Card>
+			{
+				servicios.map(({ titulo, href, acento, icono: Icono, texto }) => (
+					<Card titulo={titulo} href={href} acento={acento}>
+						<Icono slot="icono" stroke-width={1.5} size={28} />
+						<p>{texto}</p>
+					</Card>
+				))
+			}
 		</div>
 	</Seccion>
 
