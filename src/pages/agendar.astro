@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CabeceraPagina from "../components/CabeceraPagina.astro";
+import { pasosDiagnostico } from "../lib/diagnostico";
+// Textos: «Qué pasa en los 30 minutos» (aprobado) y los pasos del diagnóstico (aprobados).
+// H1 y subtítulo reutilizan textos aprobados (botón principal y llamado final del inicio).
+// title y meta description: BORRADOR. Sin publicar: «Qué debe preparar el cliente» y el mensaje
+// de confirmación (siguen [PENDIENTE] en docs/contenido.md).
+// La agenda (Cal.com) llega en la Fase 5: pedirá el teléfono, con autorización sin marcar (Ley 1581).
+// Esta página ES la acción principal: no lleva LlamadoFinal.
+---
+
+<BaseLayout
+	title="Agenda tu diagnóstico gratis | Analizando y Automatizando"
+	description="Agenda tu diagnóstico gratis: una llamada de 30 minutos y, en 3 días hábiles, un informe claro con lo que puedes automatizar en tu negocio."
+>
+	<CabeceraPagina
+		titulo="Agenda tu diagnóstico gratis"
+		subtitulo="Cuéntanos qué tareas te quitan tiempo y te decimos qué se puede automatizar."
+		migas={[{ texto: "Inicio", href: "/" }, { texto: "Agendar diagnóstico" }]}
+	/>
+
+	<div class="contenedor py-10 sm:py-12 lg:py-16">
+		<div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+			<div>
+				<h2 class="text-[1.75rem]">Qué pasa en los 30 minutos</h2>
+				<p class="mt-4 text-lg text-texto-2">
+					Nos cuentas cómo trabaja tu negocio, qué herramientas usas y qué te quita más tiempo. Sin compromiso.
+				</p>
+
+				<h2 class="mt-12 text-[1.75rem]">Cómo funciona</h2>
+				<ol class="mt-6 space-y-8">
+					{
+						pasosDiagnostico.map(({ titulo, detalle, texto, lista }, i) => (
+							<li class="flex gap-4">
+								<span aria-hidden="true" class="font-mono text-2xl text-cian">
+									{String(i + 1).padStart(2, "0")}
+								</span>
+								<div>
+									<h3 class="text-[1.375rem] leading-snug">{titulo}</h3>
+									{detalle && (
+										<p class="mt-1 font-mono text-[0.8125rem] tracking-[0.08em] text-texto uppercase">{detalle}</p>
+									)}
+									<p class="mt-2 text-texto-2">{texto}</p>
+									{lista && (
+										<ul class="mt-2 list-disc space-y-1 pl-5 text-texto-2 marker:text-cian">
+											{lista.map((punto) => (
+												<li>{punto}</li>
+											))}
+										</ul>
+									)}
+								</div>
+							</li>
+						))
+					}
+				</ol>
+			</div>
+
+			{/* Aquí irá la agenda de Cal.com (Fase 5). Bloque pendiente, visible a propósito mientras se construye. */}
+			<div id="agenda" class="self-start lg:sticky lg:top-8">
+				<div class="rounded-(--radio-tarjeta) border-2 border-dashed border-ambar bg-cristal p-6 sm:p-8">
+					<p class="font-mono text-[0.8125rem] tracking-[0.08em] text-ambar uppercase">Pendiente · Fase 5</p>
+					<p class="mt-3 text-lg font-semibold text-texto">[PENDIENTE: agenda con Cal.com — Fase 5]</p>
+					<p class="mt-3 text-texto-2">
+						Aquí irá el calendario para reservar la llamada. Pedirá el teléfono, con la autorización de tratamiento de
+						datos sin marcar y el enlace a la política (Ley 1581).
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</BaseLayout>

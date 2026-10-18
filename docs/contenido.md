@@ -412,12 +412,19 @@ Detrás de cada tablero hay una persona que quiere decidir mejor. Detrás de cad
 
 ## Agendar diagnóstico · `/agendar`
 
-- **title:** [PENDIENTE]
-- **meta description:** [PENDIENTE]
-- **H1:** [PENDIENTE]
+> Construida el 2026-10-18 con textos ya aprobados. La agenda (Cal.com) llega en la Fase 5.
+
+- **title:** Agenda tu diagnóstico gratis | Analizando y Automatizando
+  - BORRADOR (2026-10-18): falta aprobación.
+- **meta description:** Agenda tu diagnóstico gratis: una llamada de 30 minutos y, en 3 días hábiles, un informe claro con lo que puedes automatizar en tu negocio.
+  - BORRADOR (2026-10-18): falta aprobación.
+- **H1:** Agenda tu diagnóstico gratis (texto aprobado del botón principal)
+- **Subtítulo:** Cuéntanos qué tareas te quitan tiempo y te decimos qué se puede automatizar. (texto aprobado del llamado final del inicio)
 - **Qué pasa en los 30 minutos:** Nos cuentas cómo trabaja tu negocio, qué herramientas usas y qué te quita más tiempo. Sin compromiso.
-- **Qué debe preparar el cliente:** [PENDIENTE]
-- **Mensaje de confirmación del formulario:** [PENDIENTE]
+- **Cómo funciona:** los 4 pasos aprobados del diagnóstico (`src/lib/diagnostico.ts`).
+- **Agenda:** [PENDIENTE: Cal.com — Fase 5]. Debe pedir el teléfono (la conversación es por llamada) con autorización de datos sin marcar (Ley 1581).
+- **Qué debe preparar el cliente:** [PENDIENTE] (no se publica hasta tenerlo)
+- **Mensaje de confirmación del formulario:** [PENDIENTE] (Fase 5)
 
 ---
 
