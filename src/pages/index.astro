@@ -193,7 +193,12 @@ const preguntas: Pregunta[] = [
 				<EnlaceFlecha href="/sobre-nosotros" class="mt-6">Conócenos</EnlaceFlecha>
 			</div>
 
-			<Cita texto="Cada dato cuenta una historia. Nosotros te ayudamos a escucharla y a escribir el siguiente capítulo." />
+			{/* Cortina (docs/scroll.md): la cita se descubre de izquierda a derecha mientras entra en pantalla */}
+			<div data-sc-act="flow">
+				<div data-sc-reveal="right" data-sc-reveal-at="0.15 0.45">
+					<Cita texto="Cada dato cuenta una historia. Nosotros te ayudamos a escucharla y a escribir el siguiente capítulo." />
+				</div>
+			</div>
 		</div>
 	</Seccion>
 
