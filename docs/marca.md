@@ -224,6 +224,11 @@ Cada efecto debe **comunicar algo** (datos, proceso, resultado), no solo adornar
 
 La calculadora **solo multiplica los valores que ingresa el visitante**: no muestra porcentajes de ahorro inventados.
 
+**Implementados en el inicio (2026-10-19)** con el motor de scroll-craft (`src/vendor/scrollcraft/`); la partitura completa está en `docs/scroll.md`:
+tubería con pulso de datos (momento cumbre, solo CSS sobre `--sc-p`), tarjetas con luz (servicios), aparición en secuencia
+(problema, servicios, pasos), cortina sobre la cita, calculadora y cambio de tema. **Pospuestos:** red de datos viva,
+mini tablero, terminal que escribe y antes/después.
+
 ### 6.2 Movimiento
 
 - Duraciones: 150 ms (hover), 300 ms (aparición), 600–900 ms (dibujar gráficas). Curva: `cubic-bezier(.2,.8,.2,1)`.

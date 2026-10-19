@@ -173,15 +173,13 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 1. ✅ Diagnóstico, cómo trabajamos, sobre nosotros · 2. ✅ `/servicios` · 3. ✅ Tableros, limpieza, automatización, predictivo · 4. ✅ `/agendar` (agenda pendiente, Fase 5) · 5. ✅ Legales (solo estructura) y 404
 6. ⏭️ Quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` y `robots.txt` · marcar como página actual el botón «Agenda» del encabezado en `/agendar`
 
+**Efectos de scroll con scroll-craft (delegación creativa del 2026-10-19): completos en el inicio**, rama `feature/scroll` (sale de `feature/paginas`; nada fusionado a `main`).
+Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **pulso de datos en la tubería (momento cumbre)** · cortina sobre la cita. Motor solo en el inicio (7,5 KB gzip).
+
 **Próxima sesión:**
-- Pedir aprobación pendiente de: meta descriptions de las 3 páginas legales y microtextos de la 404 (BORRADOR en `docs/contenido.md`).
-- Pedir respuesta al **plan de scroll-craft** (propuesto el 2026-10-18, aún sin aprobar), con 4 decisiones:
-  1. ¿Aprueba el plan? (rama `feature/scroll`: integrar el motor en `src/vendor/scrollcraft/` con su CSS en una capa de baja prioridad y sus tokens apuntando a los de marca → partitura del inicio en `docs/scroll.md` → efectos uno por uno → verificación).
-  2. Momento cumbre: pulso de datos que recorre la tubería de «Cómo trabajamos» (recomendado).
-  3. ¿Posponer red de datos, mini tablero, terminal y antes/después? (el motor usa 19 de los 30 KB).
-  4. ¿Terminar antes el paso 6 del plan 3?
-  Partitura propuesta: hero = profundidad (retícula, Aurora y titular a distinto ritmo) + lema línea por línea · problema = sección sostenida con frases una a una · servicios = tarjetas con luz · cómo trabajamos = PICO, pulso de datos · quiénes somos = cita con cortina · preguntas y calculadora = sin efectos · cierre = quieto.
-  No se usa de scroll-craft: video scrub, KIE AI, ffmpeg, Playwright, contadores, ni sus reglas que contradicen la marca (degradado del titular y glow se quedan).
+- Paso 6 del plan 3: quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` y `robots.txt` · marcar como página actual el botón «Agenda» en `/agendar`.
+- Medir con Lighthouse (móvil) el inicio con los efectos.
+- Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
 
 **Pendientes técnicos conocidos:**
 - Imagen Open Graph (1200 × 630) por crear.
@@ -205,6 +203,10 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-19 · Efectos de scroll del inicio con scroll-craft bajo delegación creativa explícita; partitura en `docs/scroll.md` · momento cumbre = pulso de datos en la tubería (CSS sobre `--sc-p`); red de datos, mini tablero, terminal y antes/después pospuestos.
+- 2026-10-19 · Motor en capa CSS de baja prioridad; se neutraliza su `letter-spacing` y se aceptan sus mejoras (sin negritas falsas, cifras tabulares en tablas, scroll suave) · verificado con capturas de las 14 páginas.
+- 2026-10-19 · Protección `html:not(.sc-ready)`: sin JavaScript o si el motor falla, nada animado queda oculto · marca.md §6.3; verificado con JavaScript desactivado.
+- 2026-10-19 · El motor se carga solo en el inicio (componente `MotorScroll`) · las demás páginas no descargan su JavaScript.
 - 2026-10-18 · Skill scroll-craft (MIT, plugin `nateherk-design` 0.3.1) instalada por el dueño; se usa **dentro de la marca**: se toman sus técnicas de scroll, no su estética · sus reglas duras prohíben el degradado del titular y el glow, que son la firma de «Neón al amanecer»; marca.md manda.
 - 2026-10-18 · Páginas legales solo con estructura y notas `[REVISIÓN LEGAL PENDIENTE]`, estilo sobrio; sin política de cookies mientras la analítica no use cookies · CLAUDE.md §10 y marca.md §7.
 - 2026-10-18 · Datos compartidos en `src/lib/` (servicios y pasos del diagnóstico) y plantillas `PlantillaServicio` y `PlantillaLegal` · una sola fuente por texto; las refactorizaciones se verificaron con capturas idénticas byte por byte.
