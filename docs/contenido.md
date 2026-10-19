@@ -38,7 +38,7 @@ Fuente única de los textos de cada página. El código toma los textos de aquí
 - **Dolores** (situaciones comunes, no cifras):
   1. Pasas los pedidos de WhatsApp a una hoja de cálculo, uno por uno.
   2. Armas el reporte del mes a mano y te quita horas que necesitas para vender.
-  3. Tienes los números en varios archivos y ninguno cuadra con el otro.
+  3. Tienes los números en varios archivos y ninguno cuadra con los demás.
 - **Cierre:** Esas tareas se pueden hacer solas. Tú decides; el trabajo repetitivo lo hacen tus sistemas.
 
 #### 2. Servicios (resumen)
@@ -132,7 +132,7 @@ Copiar este bloque en cada servicio de abajo.
 - **title:** Diagnóstico de datos gratis | Analizando y Automatizando
 - **meta description:** Conoce el estado real de tus datos y qué puedes automatizar. Informe claro en 3 días hábiles, gratis y confidencial. Agenda tu conversación.
 - **H1:** Conoce el estado real de tus datos en 3 días hábiles
-- **Subtítulo:** Un diagnóstico claro y accionable para saber qué está frenando a tu negocio y qué puedes automatizar desde mañana.
+- **Subtítulo:** Un diagnóstico claro y práctico para saber qué está frenando a tu negocio y qué puedes automatizar desde mañana.
 - **Precio:** Gratis (la conversación inicial y el diagnóstico completo).
 - **Acción principal:** Agenda tu conversación gratuita
 
@@ -156,7 +156,7 @@ No es un informe genérico. Revisamos tus propios archivos y procesos con herram
 - **Gratis:** la conversación y el diagnóstico completo no tienen costo.
 - **Rápido:** el informe está listo en 3 días hábiles desde que recibimos tus datos.
 - **Preciso:** trabajamos sobre tu información real, no sobre supuestos.
-- **Accionable:** cada hallazgo viene con una recomendación concreta.
+- **Práctico:** cada hallazgo viene con una recomendación concreta.
 - **Confidencial:** firmamos un acuerdo de confidencialidad antes de ver tus datos y los eliminamos al terminar, si así lo prefieres. [REVISIÓN LEGAL PENDIENTE: al recibir datos de clientes actuamos como encargados del tratamiento (Ley 1581); la política debe cubrirlo]
 - **Tuyo:** el informe es tuyo, trabajes o no con nosotros después.
 
@@ -311,7 +311,7 @@ El tiempo exacto de cada proyecto depende de cuántas fuentes de datos tenga y d
 
 **Así cuidamos los tiempos de ambos:**
 - El reloj empieza cuando recibimos tus datos y accesos completos.
-- Respondemos tus mensajes en máximo un día hábil.
+- Respondemos tus mensajes en un día hábil como máximo.
 - Te enviamos un avance cada semana, para que nunca te preguntes cómo va tu proyecto.
 - Cada proyecto incluye dos rondas de ajustes sin costo.
 - Si algo depende de ti (aprobar un avance, enviar un archivo), te lo pedimos con anticipación y ajustamos la fecha de entrega de forma transparente.
