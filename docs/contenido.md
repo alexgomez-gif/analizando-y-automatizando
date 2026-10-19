@@ -434,16 +434,16 @@ Solo estructura (construida el 2026-10-18 con `PlantillaLegal`). Los textos defi
 Cada sección lleva una nota `[REVISIÓN LEGAL PENDIENTE: …]` con lo que debe ir ahí. Estilo sobrio: sin Aurora ni panel de cierre.
 
 - **Política de tratamiento de datos** · `/politica-de-tratamiento-de-datos` · [REVISIÓN LEGAL PENDIENTE] · 10 secciones
-  - meta description BORRADOR: Política de tratamiento de datos personales de Analizando y Automatizando: qué datos recolectamos, para qué los usamos y cómo ejercer tus derechos.
+  - meta description (aprobada el 2026-10-19): Política de tratamiento de datos personales de Analizando y Automatizando: qué datos recolectamos, para qué los usamos y cómo ejercer tus derechos.
 - **Aviso de privacidad** · `/aviso-de-privacidad` · [REVISIÓN LEGAL PENDIENTE] · 4 secciones
-  - meta description BORRADOR: Aviso de privacidad de Analizando y Automatizando: quién trata tus datos personales, para qué los usamos y dónde consultar la política completa.
+  - meta description (aprobada el 2026-10-19): Aviso de privacidad de Analizando y Automatizando: quién trata tus datos personales, para qué los usamos y dónde consultar la política completa.
 - **Términos y condiciones** · `/terminos-y-condiciones` · [REVISIÓN LEGAL PENDIENTE] · 9 secciones
-  - meta description BORRADOR: Términos y condiciones de uso del sitio de Analizando y Automatizando: uso del sitio, diagnóstico gratuito, propuestas y propiedad intelectual.
+  - meta description (aprobada el 2026-10-19): Términos y condiciones de uso del sitio de Analizando y Automatizando: uso del sitio, diagnóstico gratuito, propuestas y propiedad intelectual.
 - **Política de cookies** · no hace falta por ahora: la analítica elegida (Cloudflare Web Analytics o Plausible) no usa cookies. Revisar si eso cambia.
 
 ## Página 404 · `/404`
 
-> Microtextos BORRADOR (2026-10-18), falta aprobación. La página lleva `noindex`.
+> Microtextos aprobados el 2026-10-19. La página lleva `noindex`.
 
 - **title:** Página no encontrada | Analizando y Automatizando
 - **meta description:** La página que buscas no existe o cambió de lugar. Vuelve al inicio o conoce nuestros servicios de análisis de datos y automatización.
