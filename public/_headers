@@ -1,0 +1,10 @@
+# Cabeceras de Cloudflare Pages: se aplican a las respuestas según la URL.
+# Docs: https://developers.cloudflare.com/pages/configuration/headers/
+
+# Copias de prueba en *.pages.dev (producción y vistas previas por rama):
+# que Google no las indexe. El dominio real no coincide con estas reglas.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
