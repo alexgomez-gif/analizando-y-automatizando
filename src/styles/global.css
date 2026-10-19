@@ -1,4 +1,7 @@
+/* La capa de scroll-craft se declara primero: es la de menor prioridad, así la marca siempre gana */
+@layer scrollcraft;
 @import "tailwindcss";
+@import "../vendor/scrollcraft/scrollcraft.css" layer(scrollcraft);
 @import "./tokens.css";
 
 /* Variante `claro:` → estilos que solo aplican con el tema claro activo (ej. claro:hidden) */
@@ -31,6 +34,19 @@
   --font-titulo: var(--fuente-titulo);
   --font-texto: var(--fuente-texto);
   --font-mono: var(--fuente-mono);
+}
+
+/* scroll-craft: sus tokens toman los de la marca (los dos temas funcionan solos, sin colores sueltos) */
+:root {
+  --sc-canvas: var(--fondo);
+  --sc-surface: var(--superficie);
+  --sc-ink: var(--texto);
+  --sc-ink-soft: var(--texto-2);
+  --sc-accent: var(--cian);
+  --sc-accent-ink: var(--texto-sobre-neon);
+  --sc-font-display: var(--fuente-titulo);
+  --sc-font-text: var(--fuente-texto);
+  --sc-font-mono: var(--fuente-mono);
 }
 
 /* Contenedor del sitio: ancho máximo y márgenes laterales iguales en todas las secciones */
@@ -181,6 +197,12 @@
   }
 
   body {
+    /* scroll-craft aprieta el espaciado entre letras (-0.005em) en todo el texto: se neutraliza,
+       la marca usa el espaciado normal de sus fuentes. Se aceptan sus otras mejoras globales:
+       sin negritas falsas (font-synthesis-weight: none), cifras tabulares en tablas, scroll suave
+       (desactivado con «reducir movimiento»), selección de texto y barra de desplazamiento con
+       los colores de marca. Ver src/vendor/scrollcraft/LEEME.md */
+    letter-spacing: normal;
     background-color: var(--fondo);
     font-family: var(--font-texto);
     font-size: 1.0625rem;
