@@ -131,43 +131,55 @@ const preguntas: Pregunta[] = [
 		</div>
 	</Seccion>
 
-	{/* 3. Cómo trabajamos: tubería de 5 etapas (estática; el pulso de luz va con los efectos) + 4 pasos */}
-	<Seccion id="como-trabajamos" titulo="Del caos a tus procesos en automático, en cuatro pasos">
-		<ol aria-label="Nuestro método, en cinco etapas" class="flex flex-wrap items-center gap-x-2 gap-y-3">
-			{
-				etapas.map((etapa, i) => (
-					<li class="flex items-center gap-2">
-						{i > 0 && <ChevronRight size={18} stroke-width={1.5} class="text-texto-tenue" />}
-						<span
-							class:list={[
-								"inline-flex min-h-9 items-center rounded-full border px-4 font-mono text-[0.8125rem] tracking-[0.08em] uppercase",
-								i === etapas.length - 1 ? "border-lima text-lima" : "border-borde-fuerte text-texto-2",
-							]}
-						>
-							{etapa}
-						</span>
-					</li>
-				))
-			}
-		</ol>
+	{/* 3. Cómo trabajamos · MOMENTO CUMBRE (docs/scroll.md): la tubería se sostiene en pantalla y un pulso de
+	    datos la recorre al ritmo del scroll. El pulso es solo CSS y lee --sc-p (progreso del acto, 0 → 1). */}
+	<section id="como-trabajamos" aria-labelledby="como-trabajamos-titulo">
+		<div data-sc-act="pin" data-sc-span="2" class="tuberia-acto">
+			<div data-sc-stage class="flex min-h-dvh items-center">
+				<div class="contenedor">
+					<h2 id="como-trabajamos-titulo" class="max-w-3xl">Del caos a tus procesos en automático, en cuatro pasos</h2>
+					<ol aria-label="Nuestro método, en cinco etapas" class="mt-10 flex flex-wrap items-center gap-x-2 gap-y-3">
+						{
+							etapas.map((etapa, i) => (
+								<li class="flex items-center gap-2">
+									{i > 0 && <ChevronRight size={18} stroke-width={1.5} class="text-texto-tenue" />}
+									<span
+										style={`--i: ${i}`}
+										class:list={[
+											"etapa inline-flex min-h-9 items-center rounded-full border px-4 font-mono text-[0.8125rem] tracking-[0.08em] uppercase",
+											i === etapas.length - 1 && "etapa--final",
+										]}
+									>
+										{etapa}
+									</span>
+								</li>
+							))
+						}
+					</ol>
+					<div class="pulso mt-8 max-w-3xl" aria-hidden="true"><span class="pulso__luz"></span></div>
+				</div>
+			</div>
+		</div>
 
-		<ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-sc-in data-sc-stagger="90">
-			{
-				pasos.map(({ titulo, texto }, i) => (
-					<li>
-						<Card etiqueta="div" titulo={titulo} acento="cian" class="h-full">
-							<span slot="icono" aria-hidden="true" class="font-mono text-2xl">
-								{String(i + 1).padStart(2, "0")}
-							</span>
-							<p>{texto}</p>
-						</Card>
-					</li>
-				))
-			}
-		</ol>
+		<div class="contenedor pb-10 sm:pb-12 lg:pb-16">
+			<ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-sc-in data-sc-stagger="90">
+				{
+					pasos.map(({ titulo, texto }, i) => (
+						<li>
+							<Card etiqueta="div" titulo={titulo} acento="cian" class="h-full">
+								<span slot="icono" aria-hidden="true" class="font-mono text-2xl">
+									{String(i + 1).padStart(2, "0")}
+								</span>
+								<p>{texto}</p>
+							</Card>
+						</li>
+					))
+				}
+			</ol>
 
-		<EnlaceFlecha href="/como-trabajamos" class="mt-10">Ver tiempos y acompañamiento</EnlaceFlecha>
-	</Seccion>
+			<EnlaceFlecha href="/como-trabajamos" class="mt-10">Ver tiempos y acompañamiento</EnlaceFlecha>
+		</div>
+	</section>
 
 	{/* 4. Demos: oculta hasta la Fase 6 */}
 
@@ -214,6 +226,61 @@ const preguntas: Pregunta[] = [
 		z-index: -1;
 		background-image: linear-gradient(to bottom, transparent, var(--fondo));
 		pointer-events: none;
+	}
+
+	/* Pulso de datos (momento cumbre). --avance = progreso del acto sostenido.
+	   Sin JavaScript --sc-p no existe y vale 1: la tubería se ve encendida completa. Igual con «reducir movimiento». */
+	.tuberia-acto {
+		--avance: var(--sc-p, 1);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.tuberia-acto {
+			--avance: 1;
+		}
+	}
+
+	/* Cada etapa se enciende cuando el pulso llega a ella (--i = su posición, de 0 a 4) */
+	.etapa {
+		--encendido: clamp(0, calc((var(--avance) * 5 - var(--i)) * 2), 1);
+		border-color: color-mix(in oklab, var(--cian) calc(var(--encendido) * 100%), var(--borde-fuerte));
+		color: color-mix(in oklab, var(--texto) calc(var(--encendido) * 100%), var(--texto-2));
+	}
+
+	/* «Decisión»: el resultado, en lima (marca.md §2.1: crecimiento y resultados positivos) */
+	.etapa--final {
+		border-color: color-mix(in oklab, var(--lima) calc(var(--encendido) * 100%), var(--borde-fuerte));
+		color: color-mix(in oklab, var(--lima) calc(var(--encendido) * 100%), var(--texto-2));
+	}
+
+	/* Barra de progreso con el degradado Horizonte (cian → lima) y un punto de luz en la punta */
+	.pulso {
+		position: relative;
+		height: 2px;
+		border-radius: 999px;
+		background-color: var(--borde);
+	}
+
+	.pulso::before {
+		content: "";
+		position: absolute;
+		inset-block: 0;
+		left: 0;
+		width: calc(var(--avance) * 100%);
+		border-radius: inherit;
+		background-image: var(--grad-horizonte);
+	}
+
+	.pulso__luz {
+		position: absolute;
+		top: 50%;
+		left: calc(var(--avance) * 100%);
+		width: 10px;
+		height: 10px;
+		border-radius: 999px;
+		background-color: var(--cian);
+		box-shadow: var(--glow-cian);
+		translate: -50% -50%;
 	}
 
 	/* Degradado Amanecer neón solo en el titular corto (≤ 4 palabras, marca.md §2.3) */

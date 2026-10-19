@@ -53,7 +53,10 @@ await cdp("Page.enable"); await cdp("Runtime.enable");
 
 // --- Contraste: cada texto visible contra su fondo efectivo; bordes de controles a 3:1 ---
 const auditar = `(() => {
-	const rgba = (s) => { const m = s.match(/[\\d.]+/g)?.map(Number) ?? [0,0,0,0]; return [m[0], m[1], m[2], m[3] ?? 1]; };
+	// Cualquier color CSS (rgb, oklab, color-mix…) → [r, g, b, a]. Los que no son rgb se pintan en un lienzo y se lee el píxel.
+	const lienzo = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+	const rgba = (s) => { if (/^rgba?\\(/.test(s)) { const m = s.match(/[\\d.]+/g).map(Number); return [m[0], m[1], m[2], m[3] ?? 1]; }
+		lienzo.clearRect(0, 0, 1, 1); lienzo.fillStyle = s; lienzo.fillRect(0, 0, 1, 1); const d = lienzo.getImageData(0, 0, 1, 1).data; return [d[0], d[1], d[2], d[3] / 255]; };
 	const lum = ([r,g,b]) => { const f = (c) => { c /= 255; return c <= 0.04045 ? c/12.92 : ((c+0.055)/1.055) ** 2.4; }; return 0.2126*f(r)+0.7152*f(g)+0.0722*f(b); };
 	const cr = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
 	const sobre = (a, b) => [0,1,2].map(i => a[i]*a[3] + b[i]*(1-a[3])).concat(1);
