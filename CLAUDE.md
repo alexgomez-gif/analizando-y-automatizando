@@ -169,15 +169,14 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 **Calculadora de ahorro: completa** (rama `feature/calculadora`).
 
-**Plan 3 · páginas enlazadas (aprobado el 2026-10-16):** pasos 1 a 5 completos en la rama `feature/paginas` (aún sin fusionar a `main`; contiene también la calculadora).
+**Plan 3 · páginas enlazadas (aprobado el 2026-10-16): completo** y fusionado a `main` el 2026-10-19 (ramas `feature/paginas` → `feature/scroll` → `feature/seo-basico`, con la calculadora y los efectos de scroll).
 1. ✅ Diagnóstico, cómo trabajamos, sobre nosotros · 2. ✅ `/servicios` · 3. ✅ Tableros, limpieza, automatización, predictivo · 4. ✅ `/agendar` (agenda pendiente, Fase 5) · 5. ✅ Legales (solo estructura) y 404
-6. ✅ Quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` y `robots.txt` · botón «Agenda» como página actual en `/agendar` (rama `feature/seo-basico`, sale de `feature/scroll`)
+6. ✅ Quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` y `robots.txt` · botón «Agenda» como página actual en `/agendar`
 
-**Efectos de scroll con scroll-craft (delegación creativa del 2026-10-19): completos en el inicio**, rama `feature/scroll` (sale de `feature/paginas`; nada fusionado a `main`).
+**Efectos de scroll con scroll-craft (delegación creativa del 2026-10-19): completos en el inicio**, rama `feature/scroll` (fusionada a `main`).
 Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **pulso de datos en la tubería (momento cumbre)** · cortina sobre la cita. Motor solo en el inicio (7,5 KB gzip).
 
 **Próxima sesión:**
-- Decidir si se fusionan a `main` las ramas `feature/paginas` → `feature/scroll` → `feature/seo-basico` (cada una contiene a la anterior).
 - Medir con Lighthouse (móvil) el inicio con los efectos.
 - Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
 
