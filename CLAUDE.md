@@ -176,6 +176,8 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 **Efectos de scroll con scroll-craft (delegación creativa del 2026-10-19): completos en el inicio**, rama `feature/scroll` (fusionada a `main`).
 Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **pulso de datos en la tubería (momento cumbre)** · cortina sobre la cita. Motor solo en el inicio (7,5 KB gzip).
 
+**Repositorio:** https://github.com/alexgomez-gif/analizando-y-automatizando (público, solo `main`; las ramas `feature/...` quedan en local).
+
 **Próxima sesión:**
 - Medir con Lighthouse (móvil) el inicio con los efectos.
 - Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
@@ -204,6 +206,8 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-19 · Repositorio público en GitHub (`alexgomez-gif/analizando-y-automatizando`); se sube solo `main` · decisión del dueño; antes de publicar se revisó todo el historial sin encontrar claves ni `.env`. Al ser público, **nunca** subir datos de clientes ni secretos (CLAUDE.md §9); Cloudflare desplegará desde este repositorio (Fase 9).
+- 2026-10-19 · Plan 3 fusionado a `main` por avance directo (sin commit de fusión) · `main` no tenía cambios propios.
 - 2026-10-19 · Datos estructurados en `src/lib/schema.ts` y `DatosEstructurados.astro`, insertados con el slot `head` de `BaseLayout` · `ProfessionalService` en el inicio y `Service` en las 5 páginas de servicio, todos con el mismo proveedor; solo datos ya aprobados (nombre, lema, propuesta de valor, meta descriptions).
 - 2026-10-19 · Sitemap: la integración excluye sola la página 404 (13 URL públicas); `robots.txt` permite todo y anuncia `sitemap-index.xml` · las páginas legales sí se indexan.
 - 2026-10-19 · Botón «Agenda tu diagnóstico» del encabezado con `aria-current="page"` en `/agendar`, sin cambio visual · el lector de pantalla anuncia la página actual; `Button` acepta `aria-current`.
