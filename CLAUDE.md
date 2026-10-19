@@ -178,9 +178,19 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 
 **Repositorio:** https://github.com/alexgomez-gif/analizando-y-automatizando (público, solo `main`; las ramas `feature/...` quedan en local).
 
+**Plan · despliegue de prueba (aprobado el 2026-10-19):** en curso.
+1. ✅ `public/_headers` con `X-Robots-Tag: noindex` para `*.pages.dev` · 2. ✅ Fusionado a `main` y subido
+3. ⏸️ **Conectar Cloudflare Pages a GitHub (lo hace el dueño en el panel).** Primer intento sin éxito: `analizandoyautomatizando.pages.dev` da NXDOMAIN en el DNS de Cloudflare y GitHub no registra ninguna compilación → el proyecto no se creó, quedó con otro nombre (sufijo) o se creó como Worker (`.workers.dev`).
+   Configuración: Workers & Pages → Create → Pages → Connect to Git · solo este repositorio · nombre `analizandoyautomatizando` · rama `main` · preset Astro · `npm run build` · salida `dist` · sin variables (Node sale de `.nvmrc`).
+4. ⏭️ Revisar el sitio publicado (páginas, 404, robots, sitemap, noindex), `npm run verificar` contra la URL pública y Lighthouse móvil (herramienta de Chrome DevTools, sin dependencias) · 5. ⏭️ Anotar URL y decisiones aquí
+
 **Próxima sesión:**
-- Medir con Lighthouse (móvil) el inicio con los efectos.
+- Empezar preguntando qué muestra Cloudflare en Workers & Pages (proyecto, nombre, estado del despliegue) y seguir el paso 3 del plan de despliegue.
 - Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
+
+**Para lanzar en `analizandoyautomatizando.com` (revisado el 2026-10-19):**
+- Del dueño: razón social, NIT y correo para el pie (ideal `@analizandoyautomatizando.com`) · textos legales revisados por un profesional · cuenta de Cal.com · textos de `/agendar` · dónde se compró el dominio (si no es Cloudflare, cambiar los DNS).
+- De Claude: agenda Cal.com con teléfono y autorización sin marcar (Fase 5) · cabeceras de seguridad en `public/_headers` (CSP con el hash del script del tema y Cal.com) · dominio propio con `www` → dominio sin `www` · imagen Open Graph · analítica sin cookies · Search Console.
 
 **Pendientes técnicos conocidos:**
 - Imagen Open Graph (1200 × 630) por crear.
@@ -206,6 +216,8 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-19 · Ortografía revisada en las 14 páginas (diccionario es_CO + lectura completa): sin errores. Redacción ajustada con aprobación: «accionable» → «práctico», «en un día hábil como máximo», «ninguno cuadra con los demás» · evitar anglicismos y jerga.
+- 2026-10-19 · Despliegue de prueba con Cloudflare Pages conectado a GitHub desde el panel, sin instalar `wrangler` · sin dependencias nuevas; publica en cada push a `main` (CLAUDE.md §2). Las copias `*.pages.dev` llevan `noindex` para que Google no indexe un duplicado antes del lanzamiento.
 - 2026-10-19 · Repositorio público en GitHub (`alexgomez-gif/analizando-y-automatizando`); se sube solo `main` · decisión del dueño; antes de publicar se revisó todo el historial sin encontrar claves ni `.env`. Al ser público, **nunca** subir datos de clientes ni secretos (CLAUDE.md §9); Cloudflare desplegará desde este repositorio (Fase 9).
 - 2026-10-19 · Plan 3 fusionado a `main` por avance directo (sin commit de fusión) · `main` no tenía cambios propios.
 - 2026-10-19 · Datos estructurados en `src/lib/schema.ts` y `DatosEstructurados.astro`, insertados con el slot `head` de `BaseLayout` · `ProfessionalService` en el inicio y `Service` en las 5 páginas de servicio, todos con el mismo proveedor; solo datos ya aprobados (nombre, lema, propuesta de valor, meta descriptions).
