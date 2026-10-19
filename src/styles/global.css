@@ -49,6 +49,13 @@
   --sc-font-mono: var(--fuente-mono);
 }
 
+/* Contenido siempre legible (marca.md §6.3): sin JavaScript, o si el motor de scroll no llega a montarse
+   (no hay clase sc-ready en <html>), nada animado queda oculto. */
+html:not(.sc-ready) :is([data-sc-in], [data-sc-stagger] > *, [data-sc-cue]) {
+  opacity: 1;
+  transform: none;
+}
+
 /* Contenedor del sitio: ancho máximo y márgenes laterales iguales en todas las secciones */
 @utility contenedor {
   margin-inline: auto;

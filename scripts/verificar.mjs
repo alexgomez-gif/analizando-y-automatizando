@@ -43,6 +43,11 @@ const ir = async (ancho, tema) => {
 	await cdp("Emulation.setDeviceMetricsOverride", { width: ancho, height: 900, deviceScaleFactor: 1, mobile: ancho < 768 });
 	await cdp("Page.navigate", { url }); await espera(900);
 	await ev(`localStorage.setItem('tema', '${tema}')`); await cdp("Page.reload"); await espera(1200);
+	// Baja por toda la página como un visitante (dispara las apariciones de scroll) y vuelve arriba.
+	await cdp("Runtime.evaluate", { awaitPromise: true, expression: `(async () => {
+		for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight / 3) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 160)); }
+		scrollTo(0, 0); })()` });
+	await espera(900);
 };
 await cdp("Page.enable"); await cdp("Runtime.enable");
 

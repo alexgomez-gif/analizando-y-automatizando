@@ -1,0 +1,17 @@
+---
+/**
+ * Carga y monta el motor de scroll-craft (src/vendor/scrollcraft, MIT).
+ * Se incluye solo en las páginas que tienen efectos de scroll (hoy: el inicio), para que las demás
+ * no descarguen su JavaScript. El motor lee los atributos data-sc-* del HTML; no genera contenido.
+ * Al montarse pone la clase `sc-ready` en <html>. Sin JavaScript, o si falla, esa clase no existe
+ * y global.css mantiene visible todo el contenido animado (marca.md §6.3).
+ */
+---
+
+<script>
+	import "../vendor/scrollcraft/scrollcraft.js";
+
+	type Motor = { mount: (raiz: Document) => unknown };
+	const motor = (window as unknown as { ScrollCraft?: Motor }).ScrollCraft;
+	motor?.mount(document);
+</script>

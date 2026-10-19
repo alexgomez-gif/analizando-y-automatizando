@@ -10,6 +10,7 @@ import Button from "../components/Button.astro";
 import Calculadora from "../components/Calculadora.astro";
 import Cita from "../components/Cita.astro";
 import LlamadoFinal from "../components/LlamadoFinal.astro";
+import MotorScroll from "../components/MotorScroll.astro";
 import PreguntasFrecuentes, { type Pregunta } from "../components/PreguntasFrecuentes.astro";
 import Card from "../components/Card.astro";
 import EnlaceFlecha from "../components/EnlaceFlecha.astro";
@@ -87,7 +88,7 @@ const preguntas: Pregunta[] = [
 
 	{/* 1. Problema que resolvemos: frases sueltas en una lista, sin títulos (ver Card) */}
 	<Seccion id="problema" titulo="¿Tu negocio crece, pero tu tiempo no alcanza?">
-		<ul class="grid gap-6 md:grid-cols-3">
+		<ul class="grid gap-6 md:grid-cols-3" data-sc-in data-sc-stagger="90">
 			<li>
 				<Card etiqueta="div" class="h-full">
 					<MessageCircle slot="icono" stroke-width={1.5} size={28} />
@@ -114,13 +115,17 @@ const preguntas: Pregunta[] = [
 
 	{/* 2. Servicios: datos en src/lib/servicios.ts (también los usa /servicios) */}
 	<Seccion id="servicios" titulo="Lo que hacemos por tu emprendimiento">
-		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		{/* Cada tarjeta va envuelta: la aparición se anima en el envoltorio, porque la transición propia
+		    de Card (glow) tiene más prioridad que la del motor y la haría aparecer de golpe. */}
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-sc-in data-sc-stagger="70">
 			{
 				servicios.map(({ titulo, href, acento, icono: Icono, texto }) => (
-					<Card titulo={titulo} href={href} acento={acento}>
-						<Icono slot="icono" stroke-width={1.5} size={28} />
-						<p>{texto}</p>
-					</Card>
+					<div>
+						<Card titulo={titulo} href={href} acento={acento} class="h-full">
+							<Icono slot="icono" stroke-width={1.5} size={28} />
+							<p>{texto}</p>
+						</Card>
+					</div>
 				))
 			}
 		</div>
@@ -146,7 +151,7 @@ const preguntas: Pregunta[] = [
 			}
 		</ol>
 
-		<ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+		<ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-sc-in data-sc-stagger="90">
 			{
 				pasos.map(({ titulo, texto }, i) => (
 					<li>
@@ -188,6 +193,8 @@ const preguntas: Pregunta[] = [
 
 	{/* 8. Llamado final: panel con Aurora y retícula, eco del hero (texto por defecto del componente) */}
 	<LlamadoFinal />
+
+	<MotorScroll />
 </BaseLayout>
 
 <style>
