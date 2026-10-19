@@ -10,6 +10,9 @@
  * - Slot `icono`: un ícono de Lucide (decorativo). Slot por defecto: el texto de la tarjeta.
  * - `titulo` es opcional: si el contenido es una frase suelta (no un título con párrafo),
  *   se omite para no anunciar oraciones como encabezados.
+ * - `luz`: «tarjeta con luz» (marca.md §6.1): una luz cian sigue al cursor y la tarjeta se inclina
+ *   máx. 4°. La anima el motor de scroll-craft (MotorScroll), solo con mouse y nunca con
+ *   «reducir movimiento». En páginas sin el motor, el atributo no hace nada.
  * - `etiqueta`: `article` para piezas independientes; `div` cuando la tarjeta va dentro de una
  *   lista (<li>) y la lista ya da la estructura.
  */
@@ -20,10 +23,11 @@ interface Props {
 	nivel?: 2 | 3 | 4;
 	acento?: "cian" | "magenta" | "violeta";
 	etiqueta?: "article" | "div";
+	luz?: boolean;
 	class?: string;
 }
 
-const { titulo, href, nivel = 3, acento, etiqueta = "article", class: claseExtra } = Astro.props;
+const { titulo, href, nivel = 3, acento, etiqueta = "article", luz = false, class: claseExtra } = Astro.props;
 
 const Contenedor = etiqueta;
 
@@ -38,6 +42,8 @@ const colorIcono = acento ? coloresAcento[acento] : "text-texto-2";
 ---
 
 <Contenedor
+	data-sc-spotlight={luz ? "" : undefined}
+	data-sc-tilt={luz ? "4" : undefined}
 	class:list={[
 		"relative rounded-(--radio-tarjeta) border border-borde bg-cristal p-6 backdrop-blur-[14px] transition-shadow duration-150 ease-(--curva)",
 		href && "tarjeta-enlace",
