@@ -171,18 +171,20 @@ Fase actual: **[Fase 4 — Construcción]** (la Fase 2 sigue abierta por textos 
 
 **Plan 3 · páginas enlazadas (aprobado el 2026-10-16):** pasos 1 a 5 completos en la rama `feature/paginas` (aún sin fusionar a `main`; contiene también la calculadora).
 1. ✅ Diagnóstico, cómo trabajamos, sobre nosotros · 2. ✅ `/servicios` · 3. ✅ Tableros, limpieza, automatización, predictivo · 4. ✅ `/agendar` (agenda pendiente, Fase 5) · 5. ✅ Legales (solo estructura) y 404
-6. ⏭️ Quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` y `robots.txt` · marcar como página actual el botón «Agenda» del encabezado en `/agendar`
+6. ✅ Quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` y `robots.txt` · botón «Agenda» como página actual en `/agendar` (rama `feature/seo-basico`, sale de `feature/scroll`)
 
 **Efectos de scroll con scroll-craft (delegación creativa del 2026-10-19): completos en el inicio**, rama `feature/scroll` (sale de `feature/paginas`; nada fusionado a `main`).
 Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **pulso de datos en la tubería (momento cumbre)** · cortina sobre la cita. Motor solo en el inicio (7,5 KB gzip).
 
 **Próxima sesión:**
-- Paso 6 del plan 3: quitar «Demos» del menú · datos estructurados `Service` · `@astrojs/sitemap` y `robots.txt` · marcar como página actual el botón «Agenda» en `/agendar`.
+- Decidir si se fusionan a `main` las ramas `feature/paginas` → `feature/scroll` → `feature/seo-basico` (cada una contiene a la anterior).
 - Medir con Lighthouse (móvil) el inicio con los efectos.
 - Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
 
 **Pendientes técnicos conocidos:**
 - Imagen Open Graph (1200 × 630) por crear.
+- Datos estructurados del negocio sin teléfono, correo ni dirección: se agregan a `src/lib/schema.ts` cuando existan (Fase 8).
+- Validar los datos estructurados con la Prueba de resultados enriquecidos de Google tras el despliegue (Fase 9).
 - Textos legales definitivos (Fase 8) y agenda con Cal.com en `/agendar` (Fase 5).
 - Evento de analítica «uso de la calculadora» (Fase 5).
 
@@ -203,6 +205,9 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-19 · Datos estructurados en `src/lib/schema.ts` y `DatosEstructurados.astro`, insertados con el slot `head` de `BaseLayout` · `ProfessionalService` en el inicio y `Service` en las 5 páginas de servicio, todos con el mismo proveedor; solo datos ya aprobados (nombre, lema, propuesta de valor, meta descriptions).
+- 2026-10-19 · Sitemap: la integración excluye sola la página 404 (13 URL públicas); `robots.txt` permite todo y anuncia `sitemap-index.xml` · las páginas legales sí se indexan.
+- 2026-10-19 · Botón «Agenda tu diagnóstico» del encabezado con `aria-current="page"` en `/agendar`, sin cambio visual · el lector de pantalla anuncia la página actual; `Button` acepta `aria-current`.
 - 2026-10-19 · Efectos de scroll del inicio con scroll-craft bajo delegación creativa explícita; partitura en `docs/scroll.md` · momento cumbre = pulso de datos en la tubería (CSS sobre `--sc-p`); red de datos, mini tablero, terminal y antes/después pospuestos.
 - 2026-10-19 · Motor en capa CSS de baja prioridad; se neutraliza su `letter-spacing` y se aceptan sus mejoras (sin negritas falsas, cifras tabulares en tablas, scroll suave) · verificado con capturas de las 14 páginas.
 - 2026-10-19 · Protección `html:not(.sc-ready)`: sin JavaScript o si el motor falla, nada animado queda oculto · marca.md §6.3; verificado con JavaScript desactivado.

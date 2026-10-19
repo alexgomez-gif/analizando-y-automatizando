@@ -10,6 +10,8 @@ import { CircleCheck } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "./Button.astro";
 import CabeceraPagina from "./CabeceraPagina.astro";
+import DatosEstructurados from "./DatosEstructurados.astro";
+import { esquemaServicio } from "../lib/schema";
 import Card from "./Card.astro";
 import EnlaceFlecha from "./EnlaceFlecha.astro";
 import LlamadoFinal from "./LlamadoFinal.astro";
@@ -39,6 +41,8 @@ const { title, description, titulo, subtitulo, nombre, paraQuien, problema, reci
 ---
 
 <BaseLayout title={title} description={description}>
+	<DatosEstructurados slot="head" datos={esquemaServicio({ nombre, descripcion: description, ruta: Astro.url.pathname })} />
+
 	<CabeceraPagina
 		titulo={titulo}
 		subtitulo={subtitulo}

@@ -3,6 +3,8 @@ import { Crosshair, FileCheck, Gift, ListChecks, ShieldCheck, Zap } from "@lucid
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Button from "../../components/Button.astro";
 import CabeceraPagina from "../../components/CabeceraPagina.astro";
+import DatosEstructurados from "../../components/DatosEstructurados.astro";
+import { esquemaServicio } from "../../lib/schema";
 import Card from "../../components/Card.astro";
 import LlamadoFinal from "../../components/LlamadoFinal.astro";
 import Seccion from "../../components/Seccion.astro";
@@ -30,6 +32,16 @@ const diferencias = [
 	title="Diagnóstico de datos gratis | Analizando y Automatizando"
 	description="Conoce el estado real de tus datos y qué puedes automatizar. Informe claro en 3 días hábiles, gratis y confidencial. Agenda tu conversación."
 >
+	<DatosEstructurados
+		slot="head"
+		datos={esquemaServicio({
+			nombre: "Diagnóstico de datos",
+			descripcion:
+				"Conoce el estado real de tus datos y qué puedes automatizar. Informe claro en 3 días hábiles, gratis y confidencial. Agenda tu conversación.",
+			ruta: "/servicios/diagnostico-de-datos/",
+		})}
+	/>
+
 	<CabeceraPagina
 		titulo="Conoce el estado real de tus datos en 3 días hábiles"
 		subtitulo="Un diagnóstico claro y accionable para saber qué está frenando a tu negocio y qué puedes automatizar desde mañana."

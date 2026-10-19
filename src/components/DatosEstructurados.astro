@@ -1,0 +1,13 @@
+---
+/**
+ * Inserta datos estructurados schema.org (JSON-LD) en el <head>, con slot="head" de BaseLayout.
+ * Es un bloque de datos para buscadores: el navegador no lo ejecuta.
+ */
+interface Props {
+	datos: Record<string, unknown>;
+}
+
+const { datos } = Astro.props;
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(datos)} />

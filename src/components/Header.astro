@@ -14,7 +14,6 @@ import ThemeToggle from "./ThemeToggle.astro";
 const enlaces = [
 	{ href: "/servicios", texto: "Servicios" },
 	{ href: "/como-trabajamos", texto: "Cómo trabajamos" },
-	{ href: "/demos", texto: "Demos" },
 	{ href: "/sobre-nosotros", texto: "Sobre nosotros" },
 ];
 
@@ -58,7 +57,9 @@ const esActual = (href: string) => rutaActual === href || rutaActual.startsWith(
 					))
 				}
 				<li class="pt-3 lg:pt-0">
-					<Button href="/agendar" variante="secundario">Agenda tu diagnóstico</Button>
+					<Button href="/agendar" variante="secundario" aria-current={esActual("/agendar") ? "page" : undefined}>
+						Agenda tu diagnóstico
+					</Button>
 				</li>
 				<li class="pt-1 lg:pt-0">
 					<ThemeToggle />

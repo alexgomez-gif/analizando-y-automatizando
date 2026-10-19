@@ -1,12 +1,16 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
   // URL base del sitio: Astro la usa para las URL canónicas, el sitemap y Open Graph.
   site: 'https://analizandoyautomatizando.com',
+
+  // Sitemap automático (CLAUDE.md §8): genera sitemap-index.xml al compilar; robots.txt lo anuncia.
+  integrations: [sitemap()],
 
   vite: {
     plugins: [tailwindcss()]

@@ -68,6 +68,9 @@ const imagenSocial = ogImage ? new URL(ogImage, Astro.site) : undefined;
 		<Font cssVariable="--fuente-titulo" preload />
 		<Font cssVariable="--fuente-texto" preload />
 		<Font cssVariable="--fuente-mono" />
+
+		{/* Datos propios de cada página para el <head> (ej. datos estructurados schema.org) */}
+		<slot name="head" />
 	</head>
 	<body class="flex min-h-dvh flex-col">
 		{/* Oculto hasta que recibe el foco con Tab: permite saltar el menú con el teclado */}

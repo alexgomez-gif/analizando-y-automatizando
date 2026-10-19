@@ -13,6 +13,8 @@ import LlamadoFinal from "../components/LlamadoFinal.astro";
 import MotorScroll from "../components/MotorScroll.astro";
 import PreguntasFrecuentes, { type Pregunta } from "../components/PreguntasFrecuentes.astro";
 import Card from "../components/Card.astro";
+import DatosEstructurados from "../components/DatosEstructurados.astro";
+import { esquemaNegocio } from "../lib/schema";
 import EnlaceFlecha from "../components/EnlaceFlecha.astro";
 import Seccion from "../components/Seccion.astro";
 import { servicios } from "../lib/servicios";
@@ -68,6 +70,8 @@ const preguntas: Pregunta[] = [
 	title="Automatiza tu emprendimiento | Analizando y Automatizando"
 	description="Deja de perder horas en tareas repetitivas. Ponemos tus reportes y procesos en automático. Empieza con un diagnóstico gratis y sin compromiso."
 >
+	<DatosEstructurados slot="head" datos={esquemaNegocio} />
+
 	<section aria-labelledby="hero-titulo" class="hero reticula-horizonte relative isolate overflow-hidden">
 		<div class="contenedor py-20 sm:py-28 lg:py-32">
 			<h1 id="hero-titulo">
