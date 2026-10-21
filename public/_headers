@@ -1,6 +1,21 @@
 # Cabeceras de Cloudflare Pages: se aplican a las respuestas según la URL.
 # Docs: https://developers.cloudflare.com/pages/configuration/headers/
 
+# Seguridad en todas las páginas (CLAUDE.md §9). La CSP principal (scripts, estilos, Cal.com) la pone
+# Astro en un <meta> de cada página; aquí solo va lo que un <meta> no puede hacer: impedir que otros
+# sitios nos metan en un iframe (frame-ancestors). HSTS sin «preload» hasta lanzar en el dominio propio.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+# Archivos con huella en el nombre (cambian de nombre en cada versión): caché de un año
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # Copias de prueba en *.pages.dev (producción y vistas previas por rama):
 # que Google no las indexe. El dominio real no coincide con estas reglas.
 https://:project.pages.dev/*
