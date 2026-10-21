@@ -148,7 +148,7 @@ const preguntas: Pregunta[] = [
 								<li class="flex items-center gap-2">
 									{i > 0 && <ChevronRight size={18} stroke-width={1.5} class="text-texto-tenue" />}
 									<span
-										style={`--i: ${i}`}
+										data-i={i}
 										class:list={[
 											"etapa inline-flex min-h-9 items-center rounded-full border px-4 font-mono text-[0.8125rem] tracking-[0.08em] uppercase",
 											i === etapas.length - 1 && "etapa--final",
@@ -249,8 +249,22 @@ const preguntas: Pregunta[] = [
 		}
 	}
 
-	/* Cada etapa se enciende cuando el pulso llega a ella (--i = su posición, de 0 a 4) */
+	/* Cada etapa se enciende cuando el pulso llega a ella (--i = su posición, de 0 a 4).
+	   La posición va en data-i y no en style="…": la CSP del sitio bloquea los estilos en línea. */
+	.etapa[data-i="1"] {
+		--i: 1;
+	}
+	.etapa[data-i="2"] {
+		--i: 2;
+	}
+	.etapa[data-i="3"] {
+		--i: 3;
+	}
+	.etapa[data-i="4"] {
+		--i: 4;
+	}
 	.etapa {
+		--i: 0;
 		--encendido: clamp(0, calc((var(--avance) * 5 - var(--i)) * 2), 1);
 		border-color: color-mix(in oklab, var(--cian) calc(var(--encendido) * 100%), var(--borde-fuerte));
 		color: color-mix(in oklab, var(--texto) calc(var(--encendido) * 100%), var(--texto-2));

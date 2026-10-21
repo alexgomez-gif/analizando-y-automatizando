@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CabeceraPagina from "../components/CabeceraPagina.astro";
+import Agenda from "../components/Agenda.astro";
 import { pasosDiagnostico } from "../lib/diagnostico";
 // Textos: «Qué pasa en los 30 minutos» (aprobado) y los pasos del diagnóstico (aprobados).
 // H1 y subtítulo reutilizan textos aprobados (botón principal y llamado final del inicio).
 // title y meta description aprobados el 2026-10-18. Sin publicar: «Qué debe preparar el cliente» y el mensaje
 // de confirmación (siguen [PENDIENTE] en docs/contenido.md).
-// La agenda (Cal.com) llega en la Fase 5: pedirá el teléfono, con autorización sin marcar (Ley 1581).
+// La agenda vive en Agenda.astro: Cal.com tras la autorización sin marcar (Ley 1581), o WhatsApp/correo.
 // Esta página ES la acción principal: no lleva LlamadoFinal.
 ---
 
@@ -56,17 +57,8 @@ import { pasosDiagnostico } from "../lib/diagnostico";
 				</ol>
 			</div>
 
-			{/* Aquí irá la agenda de Cal.com (Fase 5). Bloque pendiente, visible a propósito mientras se construye. */}
-			<div id="agenda" class="self-start lg:sticky lg:top-8">
-				<div class="rounded-(--radio-tarjeta) border-2 border-dashed border-ambar bg-cristal p-6 sm:p-8">
-					<p class="font-mono text-[0.8125rem] tracking-[0.08em] text-ambar uppercase">Pendiente · Fase 5</p>
-					<p class="mt-3 text-lg font-semibold text-texto">[PENDIENTE: agenda con Cal.com — Fase 5]</p>
-					<p class="mt-3 text-texto-2">
-						Aquí irá el calendario para reservar la llamada. Pedirá el teléfono, con la autorización de tratamiento de
-						datos sin marcar y el enlace a la política (Ley 1581).
-					</p>
-				</div>
-			</div>
+			{/* Cal.com, WhatsApp/correo o el bloque pendiente, según lo configurado (ver Agenda.astro). */}
+			<Agenda />
 		</div>
 	</div>
 </BaseLayout>

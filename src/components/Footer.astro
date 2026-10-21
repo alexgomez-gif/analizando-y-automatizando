@@ -3,7 +3,10 @@
  * Pie de página: logo, lema, datos legales de contacto y enlaces legales.
  * CLAUDE.md §10 exige nombre o razón social, NIT y correo de contacto.
  * Estilo calmado, sin glow ni degradados (marca.md §7: sobriedad en lo legal).
+ * Los datos de contacto salen de src/lib/negocio.ts; si un dato falta, se ve su marcador [PENDIENTE].
  */
+import { negocio } from "../lib/negocio";
+
 const enlacesLegales = [
 	{ href: "/politica-de-tratamiento-de-datos", texto: "Política de tratamiento de datos" },
 	{ href: "/aviso-de-privacidad", texto: "Aviso de privacidad" },
@@ -26,9 +29,17 @@ const año = new Date().getFullYear();
 		<div class="grid gap-6 sm:grid-cols-2">
 			<address class="not-italic">
 				<p class="font-semibold text-texto">Contacto</p>
-				<p class="mt-2">[PENDIENTE: nombre o razón social]</p>
-				<p>NIT [PENDIENTE]</p>
-				<p>[PENDIENTE: correo de contacto]</p>
+				<p class="mt-2">{negocio.razonSocial || "[PENDIENTE: nombre o razón social]"}</p>
+				<p>NIT {negocio.nit || "[PENDIENTE]"}</p>
+				{
+					negocio.correo ? (
+						<a href={`mailto:${negocio.correo}`} class="inline-flex min-h-11 items-center text-texto-2 hover:text-cian">
+							{negocio.correo}
+						</a>
+					) : (
+						<p>[PENDIENTE: correo de contacto]</p>
+					)
+				}
 			</address>
 
 			<nav aria-label="Legal">

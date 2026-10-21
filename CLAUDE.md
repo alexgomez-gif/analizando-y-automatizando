@@ -54,6 +54,7 @@ npm run build        # compilación de producción — debe pasar sin errores ni
 npm run preview      # ver la compilación localmente
 npm run check        # astro check (tipos)
 npm run verificar    # con `npm run preview` abierto: contraste, desborde y teclado (capturas en .verificacion/)
+npm run imagen-social # después de build: regenera la imagen para compartir (public/og/compartir.png)
 ```
 
 Python (demos):
@@ -184,6 +185,13 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
    Configuración: Workers & Pages → Create → Pages → Connect to Git · solo este repositorio · nombre `analizandoyautomatizando` · rama `main` · preset Astro · `npm run build` · salida `dist` · sin variables (Node sale de `.nvmrc`).
 4. ⏭️ Revisar el sitio publicado (páginas, 404, robots, sitemap, noindex), `npm run verificar` contra la URL pública y Lighthouse móvil (herramienta de Chrome DevTools, sin dependencias) · 5. ⏭️ Anotar URL y decisiones aquí
 
+**Plan · demo funcional (pedido por el dueño el 2026-10-21):** código listo en la rama `feature/demo-funcional`.
+1. ✅ Datos del negocio en un solo archivo (`src/lib/negocio.ts`): pie, datos estructurados y agenda los leen de ahí
+2. ✅ Agenda en `/agendar` (`Agenda.astro`): Cal.com tras la autorización sin marcar; sin Cal.com, WhatsApp/correo; sin nada, el bloque [PENDIENTE]
+3. ✅ CSP de Astro (`security.csp`, hashes automáticos, incluido el script del tema) + cabeceras en `public/_headers` · 0 bloqueos en las 14 páginas
+4. ✅ Imagen Open Graph `public/og/compartir.png` (`npm run imagen-social`), predeterminada en `BaseLayout`
+5. ⏭️ Del dueño: llenar `negocio.ts`, crear el evento de Cal.com y poner `PUBLIC_CALCOM_URL` en Cloudflare, conectar Cloudflare Pages, fusionar la rama a `main`
+
 **Próxima sesión:**
 - Empezar preguntando qué muestra Cloudflare en Workers & Pages (proyecto, nombre, estado del despliegue) y seguir el paso 3 del plan de despliegue.
 - Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
@@ -193,7 +201,7 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 - De Claude: agenda Cal.com con teléfono y autorización sin marcar (Fase 5) · cabeceras de seguridad en `public/_headers` (CSP con el hash del script del tema y Cal.com) · dominio propio con `www` → dominio sin `www` · imagen Open Graph · analítica sin cookies · Search Console.
 
 **Pendientes técnicos conocidos:**
-- Imagen Open Graph (1200 × 630) por crear.
+- ~~Imagen Open Graph~~ hecha (2026-10-21).
 - Datos estructurados del negocio sin teléfono, correo ni dirección: se agregan a `src/lib/schema.ts` cuando existan (Fase 8).
 - Validar los datos estructurados con la Prueba de resultados enriquecidos de Google tras el despliegue (Fase 9).
 - Textos legales definitivos (Fase 8) y agenda con Cal.com en `/agendar` (Fase 5).
@@ -215,6 +223,12 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 ## 13. Decisiones
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
+
+- 2026-10-21 · Cal.com como iframe simple (sin su `embed.js`) que se carga solo después de marcar la autorización · sin dependencias ni scripts externos; Cal.com no recibe la IP del visitante antes del consentimiento (Ley 1581). En Cal.com hay que configurar además teléfono obligatorio y casilla de autorización.
+- 2026-10-21 · Datos del negocio (razón social, NIT, correo, WhatsApp) en `src/lib/negocio.ts`, no en variables de entorno · son públicos; la URL de Cal.com sí va en `PUBLIC_CALCOM_URL` porque ya estaba en `.env.example`.
+- 2026-10-21 · CSP con la función integrada de Astro 7 (`security.csp`) en un `<meta>` por página; `frame-ancestors` y demás cabeceras en `public/_headers` · Astro calcula los hashes en cada compilación, nada que mantener a mano. Se autorizan Cal.com (iframe) y Cloudflare Web Analytics.
+- 2026-10-21 · La posición de las etapas de la tubería pasa de `style="--i"` a `data-i` · la CSP bloquea estilos en línea. Resaltado de Markdown con Prism en lugar de Shiki por la misma razón (el build debe salir sin advertencias).
+- 2026-10-21 · Imagen Open Graph generada con Chrome sin interfaz desde una tarjeta HTML (`scripts/imagen-social.mjs`) · sin dependencias; usa el logo, las fuentes y los degradados de marca.
 
 - 2026-10-19 · Ortografía revisada en las 14 páginas (diccionario es_CO + lectura completa): sin errores. Redacción ajustada con aprobación: «accionable» → «práctico», «en un día hábil como máximo», «ninguno cuadra con los demás» · evitar anglicismos y jerga.
 - 2026-10-19 · Despliegue de prueba con Cloudflare Pages conectado a GitHub desde el panel, sin instalar `wrangler` · sin dependencias nuevas; publica en cada push a `main` (CLAUDE.md §2). Las copias `*.pages.dev` llevan `noindex` para que Google no indexe un duplicado antes del lanzamiento.

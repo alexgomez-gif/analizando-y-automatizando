@@ -16,6 +16,34 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
+  // Política de seguridad de contenido (CLAUDE.md §9). Astro calcula al compilar el hash de cada
+  // script y estilo propio (incluido el script del tema en el <head>) y lo pone en un <meta> por página.
+  // Lo externo se autoriza aquí: Cal.com en un iframe (/agendar) y Cloudflare Web Analytics.
+  // frame-ancestors no funciona en <meta>: va como cabecera en public/_headers.
+  // Shiki (resaltado de código por defecto) usa estilos en línea que la CSP bloquea; Prism viene
+  // incluido en Astro y es compatible. Solo aplica cuando haya Markdown con código (blog, casos).
+  markdown: {
+    syntaxHighlight: 'prism'
+  },
+
+  security: {
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "connect-src 'self' https://cloudflareinsights.com",
+        "frame-src https://cal.com https://app.cal.com",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'"
+      ],
+      scriptDirective: {
+        resources: ["'self'", "https://static.cloudflareinsights.com"]
+      }
+    }
+  },
+
   // Fuentes de docs/marca.md (sección 3). Astro las descarga al compilar y las
   // sirve desde nuestro dominio: el navegador del visitante nunca contacta a Google.
   fonts: [
