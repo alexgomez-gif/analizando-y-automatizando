@@ -200,7 +200,13 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 6. ⏭️ Terminal en «Cómo trabajamos» · 7. ⏭️ Calculadora con más vida · 8. ⏭️ Verificación completa (incluye Lighthouse móvil)
 - Por aprobar: textos y cifras de ejemplo del tablero («Tu negocio, hoy», «Ventas del mes» $48.250.000, «Pedidos» 312, «Clientes nuevos» 46 y ventas de enero a septiembre en `MiniTablero.astro`).
 
+**Logo v3 (pedido del dueño el 2026-10-21 tras ver el sitio en su tableta: «se mira distorsionado»; minimalista y sofisticado): en curso.**
+- ✅ Aprobado: monograma **A · Línea continua** (un solo trazo dibuja las dos A, que comparten el valle; la segunda, más alta, termina en el nodo lima; barra compartida; puntas cortadas rectas en la línea base) + texto **en minúsculas, Space Grotesk 600** («y» en 500, `--texto-2`), sin relieve ni contorno, degradado solo en el monograma. Hoja de opciones en `~/Escritorio/Propuesta-Amanecer/logo-v3/`.
+- ✅ Geometría lista en `scripts/logo/geometria-v3.json` (texto con el contorno real de la fuente y kerning medido en Chrome; herramientas en `logo-v3/herramientas/`). `geometria.json` sigue siendo la v2 hasta terminar.
+- ⏭️ Falta: reescribir `scripts/logo.mjs` para la v3 (todas las versiones SVG + `favicon.svg` y PNG de 32/180/192/512 con Chrome), encabezado y pie a 216 × 45 (proporción 4,8:1), `npm run imagen-social`, marca.md §4 y verificación.
+
 **Próxima sesión:**
+- Terminar el logo v3 (ver arriba) y mostrarlo en el sitio.
 - Recibir la revisión del hero «Amanecer» (paso 2) y, si está aprobado, seguir con el paso 3 del plan «Amanecer».
 - Empezar preguntando qué muestra Cloudflare en Workers & Pages (proyecto, nombre, estado del despliegue) y seguir el paso 3 del plan de despliegue.
 - Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
