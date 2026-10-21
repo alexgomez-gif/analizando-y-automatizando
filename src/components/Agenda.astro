@@ -1,0 +1,163 @@
+---
+/**
+ * Agenda del diagnóstico en /agendar (Fase 5). Tres estados, según lo que haya configurado:
+ * 1. Con PUBLIC_CALCOM_URL: pide la autorización de datos (sin marcar, Ley 1581) y, al aceptarla,
+ *    carga el calendario de Cal.com en un iframe. Así Cal.com no recibe nada antes del consentimiento.
+ * 2. Sin Cal.com pero con WhatsApp o correo en negocio.ts: enlaces para pedir la cita por esos canales.
+ * 3. Sin nada: el bloque [PENDIENTE] visible.
+ * Sin JavaScript, el estado 1 ofrece un enlace directo a la página de Cal.com.
+ *
+ * Configurar en Cal.com (lo hace el dueño): pregunta obligatoria de teléfono y una casilla obligatoria
+ * de autorización con enlace a la política. [REVISIÓN LEGAL PENDIENTE: texto de la autorización]
+ */
+import Button from "./Button.astro";
+import { negocio, urlAgenda } from "../lib/negocio";
+
+const mensaje = "Hola, quiero agendar el diagnóstico gratis.";
+const enlaceWhatsapp = negocio.whatsapp ? `https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(mensaje)}` : "";
+const enlaceCorreo = negocio.correo
+	? `mailto:${negocio.correo}?subject=${encodeURIComponent("Agendar diagnóstico gratis")}`
+	: "";
+---
+
+<div id="agenda" class="self-start lg:sticky lg:top-8">
+	{
+		urlAgenda ? (
+			<div class="rounded-(--radio-tarjeta) border border-borde bg-cristal p-6 sm:p-8" data-agenda data-url={urlAgenda}>
+				<h2 class="text-[1.75rem]">Elige el día y la hora</h2>
+				<p class="mt-3 text-texto-2">
+					Para reservar te pedimos tu nombre, tu correo y un teléfono para la llamada.
+				</p>
+
+				<form class="mt-6" data-agenda-form novalidate>
+					<div class="flex items-start gap-3">
+						<input
+							id="agenda-autorizacion"
+							name="autorizacion"
+							type="checkbox"
+							required
+							aria-describedby="agenda-autorizacion-error"
+							class="casilla mt-1 shrink-0"
+						/>
+						<label for="agenda-autorizacion" class="text-texto">
+							Autorizo el tratamiento de mis datos personales según la{" "}
+							<a href="/politica-de-tratamiento-de-datos" class="text-cian underline underline-offset-4">
+								Política de tratamiento de datos
+							</a>
+							.
+						</label>
+					</div>
+					<p id="agenda-autorizacion-error" class="mt-2 text-coral" hidden>
+						Marca la autorización para ver los horarios disponibles.
+					</p>
+					<Button type="submit" class="mt-6">Ver horarios disponibles</Button>
+				</form>
+
+				<div data-agenda-marco tabindex="-1" class="mt-6 outline-none" hidden></div>
+
+				<noscript>
+					<p class="mt-6 text-texto-2">
+						Tu navegador no ejecuta JavaScript.{" "}
+						<a href={urlAgenda} class="text-cian underline underline-offset-4">
+							Abre la agenda en Cal.com
+						</a>
+						.
+					</p>
+				</noscript>
+			</div>
+		) : enlaceWhatsapp || enlaceCorreo ? (
+			<div class="rounded-(--radio-tarjeta) border border-borde bg-cristal p-6 sm:p-8">
+				<h2 class="text-[1.75rem]">Pide tu cita</h2>
+				<p class="mt-3 text-texto-2">
+					Escríbenos y te proponemos un día y una hora para la llamada.
+				</p>
+				<div class="mt-6 flex flex-wrap gap-4">
+					{enlaceWhatsapp && <Button href={enlaceWhatsapp}>Escríbenos por WhatsApp</Button>}
+					{enlaceCorreo && (
+						<Button href={enlaceCorreo} variante={enlaceWhatsapp ? "secundario" : "primario"}>
+							Escríbenos por correo
+						</Button>
+					)}
+				</div>
+			</div>
+		) : (
+			<div class="rounded-(--radio-tarjeta) border-2 border-dashed border-ambar bg-cristal p-6 sm:p-8">
+				<p class="font-mono text-[0.8125rem] tracking-[0.08em] text-ambar uppercase">Pendiente · Fase 5</p>
+				<p class="mt-3 text-lg font-semibold text-texto">[PENDIENTE: agenda con Cal.com — Fase 5]</p>
+				<p class="mt-3 text-texto-2">
+					Aquí irá el calendario para reservar la llamada. Pedirá el teléfono, con la autorización de tratamiento de
+					datos sin marcar y el enlace a la política (Ley 1581).
+				</p>
+			</div>
+		)
+	}
+</div>
+
+<style>
+	/* Casilla de 24 px con el color de marca; la etiqueta completa también la marca (objetivo táctil amplio). */
+	.casilla {
+		inline-size: 1.5rem;
+		block-size: 1.5rem;
+		accent-color: var(--cian);
+	}
+	.casilla[aria-invalid="true"] {
+		outline: 2px solid var(--coral);
+		outline-offset: 2px;
+	}
+	[data-agenda-marco] :global(iframe) {
+		display: block;
+		inline-size: 100%;
+		block-size: 44rem;
+		border: 0;
+		border-radius: var(--radio-input);
+	}
+	@media (max-width: 40rem) {
+		[data-agenda-marco] :global(iframe) {
+			block-size: 56rem;
+		}
+	}
+</style>
+
+<script>
+	const caja = document.querySelector<HTMLElement>("[data-agenda]");
+	const formulario = caja?.querySelector<HTMLFormElement>("[data-agenda-form]");
+
+	if (caja && formulario) {
+		const casilla = formulario.querySelector<HTMLInputElement>("#agenda-autorizacion")!;
+		const error = formulario.querySelector<HTMLElement>("#agenda-autorizacion-error")!;
+		const marco = caja.querySelector<HTMLElement>("[data-agenda-marco]")!;
+
+		const mostrarError = (hayError: boolean) => {
+			error.hidden = !hayError;
+			casilla.setAttribute("aria-invalid", String(hayError));
+		};
+
+		casilla.addEventListener("change", () => {
+			if (casilla.checked) mostrarError(false);
+		});
+
+		formulario.addEventListener("submit", (evento) => {
+			evento.preventDefault();
+			if (!casilla.checked) {
+				mostrarError(true);
+				casilla.focus();
+				return;
+			}
+
+			// El calendario sigue el tema del sitio (oscuro por defecto, marca.md).
+			const tema = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+			const url = new URL(caja.dataset.url!);
+			url.searchParams.set("embed", "true");
+			url.searchParams.set("theme", tema);
+
+			const iframe = document.createElement("iframe");
+			iframe.src = url.href;
+			iframe.title = "Calendario de Cal.com para reservar tu diagnóstico";
+			marco.replaceChildren(iframe);
+			marco.hidden = false;
+			formulario.hidden = true;
+			// El foco pasa al calendario para que el lector de pantalla y el teclado sigan desde ahí.
+			marco.focus();
+		});
+	}
+</script>
