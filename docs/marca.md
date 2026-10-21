@@ -139,9 +139,14 @@ Todas de Google Fonts, con licencia libre (SIL Open Font License).
 
 ---
 
-## 4. Logo (v1)
+## 4. Logo (v2)
 
-Los archivos están en `public/logo/`. **No los redibujes ni los edites a mano**: si hace falta un cambio, se pide y se regeneran todas las versiones juntas.
+Los archivos están en `public/logo/`. **No los redibujes ni los edites a mano**: si hace falta un cambio, se pide y se regeneran todas las versiones juntas con `npm run logo` (`scripts/logo.mjs`, a partir de la geometría original en `scripts/logo/geometria.json`).
+
+**v2 (2026-10-21) · cuerpo y profundidad**, a pedido del dueño («la tipografía está muy delgada»; opción C):
+- **Cuerpo:** trazo del monograma 17 (antes 14) y letras engrosadas con un contorno del mismo color, más gruesas que Space Grotesk 700.
+- **Profundidad:** relieve de tres capas desplazadas abajo a la derecha con el degradado Amanecer neón; opaco bajo el texto y al 35 % bajo el monograma (30 % en el tema claro).
+- Las versiones a una tinta (`logo-blanco`, `logo-oscuro`) llevan el cuerpo pero no el relieve. El favicon y los íconos PNG no cambian: ya tenían trazo grueso y a 16-32 px el relieve sería ruido.
 
 ### Concepto
 Monograma **A&A** dibujado con una sola línea continua, como una gráfica de datos:
@@ -177,9 +182,9 @@ Monograma **A&A** dibujado con una sola línea continua, como una gráfica de da
 <link rel="icon" href="/logo/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/logo/apple-touch-icon.png">
 
-<!-- En el encabezado: proporción 4:1 (por ejemplo 176 × 44) -->
+<!-- En el encabezado y el pie: proporción 4:1 (200 × 50) -->
 <a href="/" aria-label="Analizando y Automatizando, inicio">
-  <img src="/logo/logo-horizontal.svg" alt="" width="176" height="44">
+  <img src="/logo/logo-horizontal.svg" alt="" width="200" height="50">
 </a>
 ```
 
@@ -188,7 +193,7 @@ Con el tema claro activo (`[data-theme="light"]`), muestra `logo-horizontal-clar
 ### Reglas
 - **Espacio libre:** alrededor del logo, como mínimo el alto del lazo (≈ ¼ del alto total).
 - **Tamaño mínimo:** horizontal 160 px de ancho (40 mm impreso); monograma 24 px. Más pequeño, usa el favicon.
-- **No se modifica:** no cambiar colores, no estirar, no añadir sombras ni contornos, no rotar, no ponerlo sobre fondos neón o fotos muy cargadas.
+- **No se modifica:** no cambiar colores, no estirar, no añadir otras sombras, contornos ni relieves (el relieve de la v2 ya es parte del logo), no rotar, no ponerlo sobre fondos neón o fotos muy cargadas.
 
 ---
 
