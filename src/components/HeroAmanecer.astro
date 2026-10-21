@@ -1,0 +1,703 @@
+---
+/**
+ * Hero del inicio · escena «Amanecer» (aprobada el 2026-10-21; partitura en docs/scroll.md).
+ * El sitio empieza de noche y amanece mientras bajas: el sol sube detrás de las montañas, las estrellas
+ * se apagan, la retícula avanza y el mini tablero se acerca.
+ *
+ * - Es un acto sostenido del motor de scroll-craft (data-sc-act="pin"): la escena se queda en pantalla
+ *   0,8 pantallas de scroll y el motor publica el avance en --sc-p (0 → 1). Las capas se mueven solo con
+ *   CSS leyendo ese avance; el script de abajo solo dibuja los dos <canvas>.
+ * - Estrellas y red de datos: ≤ 30 cuadros por segundo, máx. 60 nodos en escritorio y 25 en celular, y
+ *   nada se dibuja fuera de pantalla (marca.md §6.3). Con mouse, la red se conecta con el cursor.
+ * - Montañas calculadas al compilar (src/lib/escena.ts). Colores: tokens de la escena (tokens.css).
+ * - Sin JavaScript, si el motor falla o con «reducir movimiento»: la escena queda quieta, la sección no se
+ *   sostiene y todo el contenido está en su lugar (en celular, el tablero va debajo del botón).
+ * - El tema claro es un amanecer de día: cielo claro bajo el titular y tonos de alba en el horizonte.
+ */
+import Button from "./Button.astro";
+import MiniTablero from "./MiniTablero.astro";
+import { ALTO_MONTES, ANCHO_MONTES, cresta } from "../lib/escena";
+
+// Dos cordilleras: la lejana, más alta y casi quieta; la cercana, más baja y con más movimiento.
+const cordilleras = [
+	{
+		clase: "montes--lejos",
+		...cresta(7, 150, [
+			[3, 60, 0.4],
+			[7, 26, 1.3],
+			[13, 10, 0.2],
+		]),
+	},
+	{
+		clase: "montes--cerca",
+		...cresta(19, 210, [
+			[2, 46, 2.1],
+			[5, 24, 0.7],
+			[11, 9, 1.9],
+		]),
+	},
+];
+---
+
+<section aria-labelledby="hero-titulo" data-sc-act="pin" data-sc-span="1.8" class="hero-acto">
+	<div data-sc-stage data-escena class="escena">
+		{/* Capas decorativas, de la más lejana a la más cercana */}
+		<div class="capas" aria-hidden="true">
+			<div class="capa cielo"></div>
+			<canvas class="capa estrellas" data-estrellas></canvas>
+			<div class="capa amanecer">
+				<div class="halo"></div>
+				<div class="sol"></div>
+			</div>
+			<div class="capa bruma"></div>
+			{
+				cordilleras.map(({ clase, relleno, borde }) => (
+					<div class:list={["capa montes", clase]}>
+						<svg viewBox={`0 0 ${ANCHO_MONTES} ${ALTO_MONTES}`} preserveAspectRatio="xMidYMax slice">
+							<defs>
+								<linearGradient id={`brillo-${clase}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={ANCHO_MONTES} y2="0">
+									<stop offset="0" class="brillo brillo--tenue" />
+									<stop offset="0.42" class="brillo brillo--tenue" />
+									<stop offset="0.68" class="brillo brillo--fuerte" />
+									<stop offset="1" class="brillo brillo--medio" />
+								</linearGradient>
+							</defs>
+							<path class="relleno" d={relleno} />
+							<path class="cresta" d={borde} stroke={`url(#brillo-${clase})`} />
+						</svg>
+					</div>
+				))
+			}
+			<div class="capa piso">
+				<div class="plano"><div class="rejilla"></div></div>
+			</div>
+			<div class="capa horizonte"></div>
+			<canvas class="capa red" data-red></canvas>
+			<div class="capa velo"></div>
+			<div class="capa grano"></div>
+			<div class="capa desvanecido"></div>
+		</div>
+
+		<div class="contenido contenedor">
+			<h1 id="hero-titulo">
+				Analizamos lo que tienes. <span class="degradado-amanecer block">Automatizamos lo que repites.</span>
+			</h1>
+
+			<div class="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)] lg:items-start lg:gap-12">
+				<div>
+					<p class="max-w-xl text-lg text-texto-2 sm:text-xl lg:max-w-[30rem]">
+						Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, con soluciones a la
+						medida y sin jerga técnica.
+					</p>
+
+					<div class="mt-10 flex flex-col items-start gap-3">
+						<Button href="/agendar">Agenda tu diagnóstico gratis</Button>
+						<p class="text-sm text-texto-2">Gratis · informe en 3 días hábiles</p>
+					</div>
+				</div>
+
+				<MiniTablero class="tablero-pos w-full max-w-md lg:max-w-none" />
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	/* ── Escena ───────────────────────────────────────────────────────────────────────────────── */
+	.escena {
+		/* Avance del acto (0 → 1): lo publica el motor. Sin motor vale 0: la escena queda al empezar a amanecer. */
+		--p: var(--sc-p, 0);
+		/* Composición de celular; tablet y escritorio cambian estos valores más abajo */
+		--h: 80%; /* línea del horizonte, desde arriba de la escena */
+		--sol-x: 68%; /* centro del sol */
+		--sol-tam: 44vmin;
+		--sol-inicio: 2vh; /* dónde arranca: positivo = más abajo, escondido tras las montañas */
+		--sol-subida: 16vh; /* cuánto sube durante el acto */
+		--halo-fuerza: 0.7;
+		isolation: isolate;
+		overflow: clip;
+		min-height: 100vh;
+		min-height: 100svh;
+	}
+
+	@media (width >= 40rem) {
+		.escena {
+			--h: 74%;
+			--sol-x: 70%;
+			--sol-tam: 38vmin;
+		}
+	}
+
+	/* Escritorio: el sol queda a la derecha del párrafo (junto al tablero) y nunca detrás del texto */
+	@media (width >= 64rem) {
+		.escena {
+			--h: 63%;
+			--sol-x: 64%;
+			--sol-tam: 34vmin;
+			--sol-inicio: -3vh;
+			--sol-subida: 10vh;
+		}
+	}
+
+	@media (width >= 80rem) {
+		.escena {
+			--sol-x: 58%;
+		}
+	}
+
+	/* Sin el motor (sin JavaScript o si falla) la escena no se sostiene: es una sección normal.
+	   Con el motor, su clase sc-stage la vuelve sticky; aquí no se toca `position` para no anularla. */
+	.escena:not(.sc-stage) {
+		position: relative;
+	}
+
+	/* «Reducir movimiento»: escena quieta y sin sostén (sería un tramo de scroll en el que no pasa nada).
+	   El motor escribe la altura del acto en línea: !important es la única forma de anularla desde aquí. */
+	@media (prefers-reduced-motion: reduce) {
+		.hero-acto {
+			height: auto !important;
+		}
+
+		.escena {
+			--p: 0;
+		}
+
+		.escena.sc-stage {
+			height: auto;
+		}
+	}
+
+	.capas {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.capa {
+		position: absolute;
+		inset: 0;
+	}
+
+	canvas.capa {
+		width: 100%;
+		height: 100%;
+	}
+
+	/* Cielo: de la noche (arriba) al resplandor del alba (en el horizonte). Debajo del horizonte, el suelo. */
+	.cielo {
+		background-image: linear-gradient(
+			to bottom,
+			var(--cielo-alto) 0%,
+			var(--cielo-medio) 42%,
+			var(--cielo-bajo) calc(var(--h) - 4%),
+			var(--cielo-horizonte) var(--h),
+			var(--fondo) calc(var(--h) + 0.1%)
+		);
+	}
+
+	/* Aurora (marca.md §2.3) que respira despacio: ciclo de 14 s, pausado fuera de pantalla */
+	.cielo::after {
+		content: "";
+		position: absolute;
+		inset: -20% -10% 30%;
+		background-image:
+			radial-gradient(ellipse 45% 35% at 30% 30%, color-mix(in srgb, var(--violeta) 30%, transparent), transparent 70%),
+			radial-gradient(ellipse 40% 30% at 75% 20%, color-mix(in srgb, var(--cian) 16%, transparent), transparent 70%),
+			radial-gradient(ellipse 50% 30% at 60% 55%, color-mix(in srgb, var(--magenta) 20%, transparent), transparent 70%);
+		animation: aurora 14s ease-in-out infinite alternate;
+	}
+
+	@keyframes aurora {
+		to {
+			transform: translate3d(4%, 3%, 0) scale(1.08);
+		}
+	}
+
+	.estrellas {
+		transform: translate3d(0, calc(var(--p) * -4vh), 0);
+	}
+
+	/* Sol y halo: se recortan en el horizonte, así nunca se dibujan sobre la retícula */
+	.amanecer {
+		inset: 0 0 calc(100% - var(--h)) 0;
+		overflow: hidden;
+	}
+
+	.halo,
+	.sol {
+		--subir: calc(var(--sol-inicio) - var(--p) * var(--sol-subida));
+		position: absolute;
+		left: var(--sol-x);
+		top: 100%;
+		aspect-ratio: 1;
+		translate: -50% -50%;
+	}
+
+	.halo {
+		width: calc(var(--sol-tam) * 2.6);
+		background-image: radial-gradient(
+			circle,
+			color-mix(in srgb, var(--sol-3) 38%, transparent) 0%,
+			color-mix(in srgb, var(--sol-1) 14%, transparent) 35%,
+			transparent 65%
+		);
+		opacity: calc(var(--halo-fuerza) + var(--p) * 0.3);
+		transform: translate3d(0, var(--subir), 0) scale(calc(0.9 + var(--p) * 0.25));
+	}
+
+	/* Sol synthwave: degradado de alba cortado en franjas que se ensanchan hacia abajo */
+	.sol {
+		width: var(--sol-tam);
+		border-radius: 50%;
+		background-image: linear-gradient(to bottom, var(--sol-1) 0%, var(--sol-2) 38%, var(--sol-3) 62%, var(--sol-4) 100%);
+		mask-image: linear-gradient(
+			black 52%,
+			transparent 52% 55%,
+			black 55% 63%,
+			transparent 63% 67%,
+			black 67% 74%,
+			transparent 74% 79%,
+			black 79% 85%,
+			transparent 85% 91%,
+			black 91%
+		);
+		transform: translate3d(0, var(--subir), 0);
+	}
+
+	.bruma {
+		inset: calc(var(--h) - 9vh) 0 auto 0;
+		height: 14vh;
+		background-image: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--violeta) 16%, transparent) 55%, transparent);
+		transform: translate3d(0, calc(var(--p) * 3vh), 0);
+	}
+
+	/* Montañas andinas con la cresta en neón. La cercana se mueve más que la lejana: profundidad.
+	   La cresta brilla a contraluz: fuerte cerca del sol (a la derecha) y tenue a la izquierda, detrás del
+	   texto. Con brillo parejo, la cresta cian bajaba el contraste de la nota «Gratis…» a 3,8:1. */
+	.montes {
+		inset: auto 0 calc(100% - var(--h)) 0;
+		height: 34vh;
+	}
+
+	.montes svg {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.cresta {
+		fill: none;
+		stroke-width: 1.5;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.brillo {
+		stop-color: var(--cresta-color);
+	}
+
+	.brillo--tenue {
+		stop-opacity: calc(var(--cresta-fuerza) * 0.4);
+	}
+
+	.brillo--fuerte {
+		stop-opacity: var(--cresta-fuerza);
+	}
+
+	.brillo--medio {
+		stop-opacity: calc(var(--cresta-fuerza) * 0.75);
+	}
+
+	.montes--lejos {
+		--cresta-color: var(--violeta);
+		--cresta-fuerza: 0.6;
+		transform: translate3d(0, calc(var(--p) * 2.5vh), 0);
+	}
+
+	.montes--lejos .relleno {
+		fill: var(--monte-lejos);
+	}
+
+	.montes--cerca {
+		--cresta-color: var(--cian);
+		--cresta-fuerza: 0.8;
+		transform: translate3d(0, calc(var(--p) * 7vh), 0) scale(calc(1 + var(--p) * 0.06));
+		transform-origin: 50% 100%;
+	}
+
+	.montes--cerca .relleno {
+		fill: var(--monte-cerca);
+	}
+
+	/* Suelo: retícula de horizonte en perspectiva (marca.md §5) que avanza hacia ti.
+	   Es opaco: tapa lo que baja del horizonte cuando las montañas se mueven. */
+	.piso {
+		inset: var(--h) -40% 0 -40%;
+		perspective: 420px;
+		perspective-origin: 50% 0%;
+		overflow: hidden;
+		background-color: var(--fondo);
+	}
+
+	.plano {
+		position: absolute;
+		inset: 0 0 -60% 0;
+		transform-origin: 50% 0%;
+		transform: rotateX(72deg);
+		overflow: hidden;
+		mask-image: linear-gradient(to bottom, transparent, black 18%, black);
+	}
+
+	/* Avanza una celda cada 6 s (con transform: no repinta) y además con el scroll.
+	   mod() deja el desplazamiento dentro de una celda: la retícula se repite, así que no hay saltos. */
+	.rejilla {
+		position: absolute;
+		inset: -128px 0 0 0;
+		background-image:
+			linear-gradient(to right, color-mix(in srgb, var(--cian) 42%, transparent) 1.5px, transparent 1.5px),
+			linear-gradient(to bottom, color-mix(in srgb, var(--magenta) 55%, transparent) 1.5px, transparent 1.5px);
+		background-size: 64px 64px;
+		translate: 0 mod(calc(var(--p) * 768px), 64px);
+		animation: avanzar 6s linear infinite;
+	}
+
+	@keyframes avanzar {
+		to {
+			transform: translateY(64px);
+		}
+	}
+
+	.horizonte {
+		inset: auto 0 calc(100% - var(--h) - 1px) 0;
+		height: 2px;
+		background-image: linear-gradient(90deg, transparent, var(--cian) 25%, var(--magenta) 62%, var(--ambar) 80%, transparent);
+		opacity: 0.9;
+	}
+
+	/* Velo de lectura: oscurece (o aclara, en el tema claro) solo donde va el texto */
+	.velo {
+		background-image: linear-gradient(
+			to bottom,
+			color-mix(in srgb, var(--fondo) 70%, transparent) 0%,
+			color-mix(in srgb, var(--fondo) 25%, transparent) 55%,
+			transparent 72%
+		);
+	}
+
+	@media (width >= 64rem) {
+		.velo {
+			background-image: linear-gradient(
+				to right,
+				color-mix(in srgb, var(--fondo) 72%, transparent) 0%,
+				color-mix(in srgb, var(--fondo) 35%, transparent) 40%,
+				transparent 62%
+			);
+		}
+	}
+
+	/* Ruido sutil (marca.md §5): textura de grano para que los degradados no se vean planos */
+	.grano {
+		opacity: 0.03;
+		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+	}
+
+	/* La escena se funde con la sección siguiente en vez de cortarse en línea recta */
+	.desvanecido {
+		inset: auto 0 0 0;
+		height: 12%;
+		background-image: linear-gradient(to bottom, transparent, var(--fondo));
+	}
+
+	/* Fuera de pantalla, las animaciones de fondo se detienen (marca.md §6.2). Lo marca el script. */
+	.escena[data-pausa] .cielo::after,
+	.escena[data-pausa] .rejilla {
+		animation-play-state: paused;
+	}
+
+	/* Tema claro: amanecer de día. Aurora y halo más suaves, para que el titular conserve su contraste. */
+	:global(:root[data-theme="light"]) .escena {
+		--halo-fuerza: 0.35;
+	}
+
+	:global(:root[data-theme="light"]) .cielo::after {
+		opacity: 0.35;
+	}
+
+	/* De día las crestas son más suaves: con la fuerza de la noche, la lejana bajaba el contraste
+	   del párrafo a 4:1 justo sobre la línea (medido con píxeles reales). */
+	:global(:root[data-theme="light"]) .montes--lejos {
+		--cresta-fuerza: 0.35;
+	}
+
+	:global(:root[data-theme="light"]) .montes--cerca {
+		--cresta-fuerza: 0.5;
+	}
+
+	/* ── Contenido ────────────────────────────────────────────────────────────────────────────── */
+	/* El encabezado flota encima (Header `sobrepuesto`): el espacio de arriba lo deja libre. */
+	.contenido {
+		position: relative;
+		z-index: 1;
+		padding-top: max(6.5rem, 15vh);
+		padding-bottom: 2rem;
+	}
+
+	@media (width >= 64rem) {
+		.contenido {
+			padding-top: max(7rem, 16vh);
+		}
+	}
+
+	/* Movimiento con el scroll: solo si la escena está sostenida por el motor y nadie pidió reducirlo */
+	@media (prefers-reduced-motion: no-preference) {
+		/* El texto sube un poco. Si no cabe en la pantalla (celular), sube lo justo para mostrar el tablero. */
+		.escena.sc-stage .contenido {
+			translate: 0 calc(min(0px, (100svh - 100%) * var(--p)) - var(--p) * 5vh);
+		}
+
+		/* En celular y tablet el tablero llega desde más abajo y alcanza al texto */
+		.escena.sc-stage :global(.tablero-pos) {
+			translate: 0 calc((1 - var(--p)) * 8vh);
+		}
+	}
+
+	/* En escritorio el tablero se acerca: crece un 5 % desde su borde de arriba y sube apenas un poco más
+	   que el texto. Así nunca alcanza al titular (entre los dos quedan 24 px de aire al empezar). */
+	@media (prefers-reduced-motion: no-preference) and (width >= 64rem) {
+		.escena.sc-stage :global(.tablero-pos) {
+			translate: 0 calc(var(--p) * -1.5vh);
+			scale: calc(1 + var(--p) * 0.05);
+			transform-origin: 50% 0;
+		}
+	}
+
+	/* Degradado Amanecer neón solo en el titular corto (≤ 4 palabras, marca.md §2.3) */
+	.degradado-amanecer {
+		background-image: var(--grad-amanecer);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+</style>
+
+<script>
+	// Escena «Amanecer»: estrellas y red de datos en <canvas> (marca.md §6.1 y §6.3).
+	// - El avance del scroll sale de --sc-p, que el motor escribe en el acto (no hace falta medir nada).
+	// - ≤ 30 cuadros por segundo y solo con la escena en pantalla; fuera de ella también se pausan la aurora
+	//   y la retícula (atributo data-pausa).
+	// - «Reducir movimiento»: un solo cuadro quieto, sin seguir al cursor.
+	// - Los colores salen de los tokens de marca, así que cambian solos con el tema.
+	type Estrella = { x: number; y: number; tam: number; fase: number };
+	type Nodo = { x: number; y: number; vx: number; vy: number; z: number; color: number; px: number; py: number };
+
+	const escena = document.querySelector<HTMLElement>("[data-escena]");
+	const lienzoEstrellas = escena?.querySelector<HTMLCanvasElement>("[data-estrellas]");
+	const lienzoRed = escena?.querySelector<HTMLCanvasElement>("[data-red]");
+	const ctxEstrellas = lienzoEstrellas?.getContext("2d");
+	const ctxRed = lienzoRed?.getContext("2d");
+
+	if (escena && lienzoEstrellas && lienzoRed && ctxEstrellas && ctxRed) {
+		const raiz = document.documentElement;
+		const acto = escena.closest<HTMLElement>("[data-sc-act]");
+		const reducir = matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const conMouse = !reducir && matchMedia("(hover: hover) and (pointer: fine)").matches;
+		const densidad = Math.min(2, window.devicePixelRatio || 1);
+		// Colores de los nodos: cian, violeta, magenta, lima y cian otra vez (el cian domina, marca.md §2.1)
+		const turnoColor = [0, 1, 2, 3, 0];
+
+		const leerColores = () => {
+			const css = getComputedStyle(raiz);
+			const token = (nombre: string) => css.getPropertyValue(nombre).trim();
+			return {
+				noche: raiz.dataset.theme !== "light", // de día (tema claro) no hay estrellas
+				estrella: token("--texto"),
+				nodos: [token("--cian"), token("--violeta"), token("--magenta"), token("--lima")],
+				enlace: token("--violeta"),
+				puntero: token("--cian"),
+			};
+		};
+
+		let colores = leerColores();
+		let ancho = 0;
+		let alto = 0;
+		let estrellas: Estrella[] = [];
+		let nodos: Nodo[] = [];
+		const puntero = { x: -9999, y: -9999, nx: 0, ny: 0 };
+
+		// Avance del acto (0 → 1). Con «reducir movimiento» se queda en 0, igual que el CSS.
+		const avance = () => {
+			if (reducir) return 0;
+			const valor = Number.parseFloat(acto?.style.getPropertyValue("--sc-p") ?? "");
+			return Number.isFinite(valor) ? Math.min(1, Math.max(0, valor)) : 0;
+		};
+
+		// Ajusta los lienzos al tamaño de la escena y reparte estrellas y nodos
+		const medir = () => {
+			ancho = escena.clientWidth;
+			alto = escena.clientHeight;
+			const horizonte = Number.parseFloat(getComputedStyle(escena).getPropertyValue("--h")) / 100 || 0.8;
+
+			for (const [lienzo, ctx] of [
+				[lienzoEstrellas, ctxEstrellas],
+				[lienzoRed, ctxRed],
+			] as const) {
+				lienzo.width = Math.round(ancho * densidad);
+				lienzo.height = Math.round(alto * densidad);
+				ctx.setTransform(densidad, 0, 0, densidad, 0, 0);
+			}
+
+			estrellas = Array.from({ length: Math.round(ancho / 9) }, () => ({
+				x: Math.random() * ancho,
+				y: Math.random() * alto * horizonte * 0.9,
+				tam: Math.random() * 1.1 + 0.2,
+				fase: Math.random() * Math.PI * 2,
+			}));
+
+			// Máx. 60 nodos en escritorio y 25 en celular (marca.md §6.3)
+			nodos = Array.from({ length: ancho < 768 ? 25 : 60 }, (_, i) => ({
+				x: Math.random() * ancho,
+				y: Math.random() * alto,
+				vx: (Math.random() - 0.5) * 0.25,
+				vy: (Math.random() - 0.5) * 0.25,
+				z: 0.35 + Math.random() * 0.65,
+				color: turnoColor[i % turnoColor.length],
+				px: 0,
+				py: 0,
+			}));
+		};
+
+		const linea = (ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number) => {
+			ctx.beginPath();
+			ctx.moveTo(x1, y1);
+			ctx.lineTo(x2, y2);
+			ctx.stroke();
+		};
+
+		const dibujar = (tiempo: number) => {
+			const p = avance();
+
+			// Estrellas: titilan despacio y se apagan a medida que amanece
+			ctxEstrellas.clearRect(0, 0, ancho, alto);
+			if (colores.noche) {
+				ctxEstrellas.fillStyle = colores.estrella;
+				for (const estrella of estrellas) {
+					const brillo = reducir ? 0.5 : 0.35 + 0.35 * Math.sin(tiempo / 1400 + estrella.fase);
+					ctxEstrellas.globalAlpha = brillo * (1 - p * 0.7);
+					ctxEstrellas.fillRect(estrella.x, estrella.y, estrella.tam, estrella.tam);
+				}
+				ctxEstrellas.globalAlpha = 1;
+			}
+
+			// Red de datos: cada nodo flota según su profundidad (z) y sube con el scroll; el cursor se une a los cercanos
+			ctxRed.clearRect(0, 0, ancho, alto);
+			const subida = p * 140;
+			for (const nodo of nodos) {
+				if (!reducir) {
+					nodo.x += nodo.vx * nodo.z;
+					nodo.y += nodo.vy * nodo.z;
+					if (nodo.x < -20) nodo.x = ancho + 20;
+					else if (nodo.x > ancho + 20) nodo.x = -20;
+					if (nodo.y < -20) nodo.y = alto + 20;
+					else if (nodo.y > alto + 20) nodo.y = -20;
+				}
+				nodo.px = nodo.x + puntero.nx * 26 * nodo.z;
+				nodo.py = nodo.y - subida * nodo.z + puntero.ny * 18 * nodo.z;
+			}
+
+			ctxRed.lineWidth = 1;
+			for (let i = 0; i < nodos.length; i++) {
+				const a = nodos[i];
+				ctxRed.strokeStyle = colores.enlace;
+				for (let j = i + 1; j < nodos.length; j++) {
+					const b = nodos[j];
+					const distancia = Math.hypot(a.px - b.px, a.py - b.py);
+					if (distancia < 150) {
+						ctxRed.globalAlpha = (1 - distancia / 150) * 0.32 * Math.min(a.z, b.z);
+						linea(ctxRed, a.px, a.py, b.px, b.py);
+					}
+				}
+				const alCursor = Math.hypot(a.px - puntero.x, a.py - puntero.y);
+				if (alCursor < 190) {
+					ctxRed.strokeStyle = colores.puntero;
+					ctxRed.globalAlpha = (1 - alCursor / 190) * 0.65;
+					linea(ctxRed, a.px, a.py, puntero.x, puntero.y);
+				}
+			}
+
+			for (const nodo of nodos) {
+				ctxRed.globalAlpha = 0.45 + nodo.z * 0.5;
+				ctxRed.fillStyle = colores.nodos[nodo.color];
+				ctxRed.beginPath();
+				ctxRed.arc(nodo.px, nodo.py, 1.2 + nodo.z * 2.2, 0, Math.PI * 2);
+				ctxRed.fill();
+			}
+			ctxRed.globalAlpha = 1;
+		};
+
+		// Bucle a ≤ 30 cuadros por segundo (marca.md §6.3), solo mientras la escena está en pantalla
+		let pedido = 0;
+		let ultimo = 0;
+		let enPantalla = true;
+
+		const cuadro = (tiempo: number) => {
+			pedido = requestAnimationFrame(cuadro);
+			if (tiempo - ultimo < 33) return;
+			ultimo = tiempo;
+			dibujar(tiempo);
+		};
+
+		const arrancar = () => {
+			if (reducir) dibujar(0);
+			else if (!pedido && enPantalla && !document.hidden) pedido = requestAnimationFrame(cuadro);
+		};
+
+		const detener = () => {
+			cancelAnimationFrame(pedido);
+			pedido = 0;
+		};
+
+		medir();
+
+		new ResizeObserver(() => {
+			medir();
+			if (reducir) dibujar(0);
+		}).observe(escena);
+
+		new IntersectionObserver(([entrada]) => {
+			enPantalla = entrada.isIntersecting;
+			escena.toggleAttribute("data-pausa", !enPantalla);
+			if (enPantalla) arrancar();
+			else detener();
+		}).observe(escena);
+
+		document.addEventListener("visibilitychange", () => (document.hidden ? detener() : arrancar()));
+
+		// Cambio de tema: nuevos colores (y sin estrellas de día)
+		new MutationObserver(() => {
+			colores = leerColores();
+			if (reducir) dibujar(0);
+		}).observe(raiz, { attributes: true, attributeFilter: ["data-theme"] });
+
+		// Con mouse, la red se inclina hacia el cursor y se une a él. Nunca captura el cursor ni el scroll.
+		if (conMouse) {
+			escena.addEventListener(
+				"pointermove",
+				(evento) => {
+					if (evento.pointerType !== "mouse") return;
+					const caja = escena.getBoundingClientRect();
+					puntero.x = evento.clientX - caja.left;
+					puntero.y = evento.clientY - caja.top;
+					puntero.nx = puntero.x / caja.width - 0.5;
+					puntero.ny = puntero.y / caja.height - 0.5;
+				},
+				{ passive: true },
+			);
+			escena.addEventListener("pointerleave", () => {
+				puntero.x = -9999;
+				puntero.y = -9999;
+				puntero.nx = 0;
+				puntero.ny = 0;
+			});
+		}
+	}
+</script>
