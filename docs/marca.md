@@ -17,6 +17,7 @@ La sensación final debe ser: *el futuro ya llegó y trabaja a tu favor*.
 - **80 % calma:** fondos oscuros, mucho espacio en blanco (o en negro), tipografía limpia, orden.
 - **20 % brillo:** el neón solo en lo que importa: llamados a la acción, cifras clave, gráficos, estados activos.
 - **El brillo señala, no decora.** Si todo brilla, nada destaca y la página deja de verse profesional.
+- **Excepción aprobada (2026-10-21, plan «Amanecer»):** la escena del hero lleva más color que el 20 %: es la entrada a la marca, la noche que amanece. Debajo del hero la página vuelve a la calma.
 
 ### Nombre
 - **Empresa y sitio:** Analizando y Automatizando
@@ -139,9 +140,14 @@ Todas de Google Fonts, con licencia libre (SIL Open Font License).
 
 ---
 
-## 4. Logo (v1)
+## 4. Logo (v2)
 
-Los archivos están en `public/logo/`. **No los redibujes ni los edites a mano**: si hace falta un cambio, se pide y se regeneran todas las versiones juntas.
+Los archivos están en `public/logo/`. **No los redibujes ni los edites a mano**: si hace falta un cambio, se pide y se regeneran todas las versiones juntas con `npm run logo` (`scripts/logo.mjs`, a partir de la geometría original en `scripts/logo/geometria.json`).
+
+**v2 (2026-10-21) · cuerpo y profundidad**, a pedido del dueño («la tipografía está muy delgada»; opción C):
+- **Cuerpo:** trazo del monograma 17 (antes 14) y letras engrosadas con un contorno del mismo color, más gruesas que Space Grotesk 700.
+- **Profundidad:** relieve de tres capas desplazadas abajo a la derecha con el degradado Amanecer neón; opaco bajo el texto y al 35 % bajo el monograma (30 % en el tema claro).
+- Las versiones a una tinta (`logo-blanco`, `logo-oscuro`) llevan el cuerpo pero no el relieve. El favicon y los íconos PNG no cambian: ya tenían trazo grueso y a 16-32 px el relieve sería ruido.
 
 ### Concepto
 Monograma **A&A** dibujado con una sola línea continua, como una gráfica de datos:
@@ -177,9 +183,9 @@ Monograma **A&A** dibujado con una sola línea continua, como una gráfica de da
 <link rel="icon" href="/logo/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/logo/apple-touch-icon.png">
 
-<!-- En el encabezado: proporción 4:1 (por ejemplo 176 × 44) -->
+<!-- En el encabezado y el pie: proporción 4:1 (200 × 50) -->
 <a href="/" aria-label="Analizando y Automatizando, inicio">
-  <img src="/logo/logo-horizontal.svg" alt="" width="176" height="44">
+  <img src="/logo/logo-horizontal.svg" alt="" width="200" height="50">
 </a>
 ```
 
@@ -188,7 +194,7 @@ Con el tema claro activo (`[data-theme="light"]`), muestra `logo-horizontal-clar
 ### Reglas
 - **Espacio libre:** alrededor del logo, como mínimo el alto del lazo (≈ ¼ del alto total).
 - **Tamaño mínimo:** horizontal 160 px de ancho (40 mm impreso); monograma 24 px. Más pequeño, usa el favicon.
-- **No se modifica:** no cambiar colores, no estirar, no añadir sombras ni contornos, no rotar, no ponerlo sobre fondos neón o fotos muy cargadas.
+- **No se modifica:** no cambiar colores, no estirar, no añadir otras sombras, contornos ni relieves (el relieve de la v2 ya es parte del logo), no rotar, no ponerlo sobre fondos neón o fotos muy cargadas.
 
 ---
 
@@ -196,8 +202,13 @@ Con el tema claro activo (`[data-theme="light"]`), muestra `logo-horizontal-clar
 
 - **Esquinas:** 12 px en tarjetas, 999 px en botones y chips, 8 px en inputs.
 - **Tarjetas «cristal»:** fondo `--cristal` (oscuro `rgba(15,21,51,.65)`, claro `rgba(255,255,255,.7)`), `backdrop-filter: blur(14px)`, borde 1 px `--borde`. Si la tarjeta es un enlace, en hover y foco: borde con degradado Amanecer neón + `--glow-cian`.
-- **Retícula de horizonte:** en el hero, una cuadrícula en perspectiva (estilo synthwave) que se pierde hacia el horizonte, en `--borde` con baja opacidad. Es la firma visual de la marca.
-- **Ruido sutil:** textura de grano al 3 % sobre los fondos para evitar degradados planos.
+- **Retícula de horizonte:** una cuadrícula en perspectiva (estilo synthwave) que se pierde hacia el horizonte. Es la firma visual de la marca. En el hero va en neón (líneas cian y magenta) y avanza hacia el visitante; en el llamado final, quieta y en `--borde` con baja opacidad.
+- **Escena «Amanecer» (hero del inicio, `HeroAmanecer.astro`):** el sitio empieza de noche y amanece al bajar. Capas de atrás hacia adelante: cielo con aurora, estrellas, sol synthwave (franjas) con halo, bruma, dos cordilleras andinas con la cresta en neón, suelo con la retícula, línea de horizonte, red de datos, velo de lectura y grano.
+  - Colores: tokens de escena (`--cielo-*`, `--monte-*`, `--sol-1` a `--sol-4`, §8); nada suelto en el componente.
+  - Las crestas brillan a contraluz: fuertes cerca del sol y tenues detrás del texto.
+  - Tema claro: un amanecer de día (cielo claro bajo el titular, tonos de alba solo cerca del horizonte, sin estrellas).
+  - **Contraste medido con píxeles reales** (2 temas × 5 anchos × 3 momentos del scroll): todo el texto cumple AA sobre la escena.
+- **Ruido sutil:** textura de grano al 3 % sobre los fondos para evitar degradados planos (hoy, en la escena del hero).
 - **Iconos:** de línea, trazo 1,5 px, esquinas redondeadas. Paquete `@lucide/astro` (oficial de Lucide, licencia ISC). Se usan como componentes (`<ChartLine />`), sin JavaScript en el navegador. Color `--texto-2`; en hover, cian.
 - **Fotos e ilustraciones:** si se usan fotos de personas, aplicar duotono noche + cian. Nunca fotos genéricas de banco de imágenes sin tratar.
 - **Espaciado:** escala de 4 px (4, 8, 12, 16, 24, 32, 48, 64, 96, 128). Secciones con 96–128 px de aire vertical en escritorio.
@@ -226,8 +237,10 @@ La calculadora **solo multiplica los valores que ingresa el visitante**: no mues
 
 **Implementados en el inicio (2026-10-19)** con el motor de scroll-craft (`src/vendor/scrollcraft/`); la partitura completa está en `docs/scroll.md`:
 tubería con pulso de datos (momento cumbre, solo CSS sobre `--sc-p`), tarjetas con luz (servicios), aparición en secuencia
-(problema, servicios, pasos), cortina sobre la cita, calculadora y cambio de tema. **Pospuestos:** red de datos viva,
-mini tablero, terminal que escribe y antes/después.
+(problema, servicios, pasos), cortina sobre la cita, calculadora y cambio de tema.
+**Implementados en el hero (2026-10-21, plan «Amanecer»):** red de datos viva (`<canvas>`, máx. 60/25 nodos a ≤ 30 fps) y
+mini tablero (`MiniTablero.astro`, con su tabla de datos para lectores de pantalla). **Pospuestos:** terminal que escribe y antes/después
+(pasos 4 y 6 del plan «Amanecer»).
 
 ### 6.2 Movimiento
 
@@ -289,6 +302,18 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
   --grad-aurora: radial-gradient(ellipse at top, rgba(167,139,250,.25), transparent 60%), radial-gradient(ellipse at bottom right, rgba(255,61,220,.15), transparent 50%);
   --glow-cian: 0 0 0 1px rgba(0,229,255,.45), 0 0 24px rgba(0,229,255,.35), 0 0 64px rgba(0,229,255,.12);
   --glow-magenta: 0 0 0 1px rgba(255,61,220,.45), 0 0 24px rgba(255,61,220,.30), 0 0 64px rgba(255,61,220,.10);
+  /* Escena «Amanecer» del hero (marca.md §5): cielo de noche y montañas. Decorativos, nunca bajo texto largo */
+  --cielo-alto: #070B1F;
+  --cielo-medio: #0B1030;
+  --cielo-bajo: #1B1546;
+  --cielo-horizonte: #3B1A55;
+  --monte-lejos: #141A45;
+  --monte-cerca: #0B1030;
+  /* Sol de la escena, de arriba abajo: ámbar → coral → magenta → violeta neón. Igual en los dos temas */
+  --sol-1: #FFC94D;
+  --sol-2: #FF6B8B;
+  --sol-3: #FF3DDC;
+  --sol-4: #A78BFA;
   /* Forma */
   --radio-tarjeta: 12px;
   --radio-input: 8px;
@@ -319,6 +344,13 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
   --grad-aurora: radial-gradient(ellipse at top, rgba(98,51,214,.10), transparent 60%), radial-gradient(ellipse at bottom right, rgba(181,20,143,.06), transparent 50%);
   --glow-cian: 0 0 0 1px rgba(0,120,138,.35), 0 8px 24px rgba(0,120,138,.15);
   --glow-magenta: 0 0 0 1px rgba(181,20,143,.35), 0 8px 24px rgba(181,20,143,.15);
+  /* Escena «Amanecer» de día: cielo claro arriba (bajo el titular) y tonos de alba solo cerca del horizonte */
+  --cielo-alto: #F6F8FF;
+  --cielo-medio: #F0EEFF;
+  --cielo-bajo: #F7E4F4;
+  --cielo-horizonte: #FFE2CF;
+  --monte-lejos: #DDD9F5;
+  --monte-cerca: #C9C6EE;
   color-scheme: light;
 }
 
@@ -372,7 +404,7 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
 - Efectos *glitch*, texto que tiembla o parpadea: restan confianza.
 - Texto neón sobre fondo neón, o degradado sobre degradado.
 - Imágenes con mucho detalle detrás de texto.
-- Más de dos colores de neón en un mismo componente (las únicas excepciones son el logo y el borde del botón principal).
+- Más de dos colores de neón en un mismo componente (las únicas excepciones son el logo, el borde del botón principal y la escena «Amanecer» del hero con su mini tablero, aprobada el 2026-10-21).
 - Glow en todos los elementos de una sección.
 - Animaciones infinitas rápidas o que no se puedan detener.
 - Colores fuera de esta paleta. Si hace falta uno nuevo, se propone, se verifica el contraste y se agrega aquí.

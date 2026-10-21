@@ -18,10 +18,18 @@ interface Props {
 	ogImage?: string;
 	/** true en páginas que no deben aparecer en buscadores (ej. 404) */
 	noindex?: boolean;
+	/** true solo en el inicio: el encabezado flota sobre la escena del hero (Header `sobrepuesto`). */
+	encabezadoSobrepuesto?: boolean;
 }
 
 // Sin ogImage propia, cada página usa la tarjeta de marca (se regenera con npm run imagen-social).
-const { title, description, ogImage = "/og/compartir.png", noindex = false } = Astro.props;
+const {
+	title,
+	description,
+	ogImage = "/og/compartir.png",
+	noindex = false,
+	encabezadoSobrepuesto = false,
+} = Astro.props;
 
 const nombreSitio = "Analizando y Automatizando";
 // URL canónica: la dirección oficial de esta página, armada con `site` de astro.config.mjs
@@ -85,7 +93,7 @@ const imagenSocial = new URL(ogImage, Astro.site);
 			Saltar al contenido
 		</a>
 
-		<Header />
+		<Header sobrepuesto={encabezadoSobrepuesto} />
 
 		<main id="contenido" class="flex-1">
 			<slot />
