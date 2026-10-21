@@ -20,12 +20,13 @@ interface Props {
 	noindex?: boolean;
 }
 
-const { title, description, ogImage, noindex = false } = Astro.props;
+// Sin ogImage propia, cada página usa la tarjeta de marca (se regenera con npm run imagen-social).
+const { title, description, ogImage = "/og/compartir.png", noindex = false } = Astro.props;
 
 const nombreSitio = "Analizando y Automatizando";
 // URL canónica: la dirección oficial de esta página, armada con `site` de astro.config.mjs
 const canonica = new URL(Astro.url.pathname, Astro.site);
-const imagenSocial = ogImage ? new URL(ogImage, Astro.site) : undefined;
+const imagenSocial = new URL(ogImage, Astro.site);
 ---
 
 <!doctype html>
@@ -55,8 +56,11 @@ const imagenSocial = ogImage ? new URL(ogImage, Astro.site) : undefined;
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonica} />
-		{imagenSocial && <meta property="og:image" content={imagenSocial} />}
-		{imagenSocial && <meta name="twitter:card" content="summary_large_image" />}
+		<meta property="og:image" content={imagenSocial} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Analizando y Automatizando: Analizamos lo que tienes. Automatizamos lo que repites." />
+		<meta name="twitter:card" content="summary_large_image" />
 
 		{/* Favicons (docs/marca.md, sección 4) */}
 		<link rel="icon" href="/logo/favicon.svg" type="image/svg+xml" />

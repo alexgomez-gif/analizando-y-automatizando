@@ -12,7 +12,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "verificar": "node scripts/verificar.mjs"
+    "verificar": "node scripts/verificar.mjs",
+    "imagen-social": "node scripts/imagen-social.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
