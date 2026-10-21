@@ -1,7 +1,9 @@
 /**
  * Datos estructurados schema.org (CLAUDE.md §8). Solo datos reales y aprobados.
- * Pendientes (no se inventan): dirección, teléfono, correo y NIT. Se agregan cuando existan.
+ * Correo y NIT salen de negocio.ts y solo se incluyen cuando están llenos. Dirección y teléfono: pendientes.
  */
+import { negocio } from "./negocio";
+
 export const SITIO = "https://analizandoyautomatizando.com";
 
 const zona = { "@type": "Country", name: "Colombia" };
@@ -22,6 +24,8 @@ export const esquemaNegocio = {
 	description:
 		"Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, mediante automatización y análisis a la medida, sin jerga técnica.",
 	areaServed: zona,
+	...(negocio.correo && { email: negocio.correo }),
+	...(negocio.nit && { taxID: negocio.nit }),
 };
 
 /** Cada página de servicio */
