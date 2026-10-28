@@ -3,6 +3,10 @@
  * Panel de cierre de página: Aurora + retícula de horizonte (eco del hero) y el botón principal.
  * Por defecto lleva el texto aprobado del inicio; cada página puede cambiar título, texto y botón.
  * Para omitir el párrafo, pasa texto="".
+ *
+ * Con una escena en el hueco `escena` (hoy, EscenaCierre en el inicio) el panel ocupa todo el ancho y es un
+ * acto `flow` del motor de scroll (publica --sc-p). Aquí se reserva el sitio del paisaje: --suelo (bajo el
+ * horizonte) y --paisaje (las montañas), que la escena también lee. Sin escena, todo sigue igual.
  */
 import Button from "./Button.astro";
 
@@ -19,26 +23,54 @@ const {
 	boton = "Agenda tu diagnóstico gratis",
 	href = "/agendar",
 } = Astro.props;
+
+const conEscena = Astro.slots.has("escena");
 ---
 
-<section aria-labelledby="cierre-titulo" class="py-10 sm:py-12 lg:py-16">
-	<div class="contenedor">
-		<div
-			class="cierre reticula-horizonte relative isolate overflow-hidden rounded-(--radio-tarjeta) border border-borde px-6 py-16 text-center sm:px-12 lg:py-24"
-		>
-			<h2 id="cierre-titulo" class="mx-auto max-w-2xl">{titulo}</h2>
-			{texto && <p class="mx-auto mt-4 max-w-xl text-lg text-texto-2">{texto}</p>}
-			<div class="mt-8 flex justify-center">
-				<Button href={href}>{boton}</Button>
+{
+	conEscena ? (
+		<section aria-labelledby="cierre-titulo" data-sc-act="flow" class="cierre-escena relative isolate overflow-clip">
+			<slot name="escena" />
+			<div class="cierre-escena__contenido contenedor text-center">
+				<h2 id="cierre-titulo" class="mx-auto max-w-2xl">{titulo}</h2>
+				{texto && <p class="mx-auto mt-4 max-w-xl text-lg text-texto-2">{texto}</p>}
+				<div class="mt-8 flex justify-center">
+					<Button href={href}>{boton}</Button>
+				</div>
 			</div>
-		</div>
-	</div>
-</section>
+		</section>
+	) : (
+		<section aria-labelledby="cierre-titulo" class="py-10 sm:py-12 lg:py-16">
+			<div class="contenedor">
+				<div class="cierre reticula-horizonte relative isolate overflow-hidden rounded-(--radio-tarjeta) border border-borde px-6 py-16 text-center sm:px-12 lg:py-24">
+					<h2 id="cierre-titulo" class="mx-auto max-w-2xl">{titulo}</h2>
+					{texto && <p class="mx-auto mt-4 max-w-xl text-lg text-texto-2">{texto}</p>}
+					<div class="mt-8 flex justify-center">
+						<Button href={href}>{boton}</Button>
+					</div>
+				</div>
+			</div>
+		</section>
+	)
+}
 
 <style>
 	/* Superficie + Aurora, como un eco del hero */
 	.cierre {
 		background-color: var(--superficie);
 		background-image: var(--grad-aurora);
+	}
+
+	/* Con escena: el texto arriba, sobre el cielo, y debajo el sitio del paisaje (montañas, sol y suelo).
+	   El relleno de abajo deja libre ese sitio, así el texto nunca queda encima del sol ni de las crestas. */
+	.cierre-escena {
+		--suelo: clamp(6rem, 20svh, 10rem);
+		--paisaje: clamp(11rem, 32svh, 19rem);
+		margin-top: 2.5rem;
+	}
+
+	.cierre-escena__contenido {
+		padding-top: clamp(4rem, 12svh, 8rem);
+		padding-bottom: calc(var(--suelo) + var(--paisaje) * 0.8);
 	}
 </style>

@@ -1,0 +1,253 @@
+---
+/**
+ * Escena de cierre del inicio · el sol termina de salir (plan «Amanecer», paso 3; docs/scroll.md).
+ * Solo capas decorativas: se pone en el hueco `escena` de LlamadoFinal, que da el texto y el botón.
+ *
+ * - LlamadoFinal es un acto `flow` del motor: publica su avance en --sc-p (0 cuando la sección asoma
+ *   por abajo, 1 cuando sale por arriba). Aquí ese avance se vuelve --alba: el sol sube mientras la
+ *   sección entra y termina de salir cuando ya está casi entera en pantalla; después se queda quieto.
+ * - Lee de LlamadoFinal --suelo (alto del suelo bajo el horizonte) y --paisaje (alto de las montañas).
+ * - Sin JavaScript, si el motor falla o con «reducir movimiento»: el sol ya salió y nada se mueve.
+ * - Cero JavaScript propio; la retícula está quieta (marca.md §5: en el llamado final, quieta).
+ * - Montañas calculadas al compilar (src/lib/escena.ts) con un valle al centro, donde sale el sol.
+ */
+import { ALTO_MONTES, ANCHO_MONTES, cresta } from "../lib/escena";
+
+// Media onda de frecuencia 2 con fase π/2: alta en los bordes y baja en el centro (el valle del sol).
+const cordilleras = [
+	{
+		clase: "montes--lejos",
+		...cresta(23, 135, [
+			[2, 70, Math.PI / 2],
+			[7, 22, 0.9],
+			[15, 8, 0.3],
+		]),
+	},
+	{
+		clase: "montes--cerca",
+		...cresta(41, 205, [
+			[2, 55, Math.PI / 2],
+			[5, 20, 2.4],
+			[12, 8, 1.1],
+		]),
+	},
+];
+---
+
+<div class="escena-cierre" aria-hidden="true">
+	<div class="capa cielo"></div>
+	<div class="capa amanecer">
+		<div class="halo"></div>
+		<div class="sol"></div>
+	</div>
+	{
+		cordilleras.map(({ clase, relleno, borde }) => (
+			<div class:list={["capa montes", clase]}>
+				<svg viewBox={`0 0 ${ANCHO_MONTES} ${ALTO_MONTES}`} preserveAspectRatio="xMidYMax slice">
+					<defs>
+						<linearGradient id={`brillo-cierre-${clase}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={ANCHO_MONTES} y2="0">
+							<stop offset="0" class="brillo brillo--tenue" />
+							<stop offset="0.5" class="brillo brillo--fuerte" />
+							<stop offset="1" class="brillo brillo--tenue" />
+						</linearGradient>
+					</defs>
+					<path class="relleno" d={relleno} />
+					<path class="cresta" d={borde} stroke={`url(#brillo-cierre-${clase})`} />
+				</svg>
+			</div>
+		))
+	}
+	<div class="capa piso">
+		<div class="plano"><div class="rejilla"></div></div>
+	</div>
+	<div class="capa horizonte"></div>
+	<div class="capa grano"></div>
+</div>
+
+<style>
+	.escena-cierre {
+		/* Avance del acto → amanecer (0 → 1). Sin motor --sc-p no existe y vale 1: el sol ya salió. */
+		--alba: clamp(0, calc((var(--sc-p, 1) - 0.08) / 0.32), 1);
+		--sol-tam: clamp(9rem, 30vmin, 16rem);
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.escena-cierre {
+			--alba: 1;
+		}
+	}
+
+	.capa {
+		position: absolute;
+		inset: 0;
+	}
+
+	/* Cielo: arriba es --fondo (los tokens --cielo-alto y --fondo coinciden), así la sección anterior
+	   no se corta; baja hacia el resplandor del alba en el horizonte. Debajo del horizonte, el suelo. */
+	.cielo {
+		background-image: linear-gradient(
+			to bottom,
+			var(--cielo-alto) 0%,
+			var(--cielo-medio) 40%,
+			var(--cielo-bajo) calc(100% - var(--suelo) - 8%),
+			var(--cielo-horizonte) calc(100% - var(--suelo)),
+			var(--fondo) calc(100% - var(--suelo) + 0.1%)
+		);
+	}
+
+	/* Sol y halo: se recortan en el horizonte, así nunca se dibujan sobre la retícula */
+	.amanecer {
+		inset: 0 0 var(--suelo) 0;
+		overflow: hidden;
+	}
+
+	/* Arranca con el centro un tercio de sol bajo el horizonte (escondido tras las montañas) y termina
+	   con el centro a un cuarto de sol sobre el horizonte: asoma entero en el valle, justo bajo el botón. */
+	.halo,
+	.sol {
+		--subir: calc(var(--sol-tam) * (0.34 - var(--alba) * 0.6));
+		position: absolute;
+		left: 50%;
+		top: 100%;
+		aspect-ratio: 1;
+		translate: -50% -50%;
+	}
+
+	.halo {
+		width: calc(var(--sol-tam) * 2.8);
+		background-image: radial-gradient(
+			circle,
+			color-mix(in srgb, var(--sol-3) 34%, transparent) 0%,
+			color-mix(in srgb, var(--sol-1) 12%, transparent) 35%,
+			transparent 65%
+		);
+		opacity: calc(0.3 + var(--alba) * 0.6);
+		transform: translate3d(0, var(--subir), 0);
+	}
+
+	/* Sol synthwave: el mismo del hero (degradado de alba cortado en franjas que se ensanchan hacia abajo) */
+	.sol {
+		width: var(--sol-tam);
+		border-radius: 50%;
+		background-image: linear-gradient(to bottom, var(--sol-1) 0%, var(--sol-2) 38%, var(--sol-3) 62%, var(--sol-4) 100%);
+		mask-image: linear-gradient(
+			black 52%,
+			transparent 52% 55%,
+			black 55% 63%,
+			transparent 63% 67%,
+			black 67% 74%,
+			transparent 74% 79%,
+			black 79% 85%,
+			transparent 85% 91%,
+			black 91%
+		);
+		transform: translate3d(0, var(--subir), 0);
+	}
+
+	/* Montañas con la cresta en neón, que brilla a contraluz: fuerte en el centro (junto al sol) */
+	.montes {
+		inset: auto 0 var(--suelo) 0;
+		height: var(--paisaje);
+	}
+
+	.montes svg {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.cresta {
+		fill: none;
+		stroke-width: 1.5;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.brillo {
+		stop-color: var(--cresta-color);
+	}
+
+	.brillo--tenue {
+		stop-opacity: calc(var(--cresta-fuerza) * 0.35);
+	}
+
+	.brillo--fuerte {
+		stop-opacity: var(--cresta-fuerza);
+	}
+
+	.montes--lejos {
+		--cresta-color: var(--violeta);
+		--cresta-fuerza: 0.55;
+	}
+
+	.montes--lejos .relleno {
+		fill: var(--monte-lejos);
+	}
+
+	/* La cercana, en ámbar: la luz del sol ya les da de frente */
+	.montes--cerca {
+		--cresta-color: var(--ambar);
+		--cresta-fuerza: 0.75;
+	}
+
+	.montes--cerca .relleno {
+		fill: var(--monte-cerca);
+	}
+
+	/* Suelo: la retícula de horizonte del hero, aquí quieta, más tenue y fundida con el pie */
+	.piso {
+		inset: calc(100% - var(--suelo)) -40% 0 -40%;
+		perspective: 420px;
+		perspective-origin: 50% 0%;
+		overflow: hidden;
+		background-color: var(--fondo);
+	}
+
+	.plano {
+		position: absolute;
+		inset: 0 0 -60% 0;
+		transform-origin: 50% 0%;
+		transform: rotateX(72deg);
+		overflow: hidden;
+		mask-image: linear-gradient(to bottom, transparent, black 15%, black 60%, transparent);
+	}
+
+	.rejilla {
+		position: absolute;
+		inset: 0;
+		background-image:
+			linear-gradient(to right, color-mix(in srgb, var(--cian) 34%, transparent) 1.5px, transparent 1.5px),
+			linear-gradient(to bottom, color-mix(in srgb, var(--magenta) 44%, transparent) 1.5px, transparent 1.5px);
+		background-size: 64px 64px;
+		background-position: 50% 0;
+	}
+
+	.horizonte {
+		inset: auto 0 calc(var(--suelo) - 1px) 0;
+		height: 2px;
+		background-image: linear-gradient(90deg, transparent, var(--cian) 20%, var(--magenta) 50%, var(--ambar) 80%, transparent);
+		opacity: 0.9;
+	}
+
+	/* Ruido sutil (marca.md §5), como en el hero */
+	.grano {
+		opacity: 0.03;
+		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+	}
+
+	/* Tema claro: amanecer de día, con el halo y las crestas más suaves (como en el hero) */
+	:global(:root[data-theme="light"]) .halo {
+		opacity: calc(0.15 + var(--alba) * 0.3);
+	}
+
+	:global(:root[data-theme="light"]) .montes--lejos {
+		--cresta-fuerza: 0.35;
+	}
+
+	:global(:root[data-theme="light"]) .montes--cerca {
+		--cresta-fuerza: 0.5;
+	}
+</style>

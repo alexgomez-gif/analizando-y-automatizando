@@ -15,6 +15,7 @@ import Card from "../components/Card.astro";
 import DatosEstructurados from "../components/DatosEstructurados.astro";
 import { esquemaNegocio } from "../lib/schema";
 import EnlaceFlecha from "../components/EnlaceFlecha.astro";
+import EscenaCierre from "../components/EscenaCierre.astro";
 import HeroAmanecer from "../components/HeroAmanecer.astro";
 import Seccion from "../components/Seccion.astro";
 import { servicios } from "../lib/servicios";
@@ -199,7 +200,10 @@ const preguntas: Pregunta[] = [
 	<Calculadora />
 
 	{/* 8. Llamado final: panel con Aurora y retícula, eco del hero (texto por defecto del componente) */}
-	<LlamadoFinal />
+	{/* Cierre: el sol termina de salir (EscenaCierre, plan «Amanecer» paso 3) */}
+	<LlamadoFinal>
+		<EscenaCierre slot="escena" />
+	</LlamadoFinal>
 
 	<MotorScroll />
 </BaseLayout>

@@ -17,7 +17,7 @@ La sensación final debe ser: *el futuro ya llegó y trabaja a tu favor*.
 - **80 % calma:** fondos oscuros, mucho espacio en blanco (o en negro), tipografía limpia, orden.
 - **20 % brillo:** el neón solo en lo que importa: llamados a la acción, cifras clave, gráficos, estados activos.
 - **El brillo señala, no decora.** Si todo brilla, nada destaca y la página deja de verse profesional.
-- **Excepción aprobada (2026-10-21, plan «Amanecer»):** la escena del hero lleva más color que el 20 %: es la entrada a la marca, la noche que amanece. Debajo del hero la página vuelve a la calma.
+- **Excepción aprobada (2026-10-21, plan «Amanecer»):** la escena del hero lleva más color que el 20 %: es la entrada a la marca, la noche que amanece. Debajo del hero la página vuelve a la calma, hasta el cierre del inicio, donde el sol termina de salir (2026-10-28).
 
 ### Nombre
 - **Empresa y sitio:** Analizando y Automatizando
@@ -197,13 +197,16 @@ Con el tema claro activo (`[data-theme="light"]`), muestra `logo-horizontal-clar
 
 - **Esquinas:** 12 px en tarjetas, 999 px en botones y chips, 8 px en inputs.
 - **Tarjetas «cristal»:** fondo `--cristal` (oscuro `rgba(15,21,51,.65)`, claro `rgba(255,255,255,.7)`), `backdrop-filter: blur(14px)`, borde 1 px `--borde`. Si la tarjeta es un enlace, en hover y foco: borde con degradado Amanecer neón + `--glow-cian`.
-- **Retícula de horizonte:** una cuadrícula en perspectiva (estilo synthwave) que se pierde hacia el horizonte. Es la firma visual de la marca. En el hero va en neón (líneas cian y magenta) y avanza hacia el visitante; en el llamado final, quieta y en `--borde` con baja opacidad.
+- **Retícula de horizonte:** una cuadrícula en perspectiva (estilo synthwave) que se pierde hacia el horizonte. Es la firma visual de la marca. En el hero va en neón (líneas cian y magenta) y avanza hacia el visitante; en el llamado final de las páginas internas, quieta y en `--borde` con baja opacidad; en el cierre del inicio, quieta y en neón tenue.
 - **Escena «Amanecer» (hero del inicio, `HeroAmanecer.astro`):** el sitio empieza de noche y amanece al bajar. Capas de atrás hacia adelante: cielo con aurora, estrellas, sol synthwave (franjas) con halo, bruma, dos cordilleras andinas con la cresta en neón, suelo con la retícula, línea de horizonte, red de datos, velo de lectura y grano.
   - Colores: tokens de escena (`--cielo-*`, `--monte-*`, `--sol-1` a `--sol-4`, §8); nada suelto en el componente.
   - Las crestas brillan a contraluz: fuertes cerca del sol y tenues detrás del texto.
   - Tema claro: un amanecer de día (cielo claro bajo el titular, tonos de alba solo cerca del horizonte, sin estrellas).
   - **Contraste medido con píxeles reales** (2 temas × 5 anchos × 3 momentos del scroll): todo el texto cumple AA sobre la escena.
-- **Ruido sutil:** textura de grano al 3 % sobre los fondos para evitar degradados planos (hoy, en la escena del hero).
+- **Escena de cierre (inicio, `EscenaCierre.astro`, 2026-10-28):** el mismo amanecer al final de la página, detrás de «Tu primer paso son 30 minutos». Cielo, sol synthwave con halo que sube mientras la sección entra, dos cordilleras con un valle al centro (cresta lejana violeta, cercana ámbar: la luz del sol ya les da de frente), línea de horizonte y retícula quieta. El texto va arriba, sobre el cielo, y nunca encima del sol ni de las crestas.
+  - Contraste medido con píxeles reales (2 temas × 3 anchos × 3 momentos): título ≥ 16:1, párrafo ≥ 6,6:1 y botón contra la escena ≥ 4,1:1.
+  - Las demás páginas mantienen el cierre en tarjeta con Aurora y retícula tenue.
+- **Ruido sutil:** textura de grano al 3 % sobre los fondos para evitar degradados planos (hoy, en las escenas del hero y del cierre del inicio).
 - **Iconos:** de línea, trazo 1,5 px, esquinas redondeadas. Paquete `@lucide/astro` (oficial de Lucide, licencia ISC). Se usan como componentes (`<ChartLine />`), sin JavaScript en el navegador. Color `--texto-2`; en hover, cian.
 - **Fotos e ilustraciones:** si se usan fotos de personas, aplicar duotono noche + cian. Nunca fotos genéricas de banco de imágenes sin tratar.
 - **Espaciado:** escala de 4 px (4, 8, 12, 16, 24, 32, 48, 64, 96, 128). Secciones con 96–128 px de aire vertical en escritorio.
@@ -399,7 +402,7 @@ Archivo `src/styles/tokens.css`, importado una sola vez en `BaseLayout`. Si el p
 - Efectos *glitch*, texto que tiembla o parpadea: restan confianza.
 - Texto neón sobre fondo neón, o degradado sobre degradado.
 - Imágenes con mucho detalle detrás de texto.
-- Más de dos colores de neón en un mismo componente (las únicas excepciones son el logo, el borde del botón principal y la escena «Amanecer» del hero con su mini tablero, aprobada el 2026-10-21).
+- Más de dos colores de neón en un mismo componente (las únicas excepciones son el logo, el borde del botón principal y la escena «Amanecer» del hero con su mini tablero, aprobada el 2026-10-21, y la escena de cierre del inicio, 2026-10-28).
 - Glow en todos los elementos de una sección.
 - Animaciones infinitas rápidas o que no se puedan detener.
 - Colores fuera de esta paleta. Si hace falta uno nuevo, se propone, se verifica el contraste y se agrega aquí.
