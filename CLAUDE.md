@@ -196,7 +196,8 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 (sale de `feature/demo-funcional`). Prototipo, video y capturas en `~/Escritorio/Propuesta-Amanecer`.
 1. ↩️ Logo v2 (cuerpo y relieve neón) revertido el 2026-10-28 a pedido del dueño: el sitio vuelve al logo v1
 2. ✅ Hero «Amanecer» (`HeroAmanecer.astro`, `MiniTablero.astro`, `src/lib/escena.ts`, tokens de escena): escritorio, celular, tablet y tema claro · aprobado por el dueño el 2026-10-28
-3. ⏭️ El amanecer en toda la página y el cierre con el sol · 4. ⏭️ «Del caos al orden» (problema) · 5. ⏭️ Servicios con color propio
+3. 🔄 El amanecer en toda la página y el cierre con el sol (plan aprobado el 2026-10-28, rama `feature/amanecer-paso-3`): 3a ✅ cierre con el sol (`EscenaCierre.astro` en el hueco `escena` de `LlamadoFinal`, solo en el inicio) · **espera la revisión del dueño** · 3b ⏭️ amanecer a lo largo de la página (CSS `animation-timeline`, sin JS; Firefox ve la noche) · 3c ⏭️ verificación completa y documentos
+   4. ⏭️ «Del caos al orden» (problema) · 5. ⏭️ Servicios con color propio
 6. ⏭️ Terminal en «Cómo trabajamos» · 7. ⏭️ Calculadora con más vida · 8. ⏭️ Verificación completa (incluye Lighthouse móvil)
 - Por aprobar: textos y cifras de ejemplo del tablero («Tu negocio, hoy», «Ventas del mes» $48.250.000, «Pedidos» 312, «Clientes nuevos» 46 y ventas de enero a septiembre en `MiniTablero.astro`).
 
@@ -206,7 +207,7 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 
 **Próxima sesión:**
 - Preguntar si el cliente ya vio la demo de Vercel y, si es así, borrarla.
-- Paso 3 del plan «Amanecer»: el plan (3a cierre con el sol · 3b amanecer a lo largo de la página · 3c verificación) espera aprobación.
+- Recibir la revisión del cierre con el sol (paso 3a) y seguir con 3b.
 - Empezar preguntando qué muestra Cloudflare en Workers & Pages (proyecto, nombre, estado del despliegue) y seguir el paso 3 del plan de despliegue.
 - Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
 
@@ -239,6 +240,7 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
 - 2026-10-28 · Vuelve el logo v1 (se revierte la v2 y se pausa la v3) · pedido del dueño con la imagen para compartir original como referencia: «deja el logo como estaba antes».
+- 2026-10-28 · Cierre del inicio con el sol: `LlamadoFinal` recibe la escena por un hueco (`slot="escena"`) en vez de una opción · solo el inicio importa `EscenaCierre`, así su CSS no viaja a las otras 5 páginas con cierre. Es un acto `flow` del motor (sin sostén: el cierre es calma y la acción principal). Para medir el contraste se lee el píxel real de la captura con el texto transparente, en una pestaña en blanco (la CSP del sitio bloquea las imágenes `data:`).
 - 2026-10-28 · Demo temporal en Vercel Hobby para mostrarle el sitio a un cliente, por instrucción explícita del dueño aunque §2 dice «No usar Vercel Hobby» (avisado: sus términos no permiten uso comercial) · lleva `noindex` y se borra después; el hosting definitivo sigue siendo Cloudflare.
 - 2026-10-21 · Hero «Amanecer» como acto sostenido del motor (`data-sc-act="pin"`, 1,8 pantallas): las capas se mueven con CSS sobre `--sc-p` y solo los dos `<canvas>` (estrellas y red de datos) llevan JavaScript propio · reutiliza el motor; nada que medir en cada cuadro. Con «reducir movimiento» el hero no se sostiene: quieto, sería un tramo de scroll muerto.
 - 2026-10-21 · Encabezado `sobrepuesto` solo en el inicio (flota sobre la escena con un velo); sin JavaScript vuelve a su franja · sin JS el menú del celular queda abierto y taparía el titular.

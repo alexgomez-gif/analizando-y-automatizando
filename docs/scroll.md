@@ -53,10 +53,12 @@ con CSS leyendo `--sc-p` (el progreso del acto): cero JavaScript propio.
 | Servicios | `data-sc-in` + `data-sc-stagger` · `data-sc-spotlight` + `data-sc-tilt="4"` | Aparición en secuencia; luz que sigue al cursor e inclinación máxima de 4° (marca.md §6.1) |
 | Cómo trabajamos | `data-sc-act="pin"` (cumbre) · `data-sc-in` en los pasos | La tubería se sostiene ~2 pantallas con el pulso; los 4 pasos aparecen después en secuencia |
 | Quiénes somos | `data-sc-reveal` | Cortina de izquierda a derecha sobre la cita |
-| Preguntas, calculadora, cierre | Ninguno | Calma, herramienta y final firme |
+| Preguntas, calculadora | Ninguno | Calma y herramienta |
+| Cierre (`EscenaCierre.astro`, 2026-10-28) | `data-sc-act="flow"` en `LlamadoFinal` · capas en CSS sobre `--sc-p` | El sol termina de salir mientras la sección entra (completo cuando ya está casi entera en pantalla) y se queda quieto; sin sostén, la retícula quieta. Sin JavaScript o con «reducir movimiento», el sol ya salió |
 
-Cinco familias distintas de movimiento (aparición, puntero, sostén, cortina, quietud) y nunca la misma dos veces seguidas
-(los dos sostenes, hero y tubería, están separados por dos secciones con aparición).
+Seis familias distintas de movimiento (aparición, puntero, sostén, cortina, quietud y avance sin sostén en el cierre) y nunca la misma dos
+veces seguidas (los dos sostenes, hero y tubería, están separados por dos secciones con aparición). El sitio abre con el sol saliendo
+y cierra con el sol arriba: la misma escena al principio y al final.
 
 ## 5. Reglas que no se negocian
 
