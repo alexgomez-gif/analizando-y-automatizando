@@ -31,6 +31,18 @@
   --grad-aurora: radial-gradient(ellipse at top, rgba(167,139,250,.25), transparent 60%), radial-gradient(ellipse at bottom right, rgba(255,61,220,.15), transparent 50%);
   --glow-cian: 0 0 0 1px rgba(0,229,255,.45), 0 0 24px rgba(0,229,255,.35), 0 0 64px rgba(0,229,255,.12);
   --glow-magenta: 0 0 0 1px rgba(255,61,220,.45), 0 0 24px rgba(255,61,220,.30), 0 0 64px rgba(255,61,220,.10);
+  /* Escena «Amanecer» del hero (marca.md §5): cielo de noche y montañas. Decorativos, nunca bajo texto largo */
+  --cielo-alto: #070B1F;
+  --cielo-medio: #0B1030;
+  --cielo-bajo: #1B1546;
+  --cielo-horizonte: #3B1A55;
+  --monte-lejos: #141A45;
+  --monte-cerca: #0B1030;
+  /* Sol de la escena, de arriba abajo: ámbar → coral → magenta → violeta neón. Igual en los dos temas */
+  --sol-1: #FFC94D;
+  --sol-2: #FF6B8B;
+  --sol-3: #FF3DDC;
+  --sol-4: #A78BFA;
   /* Forma */
   --radio-tarjeta: 12px;
   --radio-input: 8px;
@@ -61,6 +73,13 @@
   --grad-aurora: radial-gradient(ellipse at top, rgba(98,51,214,.10), transparent 60%), radial-gradient(ellipse at bottom right, rgba(181,20,143,.06), transparent 50%);
   --glow-cian: 0 0 0 1px rgba(0,120,138,.35), 0 8px 24px rgba(0,120,138,.15);
   --glow-magenta: 0 0 0 1px rgba(181,20,143,.35), 0 8px 24px rgba(181,20,143,.15);
+  /* Escena «Amanecer» de día: cielo claro arriba (bajo el titular) y tonos de alba solo cerca del horizonte */
+  --cielo-alto: #F6F8FF;
+  --cielo-medio: #F0EEFF;
+  --cielo-bajo: #F7E4F4;
+  --cielo-horizonte: #FFE2CF;
+  --monte-lejos: #DDD9F5;
+  --monte-cerca: #C9C6EE;
   color-scheme: light;
 }
 

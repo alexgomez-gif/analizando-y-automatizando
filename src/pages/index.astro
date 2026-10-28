@@ -6,7 +6,6 @@ import {
 	MessageCircle,
 } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Button from "../components/Button.astro";
 import Calculadora from "../components/Calculadora.astro";
 import Cita from "../components/Cita.astro";
 import LlamadoFinal from "../components/LlamadoFinal.astro";
@@ -16,6 +15,7 @@ import Card from "../components/Card.astro";
 import DatosEstructurados from "../components/DatosEstructurados.astro";
 import { esquemaNegocio } from "../lib/schema";
 import EnlaceFlecha from "../components/EnlaceFlecha.astro";
+import HeroAmanecer from "../components/HeroAmanecer.astro";
 import Seccion from "../components/Seccion.astro";
 import { servicios } from "../lib/servicios";
 // Textos de docs/contenido.md (Inicio, aprobados).
@@ -69,26 +69,12 @@ const preguntas: Pregunta[] = [
 <BaseLayout
 	title="Automatiza tu emprendimiento | Analizando y Automatizando"
 	description="Deja de perder horas en tareas repetitivas. Ponemos tus reportes y procesos en automático. Empieza con un diagnóstico gratis y sin compromiso."
+	encabezadoSobrepuesto
 >
 	<DatosEstructurados slot="head" datos={esquemaNegocio} />
 
-	<section aria-labelledby="hero-titulo" class="hero reticula-horizonte relative isolate overflow-hidden">
-		<div class="contenedor py-20 sm:py-28 lg:py-32">
-			<h1 id="hero-titulo">
-				Analizamos lo que tienes. <span class="degradado-amanecer block">Automatizamos lo que repites.</span>
-			</h1>
-
-			<p class="mt-6 max-w-2xl text-lg text-texto-2 sm:text-xl">
-				Ayudamos a emprendimientos emergentes a dejar de perder horas en tareas repetitivas, con soluciones a la
-				medida y sin jerga técnica.
-			</p>
-
-			<div class="mt-10 flex flex-col items-start gap-3">
-				<Button href="/agendar">Agenda tu diagnóstico gratis</Button>
-				<p class="text-sm text-texto-2">Gratis · informe en 3 días hábiles</p>
-			</div>
-		</div>
-	</section>
+	{/* Hero: escena «Amanecer» sostenida con el scroll (componente HeroAmanecer, docs/scroll.md) */}
+	<HeroAmanecer />
 
 	{/* 1. Problema que resolvemos: frases sueltas en una lista, sin títulos (ver Card) */}
 	<Seccion id="problema" titulo="¿Tu negocio crece, pero tu tiempo no alcanza?">
@@ -219,24 +205,6 @@ const preguntas: Pregunta[] = [
 </BaseLayout>
 
 <style>
-	/* Fondo Aurora (marca.md §2.3); cambia sola con el tema */
-	.hero {
-		background-image: var(--grad-aurora);
-	}
-
-	/* Desvanecido inferior: el hero se funde con el fondo en vez de cortarse en línea recta.
-	   Va en ::after para pintarse encima de la retícula. */
-	.hero::after {
-		content: "";
-		position: absolute;
-		inset-inline: 0;
-		bottom: 0;
-		height: 12%;
-		z-index: -1;
-		background-image: linear-gradient(to bottom, transparent, var(--fondo));
-		pointer-events: none;
-	}
-
 	/* Pulso de datos (momento cumbre). --avance = progreso del acto sostenido.
 	   Sin JavaScript --sc-p no existe y vale 1: la tubería se ve encendida completa. Igual con «reducir movimiento». */
 	.tuberia-acto {
@@ -304,13 +272,5 @@ const preguntas: Pregunta[] = [
 		background-color: var(--cian);
 		box-shadow: var(--glow-cian);
 		translate: -50% -50%;
-	}
-
-	/* Degradado Amanecer neón solo en el titular corto (≤ 4 palabras, marca.md §2.3) */
-	.degradado-amanecer {
-		background-image: var(--grad-amanecer);
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: transparent;
 	}
 </style>

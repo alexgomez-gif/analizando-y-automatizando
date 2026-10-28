@@ -192,7 +192,18 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 4. ✅ Imagen Open Graph `public/og/compartir.png` (`npm run imagen-social`), predeterminada en `BaseLayout`
 5. ⏭️ Del dueño: llenar `negocio.ts`, crear el evento de Cal.com y poner `PUBLIC_CALCOM_URL` en Cloudflare, conectar Cloudflare Pages, fusionar la rama a `main`
 
+**Plan · «Amanecer» (aprobado el 2026-10-21: logo C, idea y plan por pasos, nivel de color del prototipo):** rama `feature/amanecer`
+(sale de `feature/demo-funcional`). Prototipo, video y capturas en `~/Escritorio/Propuesta-Amanecer`.
+1. ↩️ Logo v2 (cuerpo y relieve neón) revertido el 2026-10-28 a pedido del dueño: el sitio vuelve al logo v1
+2. ✅ Hero «Amanecer» (`HeroAmanecer.astro`, `MiniTablero.astro`, `src/lib/escena.ts`, tokens de escena): escritorio, celular, tablet y tema claro · **espera la revisión del dueño**
+3. ⏭️ El amanecer en toda la página y el cierre con el sol · 4. ⏭️ «Del caos al orden» (problema) · 5. ⏭️ Servicios con color propio
+6. ⏭️ Terminal en «Cómo trabajamos» · 7. ⏭️ Calculadora con más vida · 8. ⏭️ Verificación completa (incluye Lighthouse móvil)
+- Por aprobar: textos y cifras de ejemplo del tablero («Tu negocio, hoy», «Ventas del mes» $48.250.000, «Pedidos» 312, «Clientes nuevos» 46 y ventas de enero a septiembre en `MiniTablero.astro`).
+
+**Logo: se queda la v1 (pedido del dueño el 2026-10-28: «deja el logo como estaba antes»).** Se revirtió la v2 (archivos de `public/logo/`, imagen para compartir, encabezado y pie a 176 × 44, marca.md §4) y se quitó su generador (`scripts/logo.mjs`, `npm run logo`). La v3 queda en pausa: su geometría sigue en `scripts/logo/geometria-v3.json` y la hoja de opciones en `~/Escritorio/Propuesta-Amanecer/logo-v3/`; no retomarla sin pedido del dueño.
+
 **Próxima sesión:**
+- Recibir la revisión del hero «Amanecer» (paso 2) y, si está aprobado, seguir con el paso 3 del plan «Amanecer».
 - Empezar preguntando qué muestra Cloudflare en Workers & Pages (proyecto, nombre, estado del despliegue) y seguir el paso 3 del plan de despliegue.
 - Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
 
@@ -223,6 +234,16 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 ## 13. Decisiones
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
+
+- 2026-10-28 · Vuelve el logo v1 (se revierte la v2 y se pausa la v3) · pedido del dueño con la imagen para compartir original como referencia: «deja el logo como estaba antes».
+- 2026-10-21 · Hero «Amanecer» como acto sostenido del motor (`data-sc-act="pin"`, 1,8 pantallas): las capas se mueven con CSS sobre `--sc-p` y solo los dos `<canvas>` (estrellas y red de datos) llevan JavaScript propio · reutiliza el motor; nada que medir en cada cuadro. Con «reducir movimiento» el hero no se sostiene: quieto, sería un tramo de scroll muerto.
+- 2026-10-21 · Encabezado `sobrepuesto` solo en el inicio (flota sobre la escena con un velo); sin JavaScript vuelve a su franja · sin JS el menú del celular queda abierto y taparía el titular.
+- 2026-10-21 · Colores de la escena como tokens (`--cielo-*`, `--monte-*`, `--sol-1` a `--sol-4`) en `tokens.css` y marca.md §8; el sol usa los neones del tema oscuro también de día · nada suelto en los componentes; con los neones oscurecidos del tema claro el sol salía marrón.
+- 2026-10-21 · Contraste del texto sobre la escena medido con píxeles reales (captura normal contra captura sin texto; 2 temas × 5 anchos × 3 momentos del scroll) · `npm run verificar` no ve degradados ni lienzos. De la medición salieron: crestas a contraluz (tenues detrás del texto), crestas más suaves de día, y chip y cajas de cifras del tablero casi opacos.
+- 2026-10-21 · Para medir con estilos inyectados, el Chrome de pruebas desactiva la CSP (`Page.setBypassCSP`) · la CSP del sitio bloquea los `<style>` insertados, como debe ser en producción.
+- 2026-10-21 · Mini tablero con las cifras finales en el HTML y una copia para lectores de pantalla; la gráfica lleva su tabla de datos · sin JavaScript se ve completo y el lector nunca lee una cifra a medio contar (CLAUDE.md §7).
+- 2026-10-21 · Logo v2, opción C (cuerpo y relieve con el degradado Amanecer neón), generado con `npm run logo` desde la geometría original · pedido del dueño («la tipografía está muy delgada»); todas las versiones se regeneran juntas.
+- 2026-10-21 · Plan «Amanecer» aprobado: más color en la escena del hero (excepción a la regla 80/20 y a la de dos neones, marca.md §1 y §9) · pedido del dueño de un sitio más inmersivo y colorido.
 
 - 2026-10-21 · Cal.com como iframe simple (sin su `embed.js`) que se carga solo después de marcar la autorización · sin dependencias ni scripts externos; Cal.com no recibe la IP del visitante antes del consentimiento (Ley 1581). En Cal.com hay que configurar además teléfono obligatorio y casilla de autorización.
 - 2026-10-21 · Datos del negocio (razón social, NIT, correo, WhatsApp) en `src/lib/negocio.ts`, no en variables de entorno · son públicos; la URL de Cal.com sí va en `PUBLIC_CALCOM_URL` porque ya estaba en `.env.example`.
