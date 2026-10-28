@@ -13,8 +13,7 @@
     "astro": "astro",
     "check": "astro check",
     "verificar": "node scripts/verificar.mjs",
-    "imagen-social": "node scripts/imagen-social.mjs",
-    "logo": "node scripts/logo.mjs"
+    "imagen-social": "node scripts/imagen-social.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

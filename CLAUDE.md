@@ -194,19 +194,15 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 
 **Plan · «Amanecer» (aprobado el 2026-10-21: logo C, idea y plan por pasos, nivel de color del prototipo):** rama `feature/amanecer`
 (sale de `feature/demo-funcional`). Prototipo, video y capturas en `~/Escritorio/Propuesta-Amanecer`.
-1. ✅ Logo v2 (cuerpo y relieve neón, `npm run logo`), imagen para compartir y guía de marca
+1. ↩️ Logo v2 (cuerpo y relieve neón) revertido el 2026-10-28 a pedido del dueño: el sitio vuelve al logo v1
 2. ✅ Hero «Amanecer» (`HeroAmanecer.astro`, `MiniTablero.astro`, `src/lib/escena.ts`, tokens de escena): escritorio, celular, tablet y tema claro · **espera la revisión del dueño**
 3. ⏭️ El amanecer en toda la página y el cierre con el sol · 4. ⏭️ «Del caos al orden» (problema) · 5. ⏭️ Servicios con color propio
 6. ⏭️ Terminal en «Cómo trabajamos» · 7. ⏭️ Calculadora con más vida · 8. ⏭️ Verificación completa (incluye Lighthouse móvil)
 - Por aprobar: textos y cifras de ejemplo del tablero («Tu negocio, hoy», «Ventas del mes» $48.250.000, «Pedidos» 312, «Clientes nuevos» 46 y ventas de enero a septiembre en `MiniTablero.astro`).
 
-**Logo v3 (pedido del dueño el 2026-10-21 tras ver el sitio en su tableta: «se mira distorsionado»; minimalista y sofisticado): en curso.**
-- ✅ Aprobado: monograma **A · Línea continua** (un solo trazo dibuja las dos A, que comparten el valle; la segunda, más alta, termina en el nodo lima; barra compartida; puntas cortadas rectas en la línea base) + texto **en minúsculas, Space Grotesk 600** («y» en 500, `--texto-2`), sin relieve ni contorno, degradado solo en el monograma. Hoja de opciones en `~/Escritorio/Propuesta-Amanecer/logo-v3/`.
-- ✅ Geometría lista en `scripts/logo/geometria-v3.json` (texto con el contorno real de la fuente y kerning medido en Chrome; herramientas en `logo-v3/herramientas/`). `geometria.json` sigue siendo la v2 hasta terminar.
-- ⏭️ Falta: reescribir `scripts/logo.mjs` para la v3 (todas las versiones SVG + `favicon.svg` y PNG de 32/180/192/512 con Chrome), encabezado y pie a 216 × 45 (proporción 4,8:1), `npm run imagen-social`, marca.md §4 y verificación.
+**Logo: se queda la v1 (pedido del dueño el 2026-10-28: «deja el logo como estaba antes»).** Se revirtió la v2 (archivos de `public/logo/`, imagen para compartir, encabezado y pie a 176 × 44, marca.md §4) y se quitó su generador (`scripts/logo.mjs`, `npm run logo`). La v3 queda en pausa: su geometría sigue en `scripts/logo/geometria-v3.json` y la hoja de opciones en `~/Escritorio/Propuesta-Amanecer/logo-v3/`; no retomarla sin pedido del dueño.
 
 **Próxima sesión:**
-- Terminar el logo v3 (ver arriba) y mostrarlo en el sitio.
 - Recibir la revisión del hero «Amanecer» (paso 2) y, si está aprobado, seguir con el paso 3 del plan «Amanecer».
 - Empezar preguntando qué muestra Cloudflare en Workers & Pages (proyecto, nombre, estado del despliegue) y seguir el paso 3 del plan de despliegue.
 - Pendiente de prueba humana: luz e inclinación de tarjetas con mouse real, y una prueba con Orca/NVDA.
@@ -239,6 +235,7 @@ Partitura en `docs/scroll.md`: aparición en secuencia · tarjetas con luz · **
 
 Registro de decisiones tomadas en las sesiones (fecha · decisión · motivo). La más reciente arriba.
 
+- 2026-10-28 · Vuelve el logo v1 (se revierte la v2 y se pausa la v3) · pedido del dueño con la imagen para compartir original como referencia: «deja el logo como estaba antes».
 - 2026-10-21 · Hero «Amanecer» como acto sostenido del motor (`data-sc-act="pin"`, 1,8 pantallas): las capas se mueven con CSS sobre `--sc-p` y solo los dos `<canvas>` (estrellas y red de datos) llevan JavaScript propio · reutiliza el motor; nada que medir en cada cuadro. Con «reducir movimiento» el hero no se sostiene: quieto, sería un tramo de scroll muerto.
 - 2026-10-21 · Encabezado `sobrepuesto` solo en el inicio (flota sobre la escena con un velo); sin JavaScript vuelve a su franja · sin JS el menú del celular queda abierto y taparía el titular.
 - 2026-10-21 · Colores de la escena como tokens (`--cielo-*`, `--monte-*`, `--sol-1` a `--sol-4`) en `tokens.css` y marca.md §8; el sol usa los neones del tema oscuro también de día · nada suelto en los componentes; con los neones oscurecidos del tema claro el sol salía marrón.
